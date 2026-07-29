@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Facility Management | TrackBot - Intelligent Facility Management for Peak Performance</title>
+<meta name="description" content="Equip your FMS teams with TrackBot AI-driven solutions. Automate intelligently, predict issues, optimize resources, and deliver superior service across all properties."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2196F3;--blue-dark:#1976D2;--blue-light:#E3F2FD;
+  --green:#4CAF50;--text-dark:#111827;--text-mid:#374151;
+  --text-muted:#6B7280;--bg-page:#F0F4F8;--bg-white:#FFFFFF;
+  --border:#E5E7EB;--shadow:0 2px 12px rgba(0,0,0,0.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg-page);color:var(--text-dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:1.15rem;color:var(--text-dark)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{text-decoration:none;font-size:0.9rem;font-weight:500;color:var(--text-mid);transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a.active{color:var(--blue);font-weight:600}
+/* HERO */
+.hero{background:linear-gradient(135deg,#EBF4FF 0%,#F0F4F8 40%,#E8F5FE 100%);padding:80px 64px 0}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1280px;margin:0 auto;padding-bottom:60px}
+.hero-title{font-size:3rem;font-weight:800;line-height:1.15}
+.blue{color:var(--blue)}
+.hero-right{display:flex;flex-direction:column;gap:24px}
+.hero-desc{font-size:.95rem;color:var(--text-muted);line-height:1.7;max-width:380px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn-p{background:var(--blue);color:#fff;border:none;padding:14px 28px;border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 14px rgba(33,150,243,.35);position:relative;overflow:hidden}
+.btn-p:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(33,150,243,.45)}
+.btn-o{background:transparent;color:var(--text-dark);border:2px solid #CBD5E1;padding:12px 26px;border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;transition:border-color .2s,color .2s,transform .15s}
+.btn-o:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.hero-banner{max-width:1280px;margin:0 auto;background:#1a2035;border-radius:20px 20px 0 0;height:190px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+/* SMART FACILITY */
+.sf{padding:80px 64px}
+.sf-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.sec-h2{font-size:1.8rem;font-weight:800;line-height:1.25;margin-bottom:16px}
+.sec-p{font-size:.9rem;color:var(--text-muted);line-height:1.75}
+.dash-box{width:100%;height:320px;border-radius:20px;background:linear-gradient(140deg,#1a2035 60%,#1e3a5f 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.live-badge{position:absolute;top:14px;right:14px;background:#4ade80;color:#052e16;font-size:.65rem;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:.08em}
+.city-badge{position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,.08);color:#94a3b8;font-size:.7rem;padding:6px 12px;border-radius:20px;backdrop-filter:blur(4px)}
+/* TRANSFORMS */
+.transforms{padding:80px 64px}
+.tr-inner{max-width:1280px;margin:0 auto}
+.tr-h2{font-size:2rem;font-weight:800;line-height:1.25;margin-bottom:12px}
+.tr-desc{font-size:.9rem;color:var(--text-muted);max-width:680px;margin-bottom:48px;line-height:1.7}
+.fc{background:#fff;border-radius:20px;padding:40px;margin-bottom:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center;transition:box-shadow .25s}
+.fc.alt{background:linear-gradient(135deg,#F0FAF0 0%,#FAFFFE 100%);grid-template-columns:1fr 280px}
+.fc.alt2{background:linear-gradient(135deg,#EFF6FF 0%,#F8FAFF 100%)}
+.fc:hover{box-shadow:0 8px 32px rgba(0,0,0,.1)}
+.fc-img{width:100%;height:220px;object-fit:contain;border-radius:12px}
+.fc.alt .fc-img{order:2}
+.fc.alt .fc-body{order:1}
+.fc-h3{font-size:1.3rem;font-weight:700;margin-bottom:14px}
+.fc-p{font-size:.88rem;color:var(--text-muted);line-height:1.75;margin-bottom:16px}
+.kbl{font-size:.9rem;font-weight:700;margin-bottom:14px}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bp{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.8rem;color:var(--text-mid);font-weight:500}
+.ck{color:var(--green);flex-shrink:0}
+/* KEY BENEFITS */
+.kbs{padding:80px 64px;text-align:center}
+.kbs-h2{font-size:1.9rem;font-weight:800;margin-bottom:40px}
+.kbs-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:1100px;margin:0 auto}
+.kbc{display:flex;align-items:center;gap:12px;background:var(--bg-white);border:1px solid var(--border);border-radius:14px;padding:16px 24px;font-size:.9rem;font-weight:500;box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s;min-width:195px;cursor:default}
+.kbc:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-2px)}
+.kbc-icon{width:36px;height:36px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+/* CORE FEATURES */
+.core{padding:80px 64px}
+.core-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.core-left h2{font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:32px}
+.core-img{width:100%;max-width:360px;height:340px;object-fit:cover;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12);margin-top:32px}
+.core-right{display:flex;flex-direction:column;gap:16px}
+.cfi{background:var(--bg-white);border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:box-shadow .2s,transform .2s;cursor:default}
+.cfi:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateX(4px)}
+.cfi h4{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.cfi p{font-size:.83rem;color:var(--text-muted);line-height:1.6}
+/* SOLUTIONS */
+.solutions{padding:80px 64px}
+.sol-inner{max-width:1280px;margin:0 auto}
+.sol-h2{font-size:2rem;font-weight:800;text-align:center;margin-bottom:12px}
+.sol-desc{text-align:center;font-size:.9rem;color:var(--text-muted);margin-bottom:48px}
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sol-card{background:var(--bg-white);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .25s,transform .25s}
+.sol-card:hover{box-shadow:0 10px 36px rgba(0,0,0,.12);transform:translateY(-4px)}
+.sol-imgw{background:#F0F4F8;height:220px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sol-imgw img{width:100%;height:100%;object-fit:cover}
+.sol-body{padding:22px 24px}
+.sol-tag{display:inline-block;background:#F0F4F8;color:var(--text-muted);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+.sol-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px;line-height:1.3}
+.sol-card p{font-size:.82rem;color:var(--text-muted);line-height:1.65;margin-bottom:16px}
+.know-more{color:var(--blue);font-size:.85rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
+.know-more:hover{gap:8px}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:32px}
+.dot{width:8px;height:8px;border-radius:100px;background:#CBD5E1;cursor:pointer;transition:width .3s,background .3s}
+.dot.active{width:28px;background:var(--blue)}
+/* TESTIMONIALS */
+.testi{padding:80px 64px}
+.testi-inner{max-width:1280px;margin:0 auto}
+.testi h2{font-size:2rem;font-weight:800;margin-bottom:8px}
+.testi-desc{font-size:.9rem;color:var(--text-muted);max-width:520px;line-height:1.7;margin-bottom:40px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tc{background:var(--bg-white);border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s}
+.tc:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
+.tc-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.t-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;flex-shrink:0}
+.t-name{font-size:.95rem;font-weight:700}
+.t-role{font-size:.8rem;color:var(--text-muted);margin-top:1px}
+.tc blockquote{font-size:.85rem;color:var(--text-mid);line-height:1.7;font-style:normal}
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,#EBF4FF 0%,#F0F4F8 50%,#E8F5FE 100%);padding:80px 64px 0;text-align:center}
+.cta-sec h2{font-size:2.4rem;font-weight:800;line-height:1.25;margin-bottom:32px}
+.cta-btns{display:flex;justify-content:center;gap:16px;margin-bottom:60px;flex-wrap:wrap}
+.cta-db{max-width:900px;margin:0 auto;background:#1e2340;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 -8px 40px rgba(0,0,0,.18);padding:24px}
+.db-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px}
+.db-site{font-size:.88rem;font-weight:600;color:#e2e8f0}
+.db-bc{font-size:.72rem;color:#64748b;margin-top:3px}
+.db-g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.db-c{background:#252d4a;border-radius:10px;padding:16px}
+.db-cl{font-size:.68rem;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.db-cv{font-size:1.5rem;font-weight:700}
+.gr{color:#4ade80}.or{color:#fb923c}.bl{color:#60a5fa}
+.db-bars{background:#252d4a;border-radius:10px;padding:16px}
+.db-br{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.db-bl{font-size:.72rem;color:#94a3b8;width:100px;flex-shrink:0}
+.db-bt{flex:1;height:6px;background:#1e293b;border-radius:3px;overflow:hidden}
+.db-bf{height:100%;border-radius:3px}
+/* FOOTER */
+footer{background:#0f172a;color:#94a3b8;padding:60px 64px 30px}
+.ft-inner{max-width:1280px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.ft-brand{display:flex;align-items:center;gap:8px;margin-bottom:16px;color:#fff;font-weight:700;font-size:1.1rem}
+.ft-tag{font-size:.85rem;line-height:1.7;color:#64748b}
+.ft-col h4{color:#e2e8f0;font-size:.9rem;font-weight:700;margin-bottom:16px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:10px}
+.ft-col ul li a{text-decoration:none;color:#64748b;font-size:.85rem;transition:color .2s}
+.ft-col ul li a:hover{color:var(--blue)}
+.ft-bot{border-top:1px solid #1e293b;padding-top:24px;display:flex;justify-content:space-between;font-size:.8rem;color:#475569}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:6px}
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner,.sf-inner,.core-inner{grid-template-columns:1fr}
+  .hero-title{font-size:2.2rem}
+  .sol-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .fc,.fc.alt{grid-template-columns:1fr}
+  .fc.alt .fc-img{order:0}
+  .fc.alt .fc-body{order:1}
+  nav,.hero,.sf,.transforms,.kbs,.core,.solutions,.testi,.cta-sec,footer{padding-left:32px;padding-right:32px}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .sol-grid,.testi-grid{grid-template-columns:1fr}
+  .bg{grid-template-columns:1fr}
+  .hero-title{font-size:1.8rem}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .db-g{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" id="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+      <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
+      <rect x="13" y="12" width="6" height="20" rx="2" fill="#F9C74F"/>
+      <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+    </svg>
+    TrackBot&trade;
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nav-res">Residential</a></li>
+    <li><a href="#" class="active" id="nav-fms">Facility Management</a></li>
+    <li><a href="#" id="nav-corp">Corporate &amp; Commercial</a></li>
+    <li><a href="#" id="nav-meet">Meeting Space</a></li>
+    <li><a href="#" id="nav-plat">Platform</a></li>
+    <li><a href="#" id="nav-blog">Blogs</a></li>
+    <li><a href="#" id="nav-contact">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="hero-title"><span class="blue">Intelligent Facility</span><br>Management for Peak<br>Performance</h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">Equip your FMS teams with TrackBot&rsquo;s AI-driven solutions. Automate intelligently, predict issues, optimize resources, and deliver superior service across all properties.</p>
+      <div class="cta-row">
+        <button class="btn-p" id="hero-demo">Book a FMS demo</button>
+        <button class="btn-o" id="hero-brochure">Get FMS brochure</button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-banner">
+    <svg width="88%" height="160" viewBox="0 0 880 160" fill="none">
+      <rect width="880" height="160" fill="#1a2035"/>
+      <rect x="16" y="16" width="155" height="128" rx="10" fill="#252d4a"/>
+      <rect x="28" y="28" width="70" height="8" rx="4" fill="#334155"/>
+      <rect x="28" y="44" width="125" height="12" rx="4" fill="#60a5fa" opacity=".7"/>
+      <rect x="28" y="64" width="100" height="7" rx="3" fill="#334155" opacity=".6"/>
+      <rect x="28" y="78" width="80" height="7" rx="3" fill="#4ade80" opacity=".5"/>
+      <rect x="188" y="16" width="155" height="128" rx="10" fill="#252d4a"/>
+      <rect x="200" y="28" width="80" height="8" rx="4" fill="#334155"/>
+      <rect x="200" y="48" width="40" height="48" rx="4" fill="#fb923c" opacity=".45"/>
+      <rect x="248" y="60" width="40" height="36" rx="4" fill="#60a5fa" opacity=".45"/>
+      <rect x="296" y="72" width="40" height="24" rx="4" fill="#4ade80" opacity=".45"/>
+      <rect x="360" y="16" width="200" height="128" rx="10" fill="#252d4a"/>
+      <rect x="372" y="28" width="100" height="8" rx="4" fill="#334155"/>
+      <circle cx="460" cy="90" r="34" stroke="#4ade80" stroke-width="5" fill="none" opacity=".5"/>
+      <circle cx="460" cy="90" r="34" stroke="#60a5fa" stroke-width="5" fill="none" stroke-dasharray="70 144" stroke-dashoffset="-36" opacity=".6"/>
+      <rect x="577" y="16" width="287" height="128" rx="10" fill="#252d4a"/>
+      <rect x="590" y="28" width="120" height="8" rx="4" fill="#334155"/>
+      <rect x="590" y="52" width="260" height="7" rx="3" fill="#1e293b"/>
+      <rect x="590" y="52" width="180" height="7" rx="3" fill="#4ade80" opacity=".7"/>
+      <rect x="590" y="68" width="260" height="7" rx="3" fill="#1e293b"/>
+      <rect x="590" y="68" width="110" height="7" rx="3" fill="#60a5fa" opacity=".7"/>
+      <rect x="590" y="84" width="260" height="7" rx="3" fill="#1e293b"/>
+      <rect x="590" y="84" width="210" height="7" rx="3" fill="#fb923c" opacity=".7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SMART FACILITY -->
+<section class="sf">
+  <div class="sf-inner">
+    <div class="reveal">
+      <div class="dash-box">
+        <svg width="240" height="240" viewBox="0 0 260 260" fill="none">
+          <rect x="55" y="50" width="150" height="150" rx="6" fill="#252d4a" stroke="#334155" stroke-width="2"/>
+          <rect x="65" y="60" width="130" height="90" rx="4" fill="#1e2a45"/>
+          <rect x="73" y="68" width="36" height="24" rx="3" fill="#2196F3" opacity=".4"/>
+          <rect x="116" y="68" width="68" height="9" rx="3" fill="#60a5fa" opacity=".55"/>
+          <rect x="116" y="82" width="50" height="6" rx="3" fill="#64748b"/>
+          <rect x="73" y="100" width="110" height="42" rx="3" fill="#1a2035"/>
+          <rect x="78" y="106" width="16" height="30" rx="2" fill="#4ade80" opacity=".65"/>
+          <rect x="98" y="116" width="16" height="20" rx="2" fill="#60a5fa" opacity=".65"/>
+          <rect x="118" y="110" width="16" height="26" rx="2" fill="#fb923c" opacity=".65"/>
+          <rect x="138" y="118" width="16" height="18" rx="2" fill="#a78bfa" opacity=".65"/>
+          <rect x="158" y="113" width="16" height="23" rx="2" fill="#f472b6" opacity=".65"/>
+          <rect x="65" y="158" width="55" height="28" rx="4" fill="#252d4a"/>
+          <rect x="140" y="158" width="55" height="28" rx="4" fill="#252d4a"/>
+          <rect x="73" y="166" width="40" height="5" rx="2" fill="#60a5fa" opacity=".5"/>
+          <rect x="148" y="166" width="40" height="5" rx="2" fill="#4ade80" opacity=".5"/>
+        </svg>
+        <div class="live-badge">LIVE</div>
+        <div class="city-badge">Prestige Jindal City</div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <h2 class="sec-h2">Smart Facility Management,<br>Made Intelligent</h2>
+      <p class="sec-p">Residential spaces are more than just buildings&mdash;they&rsquo;re homes, communities, and places where families grow and memories are made. At TrackBot, we understand that maintaining a residential property means ensuring every resident feels safe, heard, and cared for. That&rsquo;s why our intelligent systems are designed not just to manage utilities, but to support the well-being of the people who live there&mdash;quietly working in the background to keep life running smoothly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMS -->
+<section class="transforms">
+  <div class="tr-inner">
+    <h2 class="tr-h2 reveal">How TrackBot&rsquo;s <span class="blue">Intelligent Solutions</span><br>Transform Facility management service (FMS)</h2>
+    <p class="tr-desc reveal">TrackBot empowers facility management teams to shift from reactive processes to intelligent, data-driven operations. Our platform unifies AI, automation, and IoT to improve service quality, reduce costs, and future-proof assets.</p>
+
+    <!-- Card 1 -->
+    <div class="fc reveal">
+      <img src="assets/ai_dashboard_person.png" alt="AI-Driven Operational Excellence" class="fc-img" id="img-ai"/>
+      <div class="fc-body">
+        <h3 class="fc-h3">AI-Driven Operational Excellence</h3>
+        <p class="fc-p">Unlock next-level efficiency with predictive insights and seamless automation. TrackBot enables facility managers to move away from manual oversight and reactive problem-solving. By monitoring assets, energy usage, and systems in real time, it proactively addresses issues, schedules tasks, and optimizes performance across your property portfolio.</p>
+        <p class="kbl">Key Benefits</p>
+        <div class="bg">
+          <div class="bp"><span class="ck">&#10004;</span>Predictive alerts for system failures</div>
+          <div class="bp"><span class="ck">&#10004;</span>Centralized control dashboard for all operations</div>
+          <div class="bp"><span class="ck">&#10004;</span>Real-time energy, water &amp; asset insights.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Reduced overhead &amp; service delays.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="fc alt reveal">
+      <div class="fc-body">
+        <h3 class="fc-h3">Intelligent Asset Performance</h3>
+        <p class="fc-p">Extend the life and reliability of your assets with AI-backed intelligence. TrackBot helps ensure that mission-critical assets&mdash;like water pumps, STPs, HVACs, and electrical systems&mdash;run efficiently and reliably. AI algorithms analyze performance trends to schedule maintenance, detect inefficiencies, and avoid breakdowns before they occur.</p>
+        <p class="kbl">Key Benefits</p>
+        <div class="bg">
+          <div class="bp"><span class="ck">&#10004;</span>Smart alerts for borewell and leak issues.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Auto-scheduled maintenance by usage.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Asset lifecycle tracking for smarter CAPEX.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Improved ROI on infrastructure investment</div>
+        </div>
+      </div>
+      <img src="assets/asset_performance_person.png" alt="Intelligent Asset Performance" class="fc-img" id="img-asset"/>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="fc alt2 reveal">
+      <img src="assets/workforce_automation_person.png" alt="Smart Workforce Automation" class="fc-img" id="img-wf"/>
+      <div class="fc-body">
+        <h3 class="fc-h3">Smart Workforce Automation</h3>
+        <p class="fc-p">Empower your team with tools that increase productivity and accountability. With TrackBot, you can digitize task assignments, monitor completion status, and even manage workforce schedules&mdash;all through a mobile-friendly platform. AI helps assign the right task to the right person at the right time, minimizing response times and errors.</p>
+        <p class="kbl">Key Benefits</p>
+        <div class="bg">
+          <div class="bp"><span class="ck">&#10004;</span>AI task &amp; shift planning.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Mobile access for task reporting &amp; updates.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Supervisor performance dashboards.</div>
+          <div class="bp"><span class="ck">&#10004;</span>Faster SLAs &amp; improved feedback.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY BENEFITS -->
+<section class="kbs">
+  <h2 class="kbs-h2 reveal">Key Benefits for <span class="blue">Residential Communities</span></h2>
+  <div class="kbs-grid">
+    <div class="kbc reveal"><div class="kbc-icon">&#9889;</div>Faster Issue Resoulution</div>
+    <div class="kbc reveal" style="transition-delay:.08s"><div class="kbc-icon">&#128201;</div>Lower Operational Costs</div>
+    <div class="kbc reveal" style="transition-delay:.16s"><div class="kbc-icon">&#128202;</div>Smarter Resource Usage</div>
+    <div class="kbc reveal" style="transition-delay:.24s"><div class="kbc-icon">&#128522;</div>Happier Residents</div>
+    <div class="kbc reveal" style="transition-delay:.32s"><div class="kbc-icon">&#128274;</div>Stronger Security</div>
+    <div class="kbc reveal" style="transition-delay:.40s"><div class="kbc-icon">&#127807;</div>Eco-Friendly Living</div>
+  </div>
+</section>
+
+<!-- CORE FEATURES -->
+<section class="core">
+  <div class="core-inner">
+    <div class="core-left reveal">
+      <h2>Core Features for <span class="blue">Facility<br>management</span></h2>
+      <div class="cta-row" style="margin-bottom:32px">
+        <button class="btn-p" id="core-demo">Request a demo</button>
+        <button class="btn-o" id="core-brochure">Get Brochure</button>
+      </div>
+      <img src="assets/facility_manager_photo.png" alt="Facility manager with laptop" class="core-img" id="img-mgr"/>
+    </div>
+    <div class="core-right reveal" style="transition-delay:.15s">
+      <div class="cfi"><h4>Unified Intelligent Monitoring Dashboard</h4><p>Centralized view of STPs, WTPs, Fire Systems, DGs, Pumps, Lifts with AI-driven health scores and predictive alerts.</p></div>
+      <div class="cfi"><h4>AI-Powered Water Management Solutions</h4><p>Includes borewell optimization, automated softener control, and leak detection across managed properties.</p></div>
+      <div class="cfi"><h4>Smart Workforce Optimization</h4><p>Digital attendance, AI-assisted task scheduling, geo-tagging, and performance reports.</p></div>
+      <div class="cfi"><h4>Automated Compliance &amp; AI-Optimized PPM</h4><p>Digital audit logs, contract management, and AI-optimized scheduling of Preventive Maintenance.</p></div>
+      <div class="cfi"><h4>Mobile App for Field Techs with AI Support</h4><p>Empower staff with on-the-go task updates, image capture for AI verification, and asset info.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="solutions">
+  <div class="sol-inner">
+    <h2 class="sol-h2 reveal"><span class="blue">Solution</span> that Made a Difference</h2>
+    <p class="sol-desc reveal">TrackBot combines powerful modules into one intuitive platform, giving you complete control and unparalleled insight</p>
+    <div class="sol-grid">
+      <div class="sol-card reveal">
+        <div class="sol-imgw"><img src="assets/maintenance_illustration.png" alt="Optimized Maintenance in Apartments" id="img-sol1"/></div>
+        <div class="sol-body">
+          <span class="sol-tag">Technology</span>
+          <h3>Optimized Maintenance in Apartments</h3>
+          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
+          <a href="#" class="know-more" id="sol1-link">know more &#8250;</a>
+        </div>
+      </div>
+      <div class="sol-card reveal" style="transition-delay:.1s">
+        <div class="sol-imgw"><img src="assets/energy_optimization_illustration.png" alt="Smart Energy Optimization in a Tower" id="img-sol2"/></div>
+        <div class="sol-body">
+          <span class="sol-tag">Technology</span>
+          <h3>Smart Energy Optimization in a Tower</h3>
+          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
+          <a href="#" class="know-more" id="sol2-link">know more &#8250;</a>
+        </div>
+      </div>
+      <div class="sol-card reveal" style="transition-delay:.2s">
+        <div class="sol-imgw"><img src="assets/proactive_maintenance_illustration.png" alt="Proactive maintenance in Industrial Facility" id="img-sol3"/></div>
+        <div class="sol-body">
+          <span class="sol-tag">Technology</span>
+          <h3>Proactive maintenance in Industrial Facility</h3>
+          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
+          <a href="#" class="know-more" id="sol3-link">know more &#8250;</a>
+        </div>
+      </div>
+    </div>
+    <div class="dots">
+      <div class="dot active" id="dot1"></div>
+      <div class="dot" id="dot2"></div>
+      <div class="dot" id="dot3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="testi-inner">
+    <h2 class="reveal">What Our <span class="blue">Clients Say</span></h2>
+    <p class="testi-desc reveal">Real experiences from property owners and managers who trust TrackBot for smarter, more efficient operations.</p>
+    <div class="testi-grid">
+      <div class="tc reveal">
+        <div class="tc-hdr"><div class="t-av" style="background:#7c3aed">V</div><div><div class="t-name">Viji</div><div class="t-role">Asssociation Member</div></div></div>
+        <blockquote>&ldquo;Thanks to TrackBot, managing our societies freshwater in is incredibly easy. We no longer receive complaints from residents about water shortages, as it ensures consistent availability and prevents common problems like clogged taps&rdquo;</blockquote>
+      </div>
+      <div class="tc reveal" style="transition-delay:.1s">
+        <div class="tc-hdr"><div class="t-av" style="background:#ea580c">P</div><div><div class="t-name">Praveen</div><div class="t-role">President</div></div></div>
+        <blockquote>&ldquo;TrackBot has been a game-changer for us, virtually eliminating water wastage and leading to significant reductions in our monthly water bills. Highly recommended!&rdquo;</blockquote>
+      </div>
+      <div class="tc reveal" style="transition-delay:.2s">
+        <div class="tc-hdr"><div class="t-av" style="background:#0284c7">M</div><div><div class="t-name">Mainak</div><div class="t-role">Secretary</div></div></div>
+        <blockquote>&ldquo;Thanks to TrackBot, our freshwater management and sewage treatment plant operations are now seamlessly automated. We have achieved zero resident complaints regarding water quality and service, which is simply outstanding&rdquo;</blockquote>
+      </div>
+      <div class="tc reveal">
+        <div class="tc-hdr"><div class="t-av" style="background:#16a34a">R</div><div><div class="t-name">Rajeev</div><div class="t-role">Joint Secretary</div></div></div>
+        <blockquote>&ldquo;With TrackBot, our freshwater and sewage management, including smart borewell automation and continuous water quality and stormwater oversight, has vastly improved our service quality and substantially reduced overall maintenance expenses&rdquo;</blockquote>
+      </div>
+      <div class="tc reveal" style="transition-delay:.1s">
+        <div class="tc-hdr"><div class="t-av" style="background:#b45309">S</div><div><div class="t-name">Sagar</div><div class="t-role">Vice President</div></div></div>
+        <blockquote>&ldquo;With TrackBot, our water management is now effortlessly efficient, thanks to intelligent borewell automation, accurate tanker water inflow tracking, and automated water shifting for crisis situations. Its been a game-changer for reducing our workload.&rdquo;</blockquote>
+      </div>
+      <div class="tc reveal" style="transition-delay:.2s">
+        <div class="tc-hdr"><div class="t-av" style="background:#be185d">B</div><div><div class="t-name">Bharati</div><div class="t-role">Member Secretary</div></div></div>
+        <blockquote>&ldquo;Managing our layouts freshwater and sewage treatment plants has never been easier. Thanks to TrackBot. We now have full, clear visibility into water sourcing, consumption, and demand-supply, giving us complete control.&rdquo;</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2 class="reveal">Ready to <span class="blue">transform your facility</span><br>management?</h2>
+  <div class="cta-btns">
+    <button class="btn-p" id="cta-demo" style="font-size:1rem;padding:16px 36px">Schedule a demo</button>
+    <button class="btn-o" id="cta-expert" style="font-size:1rem;padding:14px 34px">Talk to an expert</button>
+  </div>
+  <div class="cta-db">
+    <div class="db-top">
+      <div><div class="db-site">&#9672; Prestige Jindal City &#9660;</div><div class="db-bc">&#8592; Drinking Water Quality &nbsp;/&nbsp; Daily Log</div></div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="background:#252d4a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+        <div style="width:32px;height:32px;background:#2196F3;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700">TA</div>
+      </div>
+    </div>
+    <div class="db-g">
+      <div class="db-c"><div class="db-cl">Water Quality Score</div><div class="db-cv gr">94.2%</div></div>
+      <div class="db-c"><div class="db-cl">Active Alerts</div><div class="db-cv or">3</div></div>
+      <div class="db-c"><div class="db-cl">Daily Consumption</div><div class="db-cv bl">12.4 kL</div></div>
+      <div class="db-c"><div class="db-cl">Asset Health</div><div class="db-cv gr">98.1%</div></div>
+    </div>
+    <div class="db-bars">
+      <div class="db-br"><div class="db-bl">STP Efficiency</div><div class="db-bt"><div class="db-bf" style="width:87%;background:#4ade80"></div></div><span style="color:#4ade80;font-size:.72rem;width:34px">87%</span></div>
+      <div class="db-br"><div class="db-bl">Pump Health</div><div class="db-bt"><div class="db-bf" style="width:92%;background:#60a5fa"></div></div><span style="color:#60a5fa;font-size:.72rem;width:34px">92%</span></div>
+      <div class="db-br"><div class="db-bl">Energy Usage</div><div class="db-bt"><div class="db-bf" style="width:64%;background:#fb923c"></div></div><span style="color:#fb923c;font-size:.72rem;width:34px">64%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <div class="ft-brand"><svg width="24" height="24" viewBox="0 0 36 36" fill="none"><rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/><rect x="13" y="12" width="6" height="20" rx="2" fill="#F9C74F"/><rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/></svg>TrackBot&trade;</div>
+        <p class="ft-tag">Intelligent facility management solutions powered by AI. Automate, predict, and optimize your property operations.</p>
+      </div>
+      <div class="ft-col"><h4>Solutions</h4><ul><li><a href="index.html" id="ft-res">Residential</a></li><li><a href="#" id="ft-fms">Facility Management</a></li><li><a href="#" id="ft-corp">Corporate &amp; Commercial</a></li><li><a href="#" id="ft-meet">Meeting Space</a></li><li><a href="#" id="ft-plat">Platform</a></li></ul></div>
+      <div class="ft-col"><h4>Company</h4><ul><li><a href="#" id="ft-about">About Us</a></li><li><a href="#" id="ft-blog">Blogs</a></li><li><a href="#" id="ft-careers">Careers</a></li><li><a href="#" id="ft-contact">Contact Us</a></li></ul></div>
+      <div class="ft-col"><h4>Resources</h4><ul><li><a href="#" id="ft-brochure">Brochure</a></li><li><a href="#" id="ft-case">Case Studies</a></li><li><a href="#" id="ft-privacy">Privacy Policy</a></li><li><a href="#" id="ft-terms">Terms of Service</a></li></ul></div>
+    </div>
+    <div class="ft-bot"><span>&copy; 2024 TrackBot. All rights reserved.</span><span>Made with &#10084;&#65039; for smarter facilities</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Image map
+  var imgs = {
+    'img-ai':   'assets/ai_dashboard_person.png',
+    'img-asset':'assets/asset_performance_person.png',
+    'img-wf':   'assets/workforce_automation_person.png',
+    'img-mgr':  'assets/facility_manager_photo.png',
+    'img-sol1': 'assets/maintenance_illustration.png',
+    'img-sol2': 'assets/energy_optimization_illustration.png',
+    'img-sol3': 'assets/proactive_maintenance_illustration.png'
+  };
+  Object.keys(imgs).forEach(function(id){ var el=document.getElementById(id); if(el) el.src=imgs[id]; });
+
+  // Scroll reveal
+  var revs=document.querySelectorAll('.reveal');
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+  revs.forEach(function(el){obs.observe(el);});
+
+  // Carousel dots
+  var dots=document.querySelectorAll('.dot'),cur=0;
+  setInterval(function(){dots[cur].classList.remove('active');cur=(cur+1)%dots.length;dots[cur].classList.add('active');},2800);
+
+  // Button ripple
+  document.querySelectorAll('.btn-p').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var r=document.createElement('span'),rect=this.getBoundingClientRect();
+      r.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.35);width:16px;height:16px;top:'+(e.clientY-rect.top-8)+'px;left:'+(e.clientX-rect.left-8)+'px;pointer-events:none;animation:rip .5s ease forwards;';
+      this.appendChild(r);setTimeout(function(){r.remove();},600);
+    });
+  });
+  var ss=document.createElement('style');ss.textContent='@keyframes rip{to{transform:scale(22);opacity:0;}}';document.head.appendChild(ss);
+})();
+</script>
+</body>
+</html>
