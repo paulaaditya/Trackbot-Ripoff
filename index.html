@@ -3,579 +3,745 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TrackBot - Connecting the Dots | Intelligent Building Management</title>
-<meta name="description" content="TrackBot empowers you to step into the future of building management by digitalizing, monitoring, and automating operations to drive efficiency and intelligence to unprecedented levels."/>
+<title>TrackBot™ | AI & IoT Powered Operations Platform</title>
+<meta name="description" content="TrackBot empowers residential communities, commercial properties, and facility managers with real-time IoT monitoring, automated water management, and AI predictive maintenance."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue:#2196F3;--blue-dark:#1565C0;--blue-light:#E3F2FD;
-  --green:#4CAF50;--orange:#F59E0B;--text-dark:#0f172a;
-  --text-mid:#374151;--text-muted:#6B7280;--bg-page:#EEF2F7;
-  --bg-white:#FFFFFF;--border:#E2E8F0;
-  --shadow-sm:0 1px 4px rgba(0,0,0,0.06);
-  --shadow:0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #2196F3;
+  --blue-dark: #0F6cbd;
+  --blue-navy: #0F172A;
+  --blue-light: #EBF5FF;
+  --blue-glow: rgba(33, 150, 243, 0.15);
+  --green: #10B981;
+  --orange: #F59E0B;
+  --purple: #8B5CF6;
+  --text-dark: #0F172A;
+  --text-mid: #334155;
+  --text-muted: #64748B;
+  --bg-page: #F8FAFC;
+  --bg-white: #FFFFFF;
+  --border: #E2E8F0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --radius: 16px;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg-page);color:var(--text-dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* ======== NAV ======== */
-nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px}
-.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:1.1rem;color:var(--text-dark)}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;font-size:0.875rem;font-weight:500;color:var(--text-mid);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
+/* ======== NAVIGATION ======== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-cta {
+  background: var(--blue);
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 100px;
+  box-shadow: 0 4px 14px rgba(33,150,243,0.3);
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.nav-cta:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(33,150,243,0.4);
+}
 
 /* ======== HERO ======== */
-.hero{background:linear-gradient(160deg,#EBF5FF 0%,#EEF2F7 40%,#E8F4FF 100%);padding:96px 56px 64px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:
-  linear-gradient(rgba(203,213,225,.4) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(203,213,225,.4) 1px,transparent 1px);
-  background-size:60px 60px;pointer-events:none}
-.hero::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(33,150,243,.08) 0%,transparent 70%);pointer-events:none}
-.hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-.hero-eyebrow{color:var(--blue);font-size:2.2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-.hero-title{font-size:3.4rem;font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--text-dark);margin-bottom:24px}
-.hero-desc{font-size:1.05rem;color:var(--text-muted);max-width:720px;margin:0 auto 36px;line-height:1.75}
-.hero-cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:48px}
-.btn-p{background:var(--blue);color:#fff;border:none;padding:14px 30px;border-radius:100px;font-size:.93rem;font-weight:600;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 14px rgba(33,150,243,.38);position:relative;overflow:hidden;letter-spacing:.01em}
-.btn-p:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(33,150,243,.45)}
-.btn-o{background:#fff;color:var(--text-dark);border:2px solid #CBD5E1;padding:12px 28px;border-radius:100px;font-size:.93rem;font-weight:600;cursor:pointer;transition:border-color .2s,color .2s,transform .15s;letter-spacing:.01em}
-.btn-o:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
-.trusted-label{font-size:.83rem;color:var(--text-muted);margin-bottom:18px;letter-spacing:.04em}
-.logo-strip{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
-.logo-strip .brand-name{font-size:1rem;font-weight:700;color:#94a3b8;letter-spacing:.05em;padding:8px 18px;border:1.5px solid #E2E8F0;border-radius:8px;background:#fff}
-.hero-video{max-width:960px;margin:56px auto -60px;background:#0f172a;border-radius:20px 20px 0 0;overflow:hidden;box-shadow:0 -8px 40px rgba(0,0,0,.20);aspect-ratio:16/6;display:flex;align-items:center;justify-content:center;position:relative}
-.hero-video-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
-.play-btn{width:70px;height:70px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s,transform .2s}
-.play-btn:hover{background:rgba(255,255,255,.2);transform:scale(1.08)}
-.play-btn svg{width:24px;height:24px;fill:#fff;margin-left:4px}
-.video-tag{position:absolute;top:16px;left:20px;font-size:.75rem;font-weight:700;color:#60a5fa;letter-spacing:.08em;opacity:.8}
+.hero {
+  background: radial-gradient(100% 100% at 50% 0%, #EBF5FF 0%, #F8FAFC 70%);
+  padding: 80px 48px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(33,150,243,0.7); } 70%{ transform: scale(1); box-shadow: 0 0 0 8px rgba(33,150,243,0); } 100%{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(33,150,243,0); } }
 
-/* ======== SECTION COMMON ======== */
-.section-wrap{max-width:1200px;margin:0 auto}
-.section-pad{padding:96px 56px}
-.section-center{text-align:center}
-.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:18px}
-.eyebrow.blue{color:var(--blue);background:var(--blue-light)}
-.eyebrow.green{color:var(--green);background:#F0FFF4}
-.eyebrow.orange{color:var(--orange);background:#FFFBEB}
-.sec-h2{font-size:2.2rem;font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-bottom:14px}
-.sec-h2 span.blue{color:var(--blue)}
-.sec-p{font-size:.93rem;color:var(--text-muted);line-height:1.75;max-width:640px;margin:0 auto 48px}
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+}
+.hero-title span.highlight {
+  background: linear-gradient(135deg, #2196F3 0%, #0F6cbd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 760px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.btn-p {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 15px 34px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 4px 16px rgba(33,150,243,0.35);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-p:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(33,150,243,0.45);
+}
+.btn-o {
+  background: #fff;
+  color: var(--text-dark);
+  border: 1.5px solid #CBD5E1;
+  padding: 14px 30px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-o:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
 
-/* ======== SECTION 1: FUTURE-PROOF ======== */
-.fp{background:var(--bg-page)}
-.fp-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.fp-left h2{font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:20px;letter-spacing:-.02em}
-.fp-left h2 span.blue{color:var(--blue)}
-.fp-left p{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:28px}
-.know-more{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:.88rem;font-weight:600;text-decoration:none;transition:gap .2s}
-.know-more:hover{gap:10px}
-.fp-right{display:flex;flex-direction:column;gap:16px}
-.stat-card{background:var(--bg-white);border:1px solid var(--border);border-radius:16px;padding:22px 26px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
-.stat-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
-.stat-icon{font-size:2rem;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}
-.stat-icon.energy{background:#FFFBEB}
-.stat-icon.water{background:#EFF6FF}
-.stat-icon.people{background:#F0FFF4}
-.stat-pct{font-size:1.8rem;font-weight:800;color:var(--text-dark);letter-spacing:-.02em}
-.stat-arr{color:var(--green);font-size:.9rem;margin-left:4px;font-weight:700}
-.stat-label{font-size:.83rem;color:var(--text-muted);margin-top:2px}
+.trusted-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.logo-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.logo-item {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #475569;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
 
-/* ======== SECTION 2: SMART SOLUTIONS ======== */
-.smart{background:#F8FAFF;padding:96px 56px}
-.smart-inner{max-width:1200px;margin:0 auto}
-.smart-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
-.env-card{background:var(--bg-white);border:1px solid var(--border);border-radius:20px;padding:32px 28px;box-shadow:var(--shadow-sm);transition:box-shadow .25s,transform .25s;display:flex;flex-direction:column}
-.env-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
-.env-badge{display:inline-block;font-size:.75rem;font-weight:600;padding:5px 14px;border-radius:100px;margin-bottom:18px}
-.env-badge.res{background:#F0F4F8;color:#64748b}
-.env-badge.fms{background:#FFF3E0;color:#b45309}
-.env-badge.corp{background:#EDE9FE;color:#6d28d9}
-.env-card h3{font-size:1.25rem;font-weight:800;margin-bottom:10px;line-height:1.25;border-bottom:1px solid var(--border);padding-bottom:14px}
-.env-card p{font-size:.83rem;color:var(--text-muted);line-height:1.75;margin-bottom:20px;flex:1}
-.env-stats{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
-.env-stat{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-mid)}
-.env-stat-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
-.env-card .know-more{margin-top:auto}
+/* Hero Dashboard Graphic */
+.hero-graphic {
+  max-width: 1040px;
+  margin: 48px auto -80px;
+  background: var(--blue-navy);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+.dash-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.dash-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16,185,129,0.15);
+  color: #34D399;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.dash-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px;
+}
+.dash-card-label { font-size: 0.75rem; color: #94A3B8; margin-bottom: 6px; font-weight: 600; }
+.dash-card-val { font-size: 1.6rem; font-weight: 800; }
+.val-green { color: #34D399; }
+.val-blue { color: #60A5FA; }
+.val-orange { color: #FBBF24; }
 
-/* ======== SECTION 3: INTEGRATED FEATURES (TABS) ======== */
-.features-sec{background:var(--bg-page);padding:96px 56px}
-.features-inner{max-width:1200px;margin:0 auto}
-.features-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:36px;gap:32px;flex-wrap:wrap}
-.features-head-left{max-width:560px}
-.features-head-left h2{font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:12px;letter-spacing:-.02em}
-.features-head-left p{font-size:.9rem;color:var(--text-muted);line-height:1.75}
-.tab-arrows{display:flex;gap:8px;flex-shrink:0;margin-top:8px}
-.tab-arrow{width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s}
-.tab-arrow:hover,.tab-arrow.active-arr{background:var(--blue);border-color:var(--blue)}
-.tab-arrow:hover svg,.tab-arrow.active-arr svg{stroke:#fff}
-.tab-arrow svg{stroke:var(--text-muted);transition:stroke .2s}
-.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:40px;overflow-x:auto;scrollbar-width:none}
-.tab-bar::-webkit-scrollbar{display:none}
-.tab-btn{background:none;border:none;padding:12px 24px;font-size:.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s}
-.tab-btn:hover{color:var(--blue)}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
-.tab-panel{display:none;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.tab-panel.active{display:grid}
-.tab-img-box{background:#f1f5f9;border-radius:16px;overflow:hidden;height:400px;display:flex;align-items:center;justify-content:center}
-.tab-img-box img{width:100%;height:100%;object-fit:cover}
-.tab-img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#64748b;font-size:.85rem;padding:32px}
-.tab-img-placeholder .big-icon{font-size:4rem;opacity:.5}
-.tab-info{display:flex;flex-direction:column;gap:18px}
-.info-block{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 24px}
-.info-block-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.info-block-title{font-size:.9rem;font-weight:700;color:var(--text-dark)}
-.info-items{display:flex;flex-direction:column;gap:10px}
-.info-item{display:flex;align-items:flex-start;gap:10px;font-size:.83rem;color:var(--text-mid);line-height:1.6}
-.info-arrow{flex-shrink:0;margin-top:2px;color:var(--text-muted);font-size:.85rem}
+/* ======== STATS BANNER ======== */
+.stats-banner {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 120px 48px 48px;
+}
+.stats-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+.stat-box h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+.stat-box p { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); }
 
-/* ======== SECTION 4: SOLUTIONS ======== */
-.solutions-sec{background:#F8FAFF;padding:96px 56px}
-.solutions-inner{max-width:1200px;margin:0 auto}
-.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-.sol-card{background:var(--bg-white);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow .25s,transform .25s}
-.sol-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-5px)}
-.sol-img{height:200px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.sol-img svg{opacity:.25}
-.sol-body{padding:24px}
-.sol-tech{display:inline-block;background:#F0F4F8;color:var(--text-muted);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:100px;margin-bottom:12px;letter-spacing:.06em;text-transform:uppercase}
-.sol-card h3{font-size:1.02rem;font-weight:700;margin-bottom:10px;line-height:1.35}
-.sol-card p{font-size:.82rem;color:var(--text-muted);line-height:1.65;margin-bottom:18px}
-.sol-dots{display:flex;justify-content:center;gap:6px;margin-top:36px}
-.sol-dot{width:8px;height:8px;border-radius:100px;background:#CBD5E1;cursor:pointer;transition:width .3s,background .3s}
-.sol-dot.active{width:26px;background:var(--blue)}
+/* ======== SECTION TYPOGRAPHY ======== */
+.section-pad { padding: 96px 48px; }
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.eyebrow.blue { background: var(--blue-light); color: var(--blue); }
+.eyebrow.green { background: #E6F4EA; color: #137333; }
+.sec-h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+.sec-p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
 
-/* ======== SECTION 5: TESTIMONIALS ======== */
-.testi-sec{background:var(--bg-page);padding:96px 56px}
-.testi-inner{max-width:1200px;margin:0 auto}
-.testi-head{margin-bottom:48px}
-.testi-head h2{font-size:2.2rem;font-weight:800;margin-bottom:10px;letter-spacing:-.02em}
-.testi-head p{font-size:.9rem;color:var(--text-muted);max-width:520px;line-height:1.75}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.testi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
-.testi-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
-.testi-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.t-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;flex-shrink:0;letter-spacing:.02em}
-.t-name{font-size:.92rem;font-weight:700;color:var(--text-dark)}
-.t-role{font-size:.78rem;color:var(--text-muted);margin-top:1px}
-.testi-card blockquote{font-size:.82rem;color:var(--text-mid);line-height:1.75;font-style:normal}
+/* ======== INTERACTIVE SOLUTION SWITCHER ======== */
+.solutions-switcher { background: #F8FAFC; }
+.tab-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.switcher-btn {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border);
+  padding: 12px 26px;
+  border-radius: 100px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all .2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.switcher-btn.active {
+  background: var(--blue);
+  color: #FFF;
+  border-color: var(--blue);
+  box-shadow: 0 4px 16px rgba(33,150,243,0.3);
+}
 
-/* ======== CTA SECTION ======== */
-.cta-sec{background:linear-gradient(135deg,#EBF5FF 0%,#EEF2F7 50%,#E8F4FF 100%);padding:96px 56px 0;text-align:center;position:relative;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(203,213,225,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(203,213,225,.35) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
-.cta-inner{position:relative;z-index:1}
-.cta-sec h2{font-size:2.6rem;font-weight:800;line-height:1.2;margin-bottom:36px;letter-spacing:-.03em}
-.cta-sec h2 span.blue{color:var(--blue)}
-.cta-btns{display:flex;justify-content:center;gap:14px;margin-bottom:64px;flex-wrap:wrap}
-.cta-db-wrap{max-width:880px;margin:0 auto}
-.cta-db{background:#0f172a;border-radius:16px 16px 0 0;padding:24px;box-shadow:0 -12px 48px rgba(0,0,0,.22)}
-.cta-db-bar{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px}
-.cta-db-title{font-size:.85rem;font-weight:600;color:#e2e8f0}
-.cta-db-crumb{font-size:.7rem;color:#475569;margin-top:3px}
-.cta-db-actions{display:flex;align-items:center;gap:10px}
-.cta-db-icon{width:30px;height:30px;background:#1e293b;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.cta-db-avatar{width:30px;height:30px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff}
-.cta-db-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
-.cta-db-c{background:#1e293b;border-radius:10px;padding:14px}
-.cta-db-cl{font-size:.62rem;color:#475569;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.cta-db-cv{font-size:1.4rem;font-weight:800}
-.gr{color:#4ade80}.or{color:#fb923c}.bl{color:#60a5fa}
-.cta-db-bars{background:#1e293b;border-radius:10px;padding:14px}
-.cta-db-br{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.cta-db-blab{font-size:.68rem;color:#64748b;width:90px;flex-shrink:0}
-.cta-db-btrack{flex:1;height:5px;background:#0f172a;border-radius:3px;overflow:hidden}
-.cta-db-bfill{height:100%;border-radius:3px}
+.solution-content-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: var(--shadow);
+}
+.sol-text-content h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.sol-text-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+.sol-feature-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.sol-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #E6F4EA;
+  color: #137333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sol-preview-box {
+  background: var(--blue-navy);
+  border-radius: 20px;
+  padding: 32px;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.sol-preview-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #94A3B8; margin-bottom: 12px; font-weight: 700; }
+.sol-preview-metric { font-size: 2.2rem; font-weight: 800; color: #34D399; margin-bottom: 20px; }
+.sol-preview-item {
+  background: rgba(255,255,255,0.06);
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+/* ======== FEATURE MODULES TABS ======== */
+.features-sec { background: #FFFFFF; border-top: 1px solid var(--border); }
+.features-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 24px;
+  transition: all .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue);
+}
+.feat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--blue-light);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.feature-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; }
+.feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; flex: 1; }
+
+/* ======== CASE STUDIES ======== */
+.case-sec { background: #F8FAFC; border-top: 1px solid var(--border); }
+.case-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.case-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.case-img-wrap {
+  height: 180px;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 24px;
+  position: relative;
+}
+.case-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(33, 150, 243, 0.2);
+  color: #60A5FA;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.case-stat-big { font-size: 2.2rem; font-weight: 800; color: #34D399; }
+.case-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
+.case-body h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; line-height: 1.35; }
+.case-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.case-link {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.case-link:hover { gap: 10px; }
+
+/* ======== TESTIMONIALS (SEGMENTED) ======== */
+.testi-sec { background: #FFFFFF; border-top: 1px solid var(--border); }
+.testi-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.testi-btn {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+.testi-btn.active {
+  background: var(--blue-navy);
+  color: #fff;
+  border-color: var(--blue-navy);
+}
+.testi-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testi-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.testi-quote { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testi-name { font-size: 0.9rem; font-weight: 800; }
+.testi-role { font-size: 0.78rem; color: var(--text-muted); }
+
+/* ======== CTA & DEMO FORM ======== */
+.cta-sec {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #fff;
+  padding: 96px 48px;
+}
+.cta-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.cta-left h2 { font-size: 2.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
+.cta-left p { font-size: 1.05rem; color: #94A3B8; margin-bottom: 32px; line-height: 1.7; }
+.cta-benefits-list { display: flex; flex-direction: column; gap: 14px; }
+.cta-benefit-item { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; font-weight: 600; color: #E2E8F0; }
+
+.demo-form-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 40px;
+  color: var(--text-dark);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.demo-form-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+.demo-form-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+}
+.form-input:focus, .form-select:focus { border-color: var(--blue); }
+.btn-submit {
+  width: 100%;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: 8px;
+}
+.btn-submit:hover { background: var(--blue-dark); }
 
 /* ======== FOOTER ======== */
-footer{background:#0f172a;color:#94a3b8;padding:64px 56px 32px}
-.ft-inner{max-width:1200px;margin:0 auto}
-.ft-grid{display:grid;grid-template-columns:2fr 1fr 2fr;gap:56px;margin-bottom:48px}
-.ft-brand{display:flex;align-items:center;gap:8px;margin-bottom:14px;color:#f1f5f9;font-weight:700;font-size:1.05rem}
-.ft-sub{font-size:.78rem;color:#475569;margin-bottom:6px}
-.ft-tagline{font-size:.83rem;color:#475569;line-height:1.6;margin-bottom:24px}
-.ft-social{display:flex;gap:12px;margin-bottom:20px}
-.ft-social-link{width:34px;height:34px;border-radius:8px;background:#1e293b;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
-.ft-social-link:hover{background:var(--blue)}
-.ft-social-link svg{fill:#94a3b8;width:16px;height:16px}
-.ft-social-link:hover svg{fill:#fff}
-.ft-email{display:flex;align-items:center;gap:8px;font-size:.83rem;color:#64748b}
-.ft-email svg{stroke:#64748b;width:14px;height:14px;flex-shrink:0}
-.ft-nav h4{color:#e2e8f0;font-size:.85rem;font-weight:700;margin-bottom:16px;letter-spacing:.04em;text-transform:uppercase}
-.ft-nav ul{list-style:none}
-.ft-nav ul li{margin-bottom:10px}
-.ft-nav ul li a{text-decoration:none;color:#64748b;font-size:.83rem;transition:color .2s}
-.ft-nav ul li a:hover{color:var(--blue)}
-.ft-offices{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.ft-office h4{color:#e2e8f0;font-size:.85rem;font-weight:700;margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase}
-.ft-office-detail{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
-.ft-office-detail svg{stroke:#64748b;width:14px;height:14px;flex-shrink:0;margin-top:3px}
-.ft-office-detail span{font-size:.82rem;color:#64748b;line-height:1.55}
-.ft-bot{border-top:1px solid #1e293b;padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:#334155}
-.ft-skyline{width:100%;opacity:.18;margin-top:28px}
-
-/* ======== REVEAL ANIMATION ======== */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ======== SCROLLBAR ======== */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:#f1f5f9}
-::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:6px}
+footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+.ft-inner { max-width: 1140px; margin: 0 auto; }
+.ft-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 64px; margin-bottom: 48px; }
+.ft-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 14px; }
+.ft-desc { font-size: 0.88rem; color: #64748B; line-height: 1.65; margin-bottom: 20px; }
+.ft-title { color: #fff; font-size: 0.88rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+.ft-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-links a { text-decoration: none; color: #94A3B8; font-size: 0.88rem; transition: color .2s; }
+.ft-links a:hover { color: var(--blue); }
+.ft-office-box { font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin-bottom: 16px; }
+.ft-office-title { color: #E2E8F0; font-weight: 700; margin-bottom: 4px; }
+.ft-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #475569; }
 
 /* ======== RESPONSIVE ======== */
-@media(max-width:1100px){
-  .fp-inner,.tab-panel.active{grid-template-columns:1fr}
-  .smart-grid,.testi-grid{grid-template-columns:1fr 1fr}
-  .sol-grid{grid-template-columns:1fr 1fr}
-  .ft-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .ft-offices{grid-template-columns:1fr}
-  nav,.hero,.section-pad,.fp,.smart,.features-sec,.solutions-sec,.testi-sec,.cta-sec,footer{padding-left:32px;padding-right:32px}
-  .hero-title{font-size:2.6rem}
-}
-@media(max-width:680px){
-  .nav-links{display:none}
-  .smart-grid,.testi-grid,.sol-grid{grid-template-columns:1fr}
-  .hero-title{font-size:2rem}
-  .hero-eyebrow{font-size:1.8rem}
-  .ft-grid{grid-template-columns:1fr}
-  .cta-db-cards{grid-template-columns:1fr 1fr}
+@media(max-width: 1024px) {
+  .hero-title { font-size: 2.8rem; }
+  .dash-grid, .stats-grid, .features-grid, .case-grid, .testi-grid, .cta-container, .solution-content-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 24px; }
+  .section-pad, .hero, .cta-sec, footer { padding-left: 24px; padding-right: 24px; }
+  .ft-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 <nav>
-  <a href="index.html" class="nav-logo" id="nav-logo">
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+  <a href="index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
       <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
-      <rect x="13" y="12" width="6" height="20" rx="2" fill="#F9C74F"/>
+      <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
       <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
     </svg>
-    TrackBot&trade;
+    TrackBot™
   </a>
   <ul class="nav-links">
-    <li><a href="#" id="nav-res">Residential</a></li>
-    <li><a href="facility.html" id="nav-fms">Facility Management</a></li>
-    <li><a href="#" id="nav-corp">Corporate &amp; Commercial</a></li>
-    <li><a href="#" id="nav-meet">Meeting Space</a></li>
-    <li><a href="#" id="nav-plat">Platform</a></li>
-    <li><a href="#" id="nav-blog">Blogs</a></li>
-    <li><a href="#" id="nav-contact">Contact Us</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#demo" class="nav-cta">Book a Demo</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow reveal">TrackBot</div>
-    <h1 class="hero-title reveal" style="transition-delay:.05s">Connecting the dots</h1>
-    <p class="hero-desc reveal" style="transition-delay:.1s">Empowers you to step into the future of building management by digitalizing, monitoring, and automating operations to drive efficiency and intelligence to unprecedented levels.</p>
-    <div class="hero-cta reveal" style="transition-delay:.15s">
-      <button class="btn-p" id="hero-demo">Schedule a demo</button>
-      <button class="btn-o" id="hero-expert">Talk to an expert</button>
+    <div class="hero-badge">
+      <span class="dot"></span> AI &amp; IoT Powered Building Operations Platform
     </div>
-    <div class="trusted-label reveal" style="transition-delay:.2s">Trusted by innovative enterprises worldwide</div>
-    <div class="logo-strip reveal" style="transition-delay:.25s">
-      <span class="brand-name" style="color:#00875A;border-color:#c6f6d5">Infosys</span>
-      <span class="brand-name">Handiman</span>
-      <span class="brand-name" style="color:#0ea5e9;border-color:#bae6fd">PRK Global</span>
-      <span class="brand-name" style="color:#f59e0b;border-color:#fde68a">Arya</span>
-      <span class="brand-name">FACILUS</span>
-    </div>
-  </div>
-  <div class="hero-video reveal" style="transition-delay:.3s">
-    <div class="hero-video-inner">
-      <div class="video-tag">&#9679; LIVE DEMO</div>
-      <svg width="580" height="200" viewBox="0 0 580 200" fill="none">
-        <rect x="20" y="20" width="240" height="160" rx="10" fill="#1e293b"/>
-        <rect x="32" y="32" width="100" height="8" rx="4" fill="#334155"/>
-        <rect x="32" y="48" width="210" height="80" rx="6" fill="#0f172a"/>
-        <rect x="40" y="56" width="24" height="64" rx="3" fill="#3b82f6" opacity=".5"/>
-        <rect x="70" y="72" width="24" height="48" rx="3" fill="#4ade80" opacity=".5"/>
-        <rect x="100" y="64" width="24" height="56" rx="3" fill="#fb923c" opacity=".5"/>
-        <rect x="130" y="80" width="24" height="40" rx="3" fill="#a78bfa" opacity=".5"/>
-        <rect x="160" y="60" width="24" height="60" rx="3" fill="#3b82f6" opacity=".5"/>
-        <rect x="190" y="76" width="24" height="44" rx="3" fill="#4ade80" opacity=".5"/>
-        <rect x="32" y="140" width="60" height="6" rx="3" fill="#334155"/>
-        <rect x="32" y="152" width="100" height="6" rx="3" fill="#1e3a5f"/>
-        <rect x="290" y="20" width="270" height="160" rx="10" fill="#1e293b"/>
-        <rect x="302" y="32" width="100" height="8" rx="4" fill="#334155"/>
-        <rect x="302" y="52" width="246" height="7" rx="3" fill="#0f172a"/>
-        <rect x="302" y="52" width="180" height="7" rx="3" fill="#4ade80" opacity=".7"/>
-        <rect x="302" y="68" width="246" height="7" rx="3" fill="#0f172a"/>
-        <rect x="302" y="68" width="110" height="7" rx="3" fill="#60a5fa" opacity=".7"/>
-        <rect x="302" y="84" width="246" height="7" rx="3" fill="#0f172a"/>
-        <rect x="302" y="84" width="200" height="7" rx="3" fill="#fb923c" opacity=".7"/>
-        <rect x="302" y="100" width="246" height="7" rx="3" fill="#0f172a"/>
-        <rect x="302" y="100" width="140" height="7" rx="3" fill="#a78bfa" opacity=".7"/>
-        <circle cx="420" cy="150" r="26" stroke="#4ade80" stroke-width="4" fill="none" opacity=".5"/>
-        <circle cx="420" cy="150" r="26" stroke="#60a5fa" stroke-width="4" fill="none" stroke-dasharray="55 108" stroke-dashoffset="-28" opacity=".6"/>
-        <text x="412" y="155" fill="#e2e8f0" font-size="11" font-weight="700" font-family="Inter,sans-serif">94%</text>
-        <rect x="460" y="130" width="70" height="42" rx="6" fill="#252d4a"/>
-        <rect x="468" y="138" width="55" height="6" rx="3" fill="#334155"/>
-        <rect x="468" y="150" width="40" height="5" rx="2" fill="#4ade80" opacity=".6"/>
-        <rect x="468" y="160" width="50" height="5" rx="2" fill="#60a5fa" opacity=".6"/>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 1: FUTURE-PROOF -->
-<section class="fp section-pad">
-  <div class="section-wrap">
-    <div class="fp-inner">
-      <div class="fp-left reveal">
-        <h2>Future-Proof Facility<br><span class="blue">Management</span> with AI &amp; IoT</h2>
-        <p>Step into the future of facility management with LetUSense TrackBot. Our comprehensive, cloud-based IoT platform is engineered to simplify complexity and maximize efficiency in residential and commercial properties. By seamlessly integrating people, processes, and technology, TrackBot automates critical operations, provides real-time visibility, and delivers actionable insights.</p>
-        <a href="facility.html" class="know-more" id="fp-know-more">know more &#8250;</a>
-      </div>
-      <div class="fp-right reveal" style="transition-delay:.12s">
-        <div class="stat-card">
-          <div class="stat-icon energy">&#9889;</div>
-          <div>
-            <div class="stat-pct">30%<span class="stat-arr">&#8599;</span></div>
-            <div class="stat-label">Reduction in Energy Cost</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon water">&#128167;</div>
-          <div>
-            <div class="stat-pct">30%<span class="stat-arr">&#8599;</span></div>
-            <div class="stat-label">Reduction in Water Cost</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon people">&#128101;</div>
-          <div>
-            <div class="stat-pct">30%<span class="stat-arr">&#8599;</span></div>
-            <div class="stat-label">Lesser Manual Efforts</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 2: SMART SOLUTION -->
-<section class="smart">
-  <div class="smart-inner">
-    <div class="section-center">
-      <h2 class="sec-h2 reveal"><span class="blue">Smart Solution</span> for Every Environment</h2>
-      <p class="sec-p reveal">TrackBot adapts to the unique demands of diverse facilities. Our customizable platform ensures you have the right tools for optimizing the cost and efforts</p>
-    </div>
-    <div class="smart-grid">
-      <div class="env-card reveal">
-        <span class="env-badge res">Societies &amp; Apartments</span>
-        <h3>Residential<br>Communities</h3>
-        <p>TrackBot is engineered to revolutionize routine building maintenance, shifting from a reactive model to a proactive strategy through the integration of advanced technologies, including AI, IoT....</p>
-        <div class="env-stats">
-          <div class="env-stat"><span class="env-stat-dot"></span>30% reduction in energy cost</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>30% reduction in water cost</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>40% reduction in manual efforts</div>
-        </div>
-        <a href="#" class="know-more" id="env-res-link">Know more &#8250;</a>
-      </div>
-      <div class="env-card reveal" style="transition-delay:.1s">
-        <span class="env-badge fms">FMS Companies &amp; Large Campuses</span>
-        <h3>Facility Management<br>Services</h3>
-        <p>Competitive edge in property service delivery by leveraging a centralized dashboard to optimize operations across multiple sites. Enhance resource availability, eliminate vendor dependencies....</p>
-        <div class="env-stats">
-          <div class="env-stat"><span class="env-stat-dot"></span>50% reduction in Field Officer effort</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>30% MTTR improvement</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>20% reduction in operational overheads</div>
-        </div>
-        <a href="facility.html" class="know-more" id="env-fms-link">Know more &#8250;</a>
-      </div>
-      <div class="env-card reveal" style="transition-delay:.2s">
-        <span class="env-badge corp">Hotels, malls, factories, schools.</span>
-        <h3>Corporate &amp; Commercial<br>Properties</h3>
-        <p>Master the complexities of large-scale facilities with seamless integration of high-critical resources such as HVAC, CCTV, DG, Lifts, Fire systems, and BMS, all accessible through mobile platforms.</p>
-        <div class="env-stats">
-          <div class="env-stat"><span class="env-stat-dot"></span>50% increase in predictivity</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>60% faster response and feedback.</div>
-          <div class="env-stat"><span class="env-stat-dot"></span>20% reduction in operational cost</div>
-        </div>
-        <a href="#" class="know-more" id="env-corp-link">Know more &#8250;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 3: INTEGRATED FEATURES -->
-<section class="features-sec">
-  <div class="features-inner">
-    <div class="features-head reveal">
-      <div class="features-head-left">
-        <h2>Unlock Peak <span class="blue">Performance<br>with</span> TrackBot&rsquo;s Integrated Features</h2>
-        <p>TrackBot combines powerful modules into one intuitive platform, giving you complete control and unparalleled insight</p>
-      </div>
-      <div class="tab-arrows">
-        <button class="tab-arrow" id="tab-prev" aria-label="Previous tab">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
-        </button>
-        <button class="tab-arrow active-arr" id="tab-next" aria-label="Next tab">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,6 15,12 9,18"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="tab-bar reveal" style="transition-delay:.1s" id="tab-bar">
-      <button class="tab-btn active" data-tab="0" id="tab-btn-0">Automated Operations &amp; Daily Logs</button>
-      <button class="tab-btn" data-tab="1" id="tab-btn-1">Seamless Integration: AnyConnect IoT</button>
-      <button class="tab-btn" data-tab="2" id="tab-btn-2">Proactive Assest &amp; System Health Monitoring</button>
-      <button class="tab-btn" data-tab="3" id="tab-btn-3">Efficient Staff &amp; Task Management</button>
+    <h1 class="hero-title">
+      Intelligent Facilities &amp;<br>
+      <span class="highlight">Automated Water Management</span>
+    </h1>
+    <p class="hero-desc">
+      TrackBot empowers residential communities, commercial properties, and facility services to monitor, predict, and automate critical operations in real time.
+    </p>
+    <div class="hero-cta">
+      <a href="#demo" class="btn-p">
+        Book a Demo
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <a href="#solutions" class="btn-o">Explore Solutions</a>
     </div>
 
-    <!-- Tab 0 -->
-    <div class="tab-panel active reveal" data-panel="0" id="panel-0" style="transition-delay:.2s">
-      <div class="tab-img-box">
-        <div class="tab-img-placeholder">
-          <div class="big-icon">&#128268;</div>
-          <div>Water Sensor &amp; IoT Device</div>
-          <div style="font-size:.72rem;color:#94a3b8">Real-time monitoring enabled</div>
-        </div>
-      </div>
-      <div class="tab-info">
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Benefits</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t0-benefits-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Real-time status of critical amenities Alerts and notifications, to ensure resource availability</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Alerts and notifications, to ensure resource availability</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Visual indications</div>
-          </div>
-        </div>
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Applications</span>
-            <a href="facility.html" class="know-more" style="font-size:.8rem" id="t0-apps-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Borewells</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Fresh Water System</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Energy Management System</div>
-          </div>
-        </div>
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Sensors &amp; solutions</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t0-sensors-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Water Level</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Motor Controller</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Water Quality sensor</div>
-          </div>
-        </div>
-      </div>
+    <div class="trusted-label">Trusted by Leading Enterprises &amp; Gated Communities</div>
+    <div class="logo-strip">
+      <span class="logo-item" style="color:#00875A">Infosys</span>
+      <span class="logo-item">Handiman</span>
+      <span class="logo-item" style="color:#0EA5E9">PRK Global</span>
+      <span class="logo-item" style="color:#F59E0B">Arya Properties</span>
+      <span class="logo-item">FACILUS</span>
     </div>
 
-    <!-- Tab 1 -->
-    <div class="tab-panel" data-panel="1" id="panel-1">
-      <div class="tab-img-box">
-        <div class="tab-img-placeholder">
-          <div class="big-icon">&#128279;</div>
-          <div>AnyConnect IoT Integration</div>
-          <div style="font-size:.72rem;color:#94a3b8">Works with your existing hardware</div>
+    <!-- Live Dashboard Graphic Mockup -->
+    <div class="hero-graphic">
+      <div class="dash-header">
+        <div class="dash-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          TrackBot Live Operations Console
+        </div>
+        <div class="dash-status">
+          <span style="width:6px;height:6px;border-radius:50%;background:#34D399"></span> System Healthy
         </div>
       </div>
-      <div class="tab-info">
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Benefits</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t1-benefits-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Leverage your existing infrastructure and avoid costly hardware replacements.</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Alerts and notifications, to ensure resource availability</div>
-          </div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-card-label">Freshwater Reserve</div>
+          <div class="dash-card-val val-blue">94.2%</div>
+          <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Auto-filled via Borewell #2</div>
         </div>
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Features</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t1-features-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>TrackBot&rsquo;s unique AnyConnect capability allows integration with a wide range of existing sensors, meters, and devices, regardless of the manufacturer.</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Smartify your current equipment cost-effectively.</div>
-          </div>
+        <div class="dash-card">
+          <div class="dash-card-label">STP Efficiency</div>
+          <div class="dash-card-val val-green">98.1%</div>
+          <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Zero resident complaints</div>
         </div>
-      </div>
-    </div>
-
-    <!-- Tab 2 -->
-    <div class="tab-panel" data-panel="2" id="panel-2">
-      <div class="tab-img-box">
-        <div class="tab-img-placeholder">
-          <div class="big-icon">&#128200;</div>
-          <div>Asset Health Monitoring</div>
-          <div style="font-size:.72rem;color:#94a3b8">Proactive maintenance alerts</div>
+        <div class="dash-card">
+          <div class="dash-card-label">HVAC &amp; DG Uptime</div>
+          <div class="dash-card-val val-green">100%</div>
+          <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Predictive maintenance active</div>
         </div>
-      </div>
-      <div class="tab-info">
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Benefits</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t2-benefits-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Minimize costly downtime and extend equipment lifespan.</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>AI-driven health scores and predictive alerts</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Auto-scheduled maintenance by usage &amp; wear patterns</div>
-          </div>
-        </div>
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Applications</span>
-            <a href="facility.html" class="know-more" style="font-size:.8rem" id="t2-apps-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Fresh water system, WTP, STP, Swimming Pool</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Diesel Generators, Common Area Electricity</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>HVAC, Fire Systems, Lifts</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab 3 -->
-    <div class="tab-panel" data-panel="3" id="panel-3">
-      <div class="tab-img-box">
-        <div class="tab-img-placeholder">
-          <div class="big-icon">&#128101;</div>
-          <div>Staff &amp; Task Management</div>
-          <div style="font-size:.72rem;color:#94a3b8">Digital checklists &amp; attendance</div>
-        </div>
-      </div>
-      <div class="tab-info">
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Benefits</span>
-            <a href="#" class="know-more" style="font-size:.8rem" id="t3-benefits-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Boost team productivity and ensure task accountability.</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Digitize checklists and eliminate paper-based reporting</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Real-time staff attendance tracking &amp; geo-fencing</div>
-          </div>
-        </div>
-        <div class="info-block">
-          <div class="info-block-header">
-            <span class="info-block-title">Applications</span>
-            <a href="facility.html" class="know-more" style="font-size:.8rem" id="t3-apps-link">Know more &#8250;</a>
-          </div>
-          <div class="info-items">
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Facility Managers, Plumbers, Electricians, Pool Operators</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>STP Operators, Lift Operators, Housekeeping Supervisors</div>
-            <div class="info-item"><span class="info-arrow">&#8594;</span>Security Supervisors, Fire Operators, Gardeners</div>
-          </div>
+        <div class="dash-card">
+          <div class="dash-card-label">Monthly Cost Savings</div>
+          <div class="dash-card-val val-orange">₹2.4L</div>
+          <div style="font-size:0.72rem;color:#64748B;margin-top:4px">30% reduction in water bills</div>
         </div>
       </div>
     </div>
@@ -583,147 +749,252 @@ footer{background:#0f172a;color:#94a3b8;padding:64px 56px 32px}
   </div>
 </section>
 
-<!-- SECTION 4: SOLUTIONS -->
-<section class="solutions-sec">
-  <div class="solutions-inner">
-    <div class="section-center">
-      <h2 class="sec-h2 reveal"><span class="blue">Solution</span> that Made a Difference</h2>
-      <p class="sec-p reveal">TrackBot combines powerful modules into one intuitive platform, giving you complete control and unparalleled insight</p>
+<!-- STATS BANNER -->
+<section class="stats-banner">
+  <div class="stats-grid">
+    <div class="stat-box">
+      <h3>50M+</h3>
+      <p>Liters Water Saved Annually</p>
     </div>
-    <div class="sol-grid">
-      <div class="sol-card reveal">
-        <div class="sol-img">
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-            <rect x="20" y="30" width="80" height="60" rx="8" fill="#1e293b"/>
-            <rect x="28" y="38" width="64" height="40" rx="4" fill="#0f172a"/>
-            <rect x="34" y="44" width="12" height="28" rx="2" fill="#3b82f6" opacity=".6"/>
-            <rect x="52" y="52" width="12" height="20" rx="2" fill="#4ade80" opacity=".6"/>
-            <rect x="70" y="48" width="12" height="24" rx="2" fill="#fb923c" opacity=".6"/>
-            <rect x="28" y="82" width="40" height="4" rx="2" fill="#334155"/>
-          </svg>
-        </div>
-        <div class="sol-body">
-          <span class="sol-tech">Technology</span>
-          <h3>Optimized Maintenance in Apartments</h3>
-          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
-          <a href="facility.html" class="know-more" id="sol1-link">know more &#8250;</a>
-        </div>
-      </div>
-      <div class="sol-card reveal" style="transition-delay:.1s">
-        <div class="sol-img">
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-            <circle cx="60" cy="55" r="30" stroke="#1e293b" stroke-width="4" fill="none"/>
-            <circle cx="60" cy="55" r="30" stroke="#4ade80" stroke-width="4" fill="none" stroke-dasharray="80 108" stroke-dashoffset="-14" opacity=".7"/>
-            <circle cx="60" cy="55" r="30" stroke="#60a5fa" stroke-width="4" fill="none" stroke-dasharray="50 188" stroke-dashoffset="-94" opacity=".6"/>
-            <text x="50" y="60" fill="#1e293b" font-size="14" font-weight="800" font-family="Inter,sans-serif">94%</text>
-            <rect x="20" y="90" width="80" height="6" rx="3" fill="#e2e8f0"/>
-            <rect x="20" y="90" width="50" height="6" rx="3" fill="#4ade80" opacity=".7"/>
-          </svg>
-        </div>
-        <div class="sol-body">
-          <span class="sol-tech">Technology</span>
-          <h3>Smart Energy Optimization in a Tower</h3>
-          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
-          <a href="facility.html" class="know-more" id="sol2-link">know more &#8250;</a>
-        </div>
-      </div>
-      <div class="sol-card reveal" style="transition-delay:.2s">
-        <div class="sol-img">
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-            <rect x="20" y="25" width="80" height="70" rx="8" fill="#f1f5f9"/>
-            <rect x="30" y="35" width="60" height="8" rx="4" fill="#e2e8f0"/>
-            <rect x="30" y="50" width="60" height="5" rx="2" fill="#e2e8f0"/>
-            <rect x="30" y="50" width="42" height="5" rx="2" fill="#4ade80" opacity=".7"/>
-            <rect x="30" y="62" width="60" height="5" rx="2" fill="#e2e8f0"/>
-            <rect x="30" y="62" width="28" height="5" rx="2" fill="#fb923c" opacity=".7"/>
-            <rect x="30" y="74" width="60" height="5" rx="2" fill="#e2e8f0"/>
-            <rect x="30" y="74" width="50" height="5" rx="2" fill="#60a5fa" opacity=".7"/>
-          </svg>
-        </div>
-        <div class="sol-body">
-          <span class="sol-tech">Technology</span>
-          <h3>Proactive maintenance in Industrial Facility</h3>
-          <p>A luxury complex cut response times by 40% and maintenance costs by 25% with TrackBot&rsquo;s automation and analytics.</p>
-          <a href="facility.html" class="know-more" id="sol3-link">know more &#8250;</a>
-        </div>
-      </div>
+    <div class="stat-box">
+      <h3>30%</h3>
+      <p>Reduction in Energy &amp; Water Bills</p>
     </div>
-    <div class="sol-dots">
-      <div class="sol-dot active" id="sdot1"></div>
-      <div class="sol-dot" id="sdot2"></div>
-      <div class="sol-dot" id="sdot3"></div>
+    <div class="stat-box">
+      <h3>99.8%</h3>
+      <p>Critical Asset Uptime</p>
+    </div>
+    <div class="stat-box">
+      <h3>40%</h3>
+      <p>Faster Maintenance Resolution</p>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: TESTIMONIALS -->
-<section class="testi-sec">
-  <div class="testi-inner">
-    <div class="testi-head reveal">
-      <h2>What Our <span class="blue">Clients Say</span></h2>
-      <p>Real experiences from property owners and managers who trust TrackBot for smarter, more efficient operations.</p>
+<!-- INTERACTIVE SOLUTION SWITCHER -->
+<section class="solutions-switcher section-pad" id="solutions">
+  <div class="section-head">
+    <span class="eyebrow blue">Tailored Solutions</span>
+    <h2 class="sec-h2">Purpose-Built for Your Property Type</h2>
+    <p class="sec-p">Whether managing a high-rise residential complex, tech park, or facility services team, TrackBot adapts to your exact operational requirements.</p>
+  </div>
+
+  <div class="tab-controls">
+    <button class="switcher-btn active" onclick="switchSolution('commercial', this)">
+      🏢 Commercial &amp; Enterprise
+    </button>
+    <button class="switcher-btn" onclick="switchSolution('residential', this)">
+      🏘️ Residential Communities
+    </button>
+    <button class="switcher-btn" onclick="switchSolution('facility', this)">
+      🛠️ Facility Management Services
+    </button>
+  </div>
+
+  <div class="solution-content-grid" id="solutionCard">
+    <div class="sol-text-content">
+      <h3 id="solTitle">Commercial &amp; Enterprise Tech Parks</h3>
+      <p id="solDesc">Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, Fire Systems, and Meeting Space readiness.</p>
+      <div class="sol-feature-list" id="solFeatures">
+        <div class="sol-feature-item"><span class="check-icon">✓</span> Predictive asset health diagnostics to eliminate costly downtime</div>
+        <div class="sol-feature-item"><span class="check-icon">✓</span> Automated meeting room readiness and Google Workspace integration</div>
+        <div class="sol-feature-item"><span class="check-icon">✓</span> Real-time HVAC energy optimization and peak load management</div>
+      </div>
+      <a href="#demo" class="btn-p">Schedule Commercial Demo</a>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="testi-hdr"><div class="t-av" style="background:#7c3aed">V</div><div><div class="t-name">Viji</div><div class="t-role">Asssociation Member</div></div></div>
-        <blockquote>&ldquo;Thanks to TrackBot, managing our societies freshwater in is incredibly easy. We no longer receive complaints from residents about water shortages, as it ensures consistent availability and prevents common problems like clogged taps&rdquo;</blockquote>
+
+    <div class="sol-preview-box">
+      <div class="sol-preview-title">Impact Highlights</div>
+      <div class="sol-preview-metric" id="solMetric">30% Energy Savings</div>
+      <div class="sol-preview-item">
+        <span>Asset Health Diagnostics</span>
+        <strong style="color:#34D399">99.9% Uptime</strong>
       </div>
-      <div class="testi-card reveal" style="transition-delay:.08s">
-        <div class="testi-hdr"><div class="t-av" style="background:#ea580c">P</div><div><div class="t-name">Praveen</div><div class="t-role">President</div></div></div>
-        <blockquote>&ldquo;TrackBot has been a game-changer for us, virtually eliminating water wastage and leading to significant reductions in our monthly water bills. Highly recommended!&rdquo;</blockquote>
+      <div class="sol-preview-item">
+        <span>Response Time (MTTR)</span>
+        <strong style="color:#60A5FA">60% Faster</strong>
       </div>
-      <div class="testi-card reveal" style="transition-delay:.16s">
-        <div class="testi-hdr"><div class="t-av" style="background:#0284c7">M</div><div><div class="t-name">Mainak</div><div class="t-role">Secretary</div></div></div>
-        <blockquote>&ldquo;Thanks to TrackBot, our freshwater management and sewage treatment plant operations are now seamlessly automated. We have achieved zero resident complaints regarding water quality and service, which is simply outstanding&rdquo;</blockquote>
-      </div>
-      <div class="testi-card reveal" style="transition-delay:.0s">
-        <div class="testi-hdr"><div class="t-av" style="background:#16a34a">R</div><div><div class="t-name">Rajeev</div><div class="t-role">Joint Secretary</div></div></div>
-        <blockquote>&ldquo;With TrackBot, our freshwater and sewage management, including smart borewell automation and continuous water quality and stormwater oversight, has vastly improved our service quality and substantially reduced overall maintenance expenses&rdquo;</blockquote>
-      </div>
-      <div class="testi-card reveal" style="transition-delay:.08s">
-        <div class="testi-hdr"><div class="t-av" style="background:#b45309">S</div><div><div class="t-name">Sagar</div><div class="t-role">Vice President</div></div></div>
-        <blockquote>&ldquo;With TrackBot, our water management is now effortlessly efficient, thanks to intelligent borewell automation, accurate tanker water inflow tracking, and automated water shifting for crisis situations. Its been a game-changer for reducing our workload.&rdquo;</blockquote>
-      </div>
-      <div class="testi-card reveal" style="transition-delay:.16s">
-        <div class="testi-hdr"><div class="t-av" style="background:#be185d">B</div><div><div class="t-name">Bharati</div><div class="t-role">Member Secretary</div></div></div>
-        <blockquote>&ldquo;Managing our layouts freshwater and sewage treatment plants has never been easier. Thanks to TrackBot. We now have full, clear visibility into water sourcing, consumption, and demand-supply, giving us complete control.&rdquo;</blockquote>
+      <div class="sol-preview-item">
+        <span>Vendor Dependency</span>
+        <strong style="color:#FBBF24">Eliminated</strong>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA SECTION -->
-<section class="cta-sec">
-  <div class="cta-inner">
-    <h2 class="reveal">Ready to <span class="blue">transform your<br>facility management?</span></h2>
-    <div class="cta-btns reveal" style="transition-delay:.1s">
-      <button class="btn-p" id="cta-demo" style="font-size:1rem;padding:16px 36px">Schedule a demo</button>
-      <button class="btn-o" id="cta-expert" style="font-size:1rem;padding:14px 34px">Talk to an expert</button>
+<!-- CORE FEATURES GRID -->
+<section class="features-sec section-pad" id="features">
+  <div class="section-head">
+    <span class="eyebrow green">Platform Capabilities</span>
+    <h2 class="sec-h2">Complete Operations Control Under One Roof</h2>
+    <p class="sec-p">TrackBot replaces fragmented manual logs with intelligent automation and real-time visibility.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feat-icon">💧</div>
+      <h3>Automated Water Management</h3>
+      <p>Automate borewells, STP plants, tank levels, softeners, and quality sensors with smart motor controllers and leak detection alerts.</p>
     </div>
-    <div class="cta-db-wrap reveal" style="transition-delay:.2s">
-      <div class="cta-db">
-        <div class="cta-db-bar">
-          <div>
-            <div class="cta-db-title">&#9672; Prestige Jindal City &#9660;</div>
-            <div class="cta-db-crumb">&#8592; Drinking Water Quality &nbsp;/&nbsp; Daily Log</div>
-          </div>
-          <div class="cta-db-actions">
-            <div class="cta-db-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
-            <div class="cta-db-avatar">TA</div>
-          </div>
-        </div>
-        <div class="cta-db-cards">
-          <div class="cta-db-c"><div class="cta-db-cl">Water Quality</div><div class="cta-db-cv gr">94.2%</div></div>
-          <div class="cta-db-c"><div class="cta-db-cl">Active Alerts</div><div class="cta-db-cv or">3</div></div>
-          <div class="cta-db-c"><div class="cta-db-cl">Daily Consumption</div><div class="cta-db-cv bl">12.4 kL</div></div>
-          <div class="cta-db-c"><div class="cta-db-cl">Asset Health</div><div class="cta-db-cv gr">98.1%</div></div>
-        </div>
-        <div class="cta-db-bars">
-          <div class="cta-db-br"><div class="cta-db-blab">STP Efficiency</div><div class="cta-db-btrack"><div class="cta-db-bfill" style="width:87%;background:#4ade80"></div></div><span style="color:#4ade80;font-size:.68rem;width:32px">87%</span></div>
-          <div class="cta-db-br"><div class="cta-db-blab">Pump Health</div><div class="cta-db-btrack"><div class="cta-db-bfill" style="width:92%;background:#60a5fa"></div></div><span style="color:#60a5fa;font-size:.68rem;width:32px">92%</span></div>
-          <div class="cta-db-br"><div class="cta-db-blab">Energy Usage</div><div class="cta-db-btrack"><div class="cta-db-bfill" style="width:64%;background:#fb923c"></div></div><span style="color:#fb923c;font-size:.68rem;width:32px">64%</span></div>
+
+    <div class="feature-card">
+      <div class="feat-icon">⚡</div>
+      <h3>Predictive Asset Health</h3>
+      <p>AI health scoring for pumps, DG sets, HVAC, and elevators. Detect anomalies before breakdowns occur to minimize repair costs.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feat-icon">📲</div>
+      <h3>Digital Workforce &amp; Tasks</h3>
+      <p>Replace paper checklists with geo-fenced mobile attendance, task assignment, auto-routing tickets, and SLA compliance dashboards.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feat-icon">🔌</div>
+      <h3>AnyConnect IoT Hardware</h3>
+      <p>Seamlessly integrate with your existing flow meters, water sensors, and BMS hardware without requiring expensive retrofits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFIED CASE STUDIES -->
+<section class="case-sec section-pad" id="case-studies">
+  <div class="section-head">
+    <span class="eyebrow blue">Proven Results</span>
+    <h2 class="sec-h2">Solutions That Made a Difference</h2>
+    <p class="sec-p">See how real properties cut operational expenses and simplified building management with TrackBot.</p>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-img-wrap">
+        <span class="case-tag">Apartment Complex</span>
+        <div class="case-stat-big">40% Less Water Wastage</div>
+      </div>
+      <div class="case-body">
+        <h3>Prestige Society Water &amp; STP Automation</h3>
+        <p>Eliminated manual tanker ordering and resident water shortage complaints with automated borewell shifting and STP monitoring.</p>
+        <a href="#demo" class="case-link">Read Full Case Study →</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-img-wrap">
+        <span class="case-tag">Commercial Tower</span>
+        <div class="case-stat-big">28% Energy Cut</div>
+      </div>
+      <div class="case-body">
+        <h3>Smart HVAC &amp; Energy Optimization</h3>
+        <p>A 20-story IT park tower automated common area lighting and HVAC cooling cycles based on real-time occupancy and environmental sensors.</p>
+        <a href="#demo" class="case-link">Read Full Case Study →</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-img-wrap">
+        <span class="case-tag">Industrial Campus</span>
+        <div class="case-stat-big">99.9% Uptime</div>
+      </div>
+      <div class="case-body">
+        <h3>Proactive Pump &amp; DG Health Monitoring</h3>
+        <p>An industrial facility eliminated emergency breakdowns with AI vibration analysis and usage-based maintenance alerts.</p>
+        <a href="#demo" class="case-link">Read Full Case Study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTED TESTIMONIALS -->
+<section class="testi-sec section-pad" id="testimonials">
+  <div class="section-head">
+    <span class="eyebrow green">Client Praise</span>
+    <h2 class="sec-h2">Trusted by Property Leaders</h2>
+    <p class="sec-p">Hear directly from society presidents, association members, and facility managers.</p>
+  </div>
+
+  <div class="testi-toggle">
+    <button class="testi-btn active" onclick="switchTesti('residential', this)">Residential Community Leaders</button>
+    <button class="testi-btn" onclick="switchTesti('commercial', this)">Commercial &amp; Enterprise Managers</button>
+  </div>
+
+  <div class="testi-grid" id="testiGrid">
+    <div class="testi-card">
+      <div class="testi-quote">"TrackBot eliminated water wastage and significantly reduced our monthly water bills. Managing freshwater in our society is now completely effortless."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#7C3AED">P</div>
+        <div>
+          <div class="testi-name">Praveen</div>
+          <div class="testi-role">President, Gated Community</div>
         </div>
       </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"Our freshwater management and STP operations are seamlessly automated. Zero resident complaints regarding water quality since deployment!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#0284C7">M</div>
+        <div>
+          <div class="testi-name">Mainak</div>
+          <div class="testi-role">Secretary, Apartment Association</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"Smart borewell automation and water quality oversight vastly improved service quality while cutting maintenance costs."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#16A34A">R</div>
+        <div>
+          <div class="testi-name">Rajeev</div>
+          <div class="testi-role">Joint Secretary, Residential Society</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO & LEAD CAPTURE SECTION -->
+<section class="cta-sec" id="demo">
+  <div class="cta-container">
+    <div class="cta-left">
+      <h2>Ready to Transform Your Building Operations?</h2>
+      <p>Schedule a personalized 15-minute demo to see how TrackBot automates water management, asset health, and staff workflows for your property.</p>
+
+      <div class="cta-benefits-list">
+        <div class="cta-benefit-item"><span class="check-icon">✓</span> Custom ROI &amp; savings analysis for your facility</div>
+        <div class="cta-benefit-item"><span class="check-icon">✓</span> Zero hardware lock-in (Works with existing IoT sensors)</div>
+        <div class="cta-benefit-item"><span class="check-icon">✓</span> Rapid 48-hour onboarding and deployment support</div>
+      </div>
+    </div>
+
+    <div class="demo-form-card">
+      <h3>Book a Live Demo</h3>
+      <p>Fill in your details and our expert team will reach out within 2 hours.</p>
+
+      <form onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" placeholder="e.g. Vikram Sharma" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Work Email</label>
+          <input type="email" class="form-input" placeholder="name@company.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Property Type</label>
+          <select class="form-select" required>
+            <option value="residential">Residential Apartment / Community</option>
+            <option value="commercial">Commercial Office Park / Tower</option>
+            <option value="facility">Facility Management Agency</option>
+            <option value="other">Industrial / Hotel / Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="+91 98765 43210" required/>
+        </div>
+        <button type="submit" class="btn-submit">Schedule My Demo →</button>
+      </form>
     </div>
   </div>
 </section>
@@ -734,104 +1005,133 @@ footer{background:#0f172a;color:#94a3b8;padding:64px 56px 32px}
     <div class="ft-grid">
       <div>
         <div class="ft-brand">
-          <svg width="26" height="26" viewBox="0 0 36 36" fill="none"><rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/><rect x="13" y="12" width="6" height="20" rx="2" fill="#F9C74F"/><rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/></svg>
-          TrackBot&trade;
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+            <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
+            <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
+            <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+          </svg>
+          TrackBot™
         </div>
-        <div class="ft-sub">From LetUSense</div>
-        <p class="ft-tagline">Intelligent building management powered by AI &amp; IoT. Automate, predict, and optimize your property operations at scale.</p>
-        <div class="ft-social">
-          <a href="#" class="ft-social-link" id="ft-fb" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-          </a>
-          <a href="#" class="ft-social-link" id="ft-li" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-        <div class="ft-email">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>info@trackbot.in</span>
-        </div>
+        <p class="ft-desc">
+          Intelligent building management platform by LetUSense. Digitalize, monitor, and automate property operations at scale.
+        </p>
+        <div style="color:#64748B;font-size:0.85rem">✉️ info@trackbot.in &nbsp;|&nbsp; 📞 +91 8296013357</div>
       </div>
-      <div class="ft-nav">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#" id="ft-res">Residential</a></li>
-          <li><a href="facility.html" id="ft-fms">Facility Management</a></li>
-          <li><a href="#" id="ft-corp">Corporate &amp; Commercial</a></li>
-          <li><a href="#" id="ft-meet">Meeting Space</a></li>
-          <li><a href="#" id="ft-plat">Platform</a></li>
-          <li><a href="#" id="ft-blog">Blogs</a></li>
-          <li><a href="#" id="ft-contact">Contact</a></li>
+
+      <div>
+        <div class="ft-title">Quick Links</div>
+        <ul class="ft-links">
+          <li><a href="#solutions">Commercial Solutions</a></li>
+          <li><a href="#solutions">Residential Solutions</a></li>
+          <li><a href="#features">Features Grid</a></li>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#demo">Book a Demo</a></li>
         </ul>
       </div>
-      <div class="ft-offices">
-        <div class="ft-office">
-          <h4>India Office</h4>
-          <div class="ft-office-detail">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Sarjapur road, Bengaluru<br>Karnataka 560 035</span>
-          </div>
-          <div class="ft-office-detail">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.66a19.79 19.79 0 01-3.07-8.66A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.29 6.29l1.42-1.42a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <span>+91 8296013357</span>
-          </div>
+
+      <div>
+        <div class="ft-title">Global Offices</div>
+        <div class="ft-office-box">
+          <div class="ft-office-title">🇮🇳 Bengaluru, India</div>
+          <div>Sarjapur Road, Bengaluru, Karnataka 560 035</div>
         </div>
-        <div class="ft-office">
-          <h4>Sweden Office</h4>
-          <div class="ft-office-detail">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Armrgatan 36, Stockholm<br>Sweden 17171</span>
-          </div>
+        <div class="ft-office-box">
+          <div class="ft-office-title">🇸🇪 Stockholm, Sweden</div>
+          <div>Armrgatan 36, Stockholm, Sweden 17171</div>
         </div>
       </div>
     </div>
-    <svg class="ft-skyline" viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 80 L0 55 L20 55 L20 40 L25 40 L25 30 L30 30 L30 40 L35 40 L35 45 L50 45 L50 35 L55 35 L55 20 L60 20 L60 35 L65 35 L65 45 L80 45 L80 50 L90 50 L90 30 L95 30 L95 15 L100 15 L100 30 L105 30 L105 50 L120 50 L120 40 L130 40 L130 25 L135 25 L135 10 L140 10 L140 25 L145 25 L145 40 L160 40 L160 50 L180 50 L180 35 L185 35 L185 20 L190 20 L190 35 L195 35 L195 50 L210 50 L210 55 L230 55 L230 38 L235 38 L235 22 L240 22 L240 38 L245 38 L245 55 L260 55 L260 45 L270 45 L270 28 L275 28 L275 12 L280 12 L280 28 L285 28 L285 45 L300 45 L300 50 L320 50 L320 40 L325 40 L325 25 L330 25 L330 40 L335 40 L335 50 L360 50 L360 55 L380 55 L380 38 L385 38 L385 20 L390 20 L390 38 L395 38 L395 55 L410 55 L410 45 L420 45 L420 30 L425 30 L425 15 L430 15 L430 30 L435 30 L435 45 L450 45 L450 55 L470 55 L470 40 L475 40 L475 22 L480 22 L480 40 L485 40 L485 55 L500 55 L500 45 L510 45 L510 28 L515 28 L515 12 L520 12 L520 28 L525 28 L525 45 L540 45 L540 50 L560 50 L560 35 L565 35 L565 18 L570 18 L570 35 L575 35 L575 50 L590 50 L590 55 L610 55 L610 40 L615 40 L615 25 L620 25 L620 40 L625 40 L625 55 L640 55 L640 45 L650 45 L650 30 L655 30 L655 14 L660 14 L660 30 L665 30 L665 45 L680 45 L680 55 L700 55 L700 38 L705 38 L705 20 L710 20 L710 38 L715 38 L715 55 L730 55 L730 50 L750 50 L750 35 L755 35 L755 18 L760 18 L760 35 L765 35 L765 50 L780 50 L780 55 L800 55 L800 40 L805 40 L805 22 L810 22 L810 40 L815 40 L815 55 L830 55 L830 45 L840 45 L840 28 L845 28 L845 12 L850 12 L850 28 L855 28 L855 45 L870 45 L870 50 L890 50 L890 38 L895 38 L895 22 L900 22 L900 38 L905 38 L905 50 L920 50 L920 55 L940 55 L940 40 L945 40 L945 25 L950 25 L950 40 L955 40 L955 55 L970 55 L970 45 L980 45 L980 30 L985 30 L985 15 L990 15 L990 30 L995 30 L995 45 L1010 45 L1010 55 L1030 55 L1030 38 L1035 38 L1035 20 L1040 20 L1040 38 L1045 38 L1045 55 L1060 55 L1060 50 L1080 50 L1080 35 L1085 35 L1085 18 L1090 18 L1090 35 L1095 35 L1095 50 L1110 50 L1110 55 L1130 55 L1130 42 L1135 42 L1135 28 L1140 28 L1140 42 L1145 42 L1145 55 L1160 55 L1160 45 L1170 45 L1170 55 L1200 55 L1200 80 Z" fill="#1e293b"/>
-    </svg>
-    <div class="ft-bot">
-      <span>&copy; 2024 TrackBot, from LetUSense. All rights reserved.</span>
-      <span>Made with &#10084;&#65039; for smarter buildings</span>
+
+    <div class="ft-bottom">
+      <span>© 2026 TrackBot™ by LetUSense. All rights reserved.</span>
+      <span>Privacy Policy | Terms of Service</span>
     </div>
   </div>
 </footer>
 
 <script>
-(function(){
-  // Scroll reveal
-  var revs=document.querySelectorAll('.reveal');
-  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);}});},{threshold:.07,rootMargin:'0px 0px -40px 0px'});
-  revs.forEach(function(el){obs.observe(el);});
-
-  // Tabs
-  var tabs=document.querySelectorAll('.tab-btn');
-  var panels=document.querySelectorAll('.tab-panel');
-  var curTab=0;
-  function switchTab(idx){
-    tabs[curTab].classList.remove('active');
-    panels[curTab].classList.remove('active');
-    curTab=idx;
-    tabs[curTab].classList.add('active');
-    panels[curTab].classList.add('active');
-    tabs[curTab].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+const solutionsData = {
+  commercial: {
+    title: "Commercial & Enterprise Tech Parks",
+    desc: "Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, Fire Systems, and Meeting Space readiness.",
+    features: [
+      "Predictive asset health diagnostics to eliminate costly downtime",
+      "Automated meeting room readiness and Google Workspace integration",
+      "Real-time HVAC energy optimization and peak load management"
+    ],
+    metric: "30% Energy Savings"
+  },
+  residential: {
+    title: "Residential Communities & Apartments",
+    desc: "Automate society water management, tank level monitoring, STP treatment, borewell pumps, softeners, and maintenance tickets seamlessly.",
+    features: [
+      "Automatic borewell motor control & water tank level tracking",
+      "Zero resident water complaints with proactive STP health monitoring",
+      "Digital maintenance ticket logging & resident transparency"
+    ],
+    metric: "40% Water Savings"
+  },
+  facility: {
+    title: "Facility Management Service (FMS) Teams",
+    desc: "Give your field officers and maintenance personnel an edge with digitized checklists, SLA tracking, and multi-site central dashboards.",
+    features: [
+      "50% reduction in manual supervisor inspection efforts",
+      "Real-time mobile task dispatching & geo-fenced staff attendance",
+      "Eliminate vendor dependencies with automated alert triggers"
+    ],
+    metric: "60% Faster MTTR"
   }
-  tabs.forEach(function(btn,i){btn.addEventListener('click',function(){switchTab(i);});});
-  document.getElementById('tab-next').addEventListener('click',function(){switchTab((curTab+1)%tabs.length);});
-  document.getElementById('tab-prev').addEventListener('click',function(){switchTab((curTab-1+tabs.length)%tabs.length);});
+};
 
-  // Sol dots carousel
-  var sdots=document.querySelectorAll('.sol-dot');var sc=0;
-  setInterval(function(){sdots[sc].classList.remove('active');sc=(sc+1)%sdots.length;sdots[sc].classList.add('active');},3200);
+function switchSolution(key, btn) {
+  document.querySelectorAll('.switcher-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 
-  // Button ripple
-  document.querySelectorAll('.btn-p').forEach(function(btn){
-    btn.addEventListener('click',function(e){
-      var r=document.createElement('span'),rect=this.getBoundingClientRect();
-      r.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.32);width:16px;height:16px;top:'+(e.clientY-rect.top-8)+'px;left:'+(e.clientX-rect.left-8)+'px;pointer-events:none;animation:rip .5s ease forwards;';
-      this.appendChild(r);setTimeout(function(){r.remove();},600);
-    });
-  });
-  var ss=document.createElement('style');ss.textContent='@keyframes rip{to{transform:scale(22);opacity:0;}}';document.head.appendChild(ss);
-})();
+  const data = solutionsData[key];
+  document.getElementById('solTitle').innerText = data.title;
+  document.getElementById('solDesc').innerText = data.desc;
+  document.getElementById('solMetric').innerText = data.metric;
+
+  const featContainer = document.getElementById('solFeatures');
+  featContainer.innerHTML = data.features.map(f => `<div class="sol-feature-item"><span class="check-icon">✓</span> ${f}</div>`).join('');
+}
+
+const testiData = {
+  residential: [
+    { quote: "TrackBot eliminated water wastage and significantly reduced our monthly water bills. Managing freshwater in our society is now completely effortless.", name: "Praveen", role: "President, Gated Community", avatar: "P", color: "#7C3AED" },
+    { quote: "Our freshwater management and STP operations are seamlessly automated. Zero resident complaints regarding water quality since deployment!", name: "Mainak", role: "Secretary, Apartment Association", avatar: "M", color: "#0284C7" },
+    { quote: "Smart borewell automation and water quality oversight vastly improved service quality while cutting maintenance costs.", name: "Rajeev", role: "Joint Secretary, Residential Society", avatar: "R", color: "#16A34A" }
+  ],
+  commercial: [
+    { quote: "TrackBot gave us complete visibility into HVAC energy consumption and generator health across 3 tech park towers. Peak load cost reduced by 25%.", name: "Anand Kumar", role: "Director of Facilities, Tech Park", avatar: "A", color: "#0F6CBD" },
+    { quote: "Meeting room automation and instant maintenance ticket dispatch reduced our floor supervisor inspection time by half.", name: "Sunil V.", role: "Senior Operations Lead", avatar: "S", color: "#F59E0B" },
+    { quote: "Zero unscheduled pump failures in the last 14 months. The predictive asset health scoring has saved us lakhs in emergency repairs.", name: "Rajesh Nair", role: "Head of Infrastructure", avatar: "R", color: "#10B981" }
+  ]
+};
+
+function switchTesti(key, btn) {
+  document.querySelectorAll('.testi-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('testiGrid');
+  grid.innerHTML = testiData[key].map(t => `
+    <div class="testi-card">
+      <div class="testi-quote">"${t.quote}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:${t.color}">${t.avatar}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-role">${t.role}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  alert("Thank you! Your demo request has been received. Our TrackBot expert will contact you shortly.");
+}
 </script>
 </body>
 </html>
