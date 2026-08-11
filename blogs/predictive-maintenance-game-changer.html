@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrackBot Predictive Maintenance | TrackBot™ Blog</title>
+<meta name="description" content="TrackBot's Predictive Maintenance (PdM) uses data and AI to anticipate equipment failures. It replaces reactive fixes with proactive strategies, optimizing asset performance."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #2196F3; --blue-dark: #0F6cbd; --blue-light: #EBF5FF;
+  --text-dark: #0F172A; --text-mid: #334155; --text-muted: #64748B;
+  --bg-page: #F8FAFC; --border: #E2E8F0;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-page); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+nav { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1.2rem; color: var(--text-dark); letter-spacing: -0.02em; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 0.9rem; font-weight: 600; color: var(--text-mid); transition: color .2s; }
+.nav-links a:hover { color: var(--blue); }
+.nav-links a.active { color: var(--blue); }
+.nav-cta { background: var(--blue); color: #fff !important; padding: 10px 22px; border-radius: 100px; box-shadow: 0 4px 14px rgba(33,150,243,0.3); }
+.nav-cta:hover { background: var(--blue-dark); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: var(--text-dark); }
+.nav-toggle svg { display: block; }
+
+.article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); text-decoration: none; font-weight: 700; font-size: 0.88rem; margin-bottom: 32px; }
+.back-link:hover { gap: 10px; }
+.art-meta { font-size: 0.82rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+.art-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 18px; color: var(--text-dark); }
+.art-byline { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+.art-body p { font-size: 1.02rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 22px; }
+.art-body h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 40px 0 16px; letter-spacing: -0.01em; }
+.art-body ul { margin: 0 0 22px 22px; }
+.art-body li { font-size: 1.02rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 10px; }
+.art-body li strong { color: var(--text-dark); }
+.art-share { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+
+footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+.ft-inner { max-width: 1140px; margin: 0 auto; }
+.ft-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 64px; margin-bottom: 48px; }
+.ft-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 14px; }
+.ft-desc { font-size: 0.88rem; color: #64748B; line-height: 1.65; margin-bottom: 20px; }
+.ft-title { color: #fff; font-size: 0.88rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+.ft-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-links a { text-decoration: none; color: #94A3B8; font-size: 0.88rem; transition: color .2s; }
+.ft-links a:hover { color: var(--blue); }
+.ft-office-box { font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin-bottom: 16px; }
+.ft-office-title { color: #E2E8F0; font-weight: 700; margin-bottom: 4px; }
+.ft-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #475569; }
+
+@media(max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .art-title { font-size: 1.7rem; }
+  .ft-grid { grid-template-columns: 1fr; gap: 32px; }
+  footer { padding-left: 24px; padding-right: 24px; }
+}
+@media(max-width: 860px) {
+  .nav-toggle { display: flex; align-items: center; justify-content: center; }
+  .nav-links {
+    position: fixed; top: 72px; left: 0; right: 0;
+    flex-direction: column; align-items: flex-start; gap: 4px;
+    background: #FFFFFF; border-bottom: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 12px 24px 20px;
+    transform: translateY(-8px); opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .nav-links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 12px 0; width: 100%; }
+  .nav-cta { display: inline-flex; margin-top: 4px; }
+}
+@media(max-width: 640px) {
+  .article-wrap { padding: 40px 20px 72px; }
+  .art-title { font-size: 1.5rem; }
+  .art-body p, .art-body li { font-size: 0.96rem; }
+  .art-body h2 { font-size: 1.2rem; margin: 32px 0 14px; }
+  footer { padding: 56px 20px 28px; }
+  .ft-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+      <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
+      <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
+      <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+    </svg>
+    TrackBot™
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html#solutions">Solutions</a></li>
+    <li><a href="../index.html#features">Features</a></li>
+    <li><a href="../blogs.html" class="active">Blogs</a></li>
+    <li><a href="../index.html#testimonials">Testimonials</a></li>
+    <li><a href="../index.html#demo" class="nav-cta">Book a Demo</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  </button>
+</nav>
+
+<div class="article-wrap">
+  <a href="../blogs.html" class="back-link">← Back to Blogs</a>
+  <div class="art-meta">Jan 22, 2025</div>
+  <h1 class="art-title">TrackBot Predictive Maintenance: A Game Changer in Asset Management</h1>
+  <div class="art-byline">By Sijohn Mathew, Lead Integration Architect</div>
+
+  <div class="art-body">
+    <p>TrackBot's Predictive Maintenance (PdM) is a revolutionary approach to asset management that leverages data analysis and advanced technologies to anticipate potential equipment failures before they occur. Unlike traditional reactive maintenance, which waits for problems to arise, TrackBot PdM focuses on proactive, data-driven strategies to prevent breakdowns and optimize asset performance.</p>
+    <p>This approach helps facility management companies and building associations keep critical resources such as HVAC systems, Pumps, Blowers, Diesel Generators, Lifts, and Transformers in healthy condition, always. Our cloud-native application offers unparalleled flexibility and power, integrating with our renowned Task Management system to become an essential tool for managing amenities like never before.</p>
+
+    <h2>The Core Principles of TrackBot PdM</h2>
+    <ul>
+      <li><strong>Data-Driven Insights:</strong> TrackBot PdM relies on collecting and analyzing data from various sources—including sensors, vibration analysis, and operational records—to provide valuable insights into equipment health and identify subtle anomalies that may indicate potential issues.</li>
+      <li><strong>Predictive Models:</strong> Optional advanced analytics and machine learning algorithms are employed to analyze collected data and create predictive models that forecast the Remaining Useful Life (RUL) of equipment, enabling proactive maintenance before failures occur.</li>
+      <li><strong>Proactive Intervention:</strong> Based on RUL predictions, TrackBot's PdM schedules maintenance activities just when needed, maximizing equipment uptime, eliminating unnecessary work, and optimizing resource allocation for facility management companies.</li>
+    </ul>
+
+    <h2>Key Benefits of TrackBot's Predictive Maintenance</h2>
+    <ul>
+      <li><strong>Reduced Downtime:</strong> Minimize production losses and ensure uninterrupted service flow, leading to significant cost savings.</li>
+      <li><strong>Extended Equipment Lifespan:</strong> Regular, timely maintenance based on real-time data helps prevent wear and tear, delaying expensive replacements.</li>
+      <li><strong>Improved Operational Efficiency:</strong> Optimized equipment performance translates to reduced energy consumption and lower production costs.</li>
+      <li><strong>Enhanced Safety:</strong> Identify potential safety hazards before they result in accidents, creating a safer work environment for everyone.</li>
+      <li><strong>Data-Driven Decision-Making:</strong> Gain valuable insights into asset health for informed decisions on maintenance planning, resource allocation, and future investments.</li>
+    </ul>
+
+    <h2>Applicable Across Industries</h2>
+    <p>TrackBot's PdM is a versatile solution ideal for a wide range of industries, including:</p>
+    <ul>
+      <li><strong>Apartments, Tech Parks &amp; Facility Management:</strong> Monitoring critical building systems like Diesel Generators, Lifts, Borewells, and Transformers to ensure occupant comfort and avoid costly service interruptions.</li>
+      <li><strong>Security:</strong> Ensuring CCTV cameras are always operational and recordings are available on-demand to maintain premise security.</li>
+      <li><strong>Manufacturing, Energy &amp; Transportation:</strong> Monitoring production equipment, turbines, and vehicles to prevent downtime and optimize complex maintenance schedules.</li>
+    </ul>
+
+    <h2>The Future of Asset Management is Here</h2>
+    <p>With advancements in sensing technologies, data analytics, and AI, TrackBot's PdM is rapidly evolving. The future promises even greater benefits, including autonomous maintenance and deeper cross-functional integration. Overall, TrackBot's PdM is transforming asset management by delivering significant benefits in efficiency, cost reduction, and safety. As technology continues to evolve, TrackBot is leading the way in optimizing asset performance and maximizing value.</p>
+  </div>
+
+  <div class="art-share">Share this article</div>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-brand">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+            <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
+            <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
+            <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+          </svg>
+          TrackBot™
+        </div>
+        <p class="ft-desc">Intelligent building management platform by LetUSense. Digitalize, monitor, and automate property operations at scale.</p>
+        <div style="color:#64748B;font-size:0.85rem">✉️ info@trackbot.in &nbsp;|&nbsp; 📞 +91 8296013357</div>
+      </div>
+      <div>
+        <div class="ft-title">Quick Links</div>
+        <ul class="ft-links">
+          <li><a href="../index.html#solutions">Commercial Solutions</a></li>
+          <li><a href="../index.html#solutions">Residential Solutions</a></li>
+          <li><a href="../index.html#features">Features Grid</a></li>
+          <li><a href="../blogs.html">Blogs</a></li>
+          <li><a href="../index.html#demo">Book a Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-title">Global Offices</div>
+        <div class="ft-office-box">
+          <div class="ft-office-title">🇮🇳 Bengaluru, India</div>
+          <div>Sarjapur Road, Bengaluru, Karnataka 560 035</div>
+        </div>
+        <div class="ft-office-box">
+          <div class="ft-office-title">🇸🇪 Stockholm, Sweden</div>
+          <div>Armrgatan 36, Stockholm, Sweden 17171</div>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 TrackBot™ by LetUSense. All rights reserved.</span>
+      <span>Privacy Policy | Terms of Service</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen);
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+</script>
+</body>
+</html>

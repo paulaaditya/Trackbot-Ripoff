@@ -464,66 +464,110 @@ nav {
   margin-bottom: 20px;
 }
 .feature-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; }
-.feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; flex: 1; }
-
-/* ======== CASE STUDIES ======== */
-.case-sec { background: #F8FAFC; border-top: 1px solid var(--border); }
-.case-grid {
-  max-width: 1140px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.case-card {
-  background: #FFFFFF;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: all .25s ease;
-  display: flex;
-  flex-direction: column;
-}
-.case-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-.case-img-wrap {
-  height: 180px;
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  padding: 24px;
-  position: relative;
-}
-.case-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: rgba(33, 150, 243, 0.2);
-  color: #60A5FA;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 100px;
-}
-.case-stat-big { font-size: 2.2rem; font-weight: 800; color: #34D399; }
-.case-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
-.case-body h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; line-height: 1.35; }
-.case-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; flex: 1; }
-.case-link {
+.feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+.feat-link {
+  background: none;
+  border: none;
+  padding: 0;
   color: var(--blue);
   font-weight: 700;
   font-size: 0.85rem;
-  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  align-self: flex-start;
 }
-.case-link:hover { gap: 10px; }
+.feat-link:hover { gap: 10px; }
+
+/* ======== FEATURE DETAIL MODAL ======== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: #fff;
+  border-radius: 24px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, color .2s;
+}
+.modal-close:hover { background: var(--blue-light); color: var(--blue); }
+.modal-header {
+  padding: 40px 40px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--blue-light);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+}
+.modal-header h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark); }
+.modal-header p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; }
+.modal-body { padding: 28px 40px 40px; display: flex; flex-direction: column; gap: 28px; }
+.modal-section-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+.modal-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.modal-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.modal-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.modal-tag {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+}
 
 /* ======== TESTIMONIALS (SEGMENTED) ======== */
 .testi-sec { background: #FFFFFF; border-top: 1px solid var(--border); }
@@ -653,7 +697,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 /* ======== RESPONSIVE ======== */
 @media(max-width: 1024px) {
   .hero-title { font-size: 2.8rem; }
-  .dash-grid, .stats-grid, .features-grid, .case-grid, .testi-grid, .cta-container, .solution-content-grid { grid-template-columns: 1fr; }
+  .dash-grid, .stats-grid, .features-grid, .blog-grid, .testi-grid, .cta-container, .solution-content-grid { grid-template-columns: 1fr; }
   nav { padding: 0 24px; }
   .section-pad, .hero, .cta-sec, footer { padding-left: 24px; padding-right: 24px; }
   .ft-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -675,8 +719,8 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   <ul class="nav-links">
     <li><a href="#solutions">Solutions</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#case-studies">Case Studies</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="blogs.html">Blogs</a></li>
     <li><a href="#demo" class="nav-cta">Book a Demo</a></li>
   </ul>
 </nav>
@@ -776,7 +820,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   <div class="section-head">
     <span class="eyebrow blue">Tailored Solutions</span>
     <h2 class="sec-h2">Purpose-Built for Your Property Type</h2>
-    <p class="sec-p">Whether managing a high-rise residential complex, tech park, or facility services team, TrackBot adapts to your exact operational requirements.</p>
+    <p class="sec-p">Whether managing a high-rise residential complex, tech park, facility services team, or a meeting-heavy corporate campus, TrackBot adapts to your exact operational requirements.</p>
   </div>
 
   <div class="tab-controls">
@@ -789,18 +833,21 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <button class="switcher-btn" onclick="switchSolution('facility', this)">
       🛠️ Facility Management Services
     </button>
+    <button class="switcher-btn" onclick="switchSolution('meeting', this)">
+      📽️ Meeting Spaces
+    </button>
   </div>
 
   <div class="solution-content-grid" id="solutionCard">
     <div class="sol-text-content">
       <h3 id="solTitle">Commercial &amp; Enterprise Tech Parks</h3>
-      <p id="solDesc">Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, Fire Systems, and Meeting Space readiness.</p>
+      <p id="solDesc">Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, and Fire Systems.</p>
       <div class="sol-feature-list" id="solFeatures">
         <div class="sol-feature-item"><span class="check-icon">✓</span> Predictive asset health diagnostics to eliminate costly downtime</div>
-        <div class="sol-feature-item"><span class="check-icon">✓</span> Automated meeting room readiness and Google Workspace integration</div>
+        <div class="sol-feature-item"><span class="check-icon">✓</span> Centralized fire, CCTV, and lift system health monitoring across all sites</div>
         <div class="sol-feature-item"><span class="check-icon">✓</span> Real-time HVAC energy optimization and peak load management</div>
       </div>
-      <a href="#demo" class="btn-p">Schedule Commercial Demo</a>
+      <a href="#demo" class="btn-p" id="solCta">Schedule Commercial Demo</a>
     </div>
 
     <div class="sol-preview-box">
@@ -835,74 +882,44 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <div class="feat-icon">💧</div>
       <h3>Automated Water Management</h3>
       <p>Automate borewells, STP plants, tank levels, softeners, and quality sensors with smart motor controllers and leak detection alerts.</p>
+      <button class="feat-link" onclick="openFeatureModal('water')">Know more →</button>
     </div>
 
     <div class="feature-card">
       <div class="feat-icon">⚡</div>
       <h3>Predictive Asset Health</h3>
       <p>AI health scoring for pumps, DG sets, HVAC, and elevators. Detect anomalies before breakdowns occur to minimize repair costs.</p>
+      <button class="feat-link" onclick="openFeatureModal('asset')">Know more →</button>
     </div>
 
     <div class="feature-card">
       <div class="feat-icon">📲</div>
       <h3>Digital Workforce &amp; Tasks</h3>
       <p>Replace paper checklists with geo-fenced mobile attendance, task assignment, auto-routing tickets, and SLA compliance dashboards.</p>
+      <button class="feat-link" onclick="openFeatureModal('workforce')">Know more →</button>
     </div>
 
     <div class="feature-card">
       <div class="feat-icon">🔌</div>
       <h3>AnyConnect IoT Hardware</h3>
       <p>Seamlessly integrate with your existing flow meters, water sensors, and BMS hardware without requiring expensive retrofits.</p>
+      <button class="feat-link" onclick="openFeatureModal('anyconnect')">Know more →</button>
     </div>
   </div>
 </section>
 
-<!-- VERIFIED CASE STUDIES -->
-<section class="case-sec section-pad" id="case-studies">
-  <div class="section-head">
-    <span class="eyebrow blue">Proven Results</span>
-    <h2 class="sec-h2">Solutions That Made a Difference</h2>
-    <p class="sec-p">See how real properties cut operational expenses and simplified building management with TrackBot.</p>
+<!-- FEATURE DETAIL MODAL -->
+<div class="modal-overlay" id="featureModalOverlay" onclick="if(event.target===this) closeFeatureModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeFeatureModal()" aria-label="Close">✕</button>
+    <div class="modal-header">
+      <div class="modal-icon" id="modalIcon">💧</div>
+      <h3 id="modalTitle">Automated Water Management</h3>
+      <p id="modalDesc">Description</p>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
   </div>
-
-  <div class="case-grid">
-    <div class="case-card">
-      <div class="case-img-wrap">
-        <span class="case-tag">Apartment Complex</span>
-        <div class="case-stat-big">40% Less Water Wastage</div>
-      </div>
-      <div class="case-body">
-        <h3>Prestige Society Water &amp; STP Automation</h3>
-        <p>Eliminated manual tanker ordering and resident water shortage complaints with automated borewell shifting and STP monitoring.</p>
-        <a href="#demo" class="case-link">Read Full Case Study →</a>
-      </div>
-    </div>
-
-    <div class="case-card">
-      <div class="case-img-wrap">
-        <span class="case-tag">Commercial Tower</span>
-        <div class="case-stat-big">28% Energy Cut</div>
-      </div>
-      <div class="case-body">
-        <h3>Smart HVAC &amp; Energy Optimization</h3>
-        <p>A 20-story IT park tower automated common area lighting and HVAC cooling cycles based on real-time occupancy and environmental sensors.</p>
-        <a href="#demo" class="case-link">Read Full Case Study →</a>
-      </div>
-    </div>
-
-    <div class="case-card">
-      <div class="case-img-wrap">
-        <span class="case-tag">Industrial Campus</span>
-        <div class="case-stat-big">99.9% Uptime</div>
-      </div>
-      <div class="case-body">
-        <h3>Proactive Pump &amp; DG Health Monitoring</h3>
-        <p>An industrial facility eliminated emergency breakdowns with AI vibration analysis and usage-based maintenance alerts.</p>
-        <a href="#demo" class="case-link">Read Full Case Study →</a>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- SEGMENTED TESTIMONIALS -->
 <section class="testi-sec section-pad" id="testimonials">
@@ -1024,7 +1041,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           <li><a href="#solutions">Commercial Solutions</a></li>
           <li><a href="#solutions">Residential Solutions</a></li>
           <li><a href="#features">Features Grid</a></li>
-          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
           <li><a href="#demo">Book a Demo</a></li>
         </ul>
       </div>
@@ -1053,13 +1070,14 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 const solutionsData = {
   commercial: {
     title: "Commercial & Enterprise Tech Parks",
-    desc: "Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, Fire Systems, and Meeting Space readiness.",
+    desc: "Master complex commercial operations with centralized IoT monitoring for HVAC, Diesel Generators, Lifts, and Fire Systems.",
     features: [
       "Predictive asset health diagnostics to eliminate costly downtime",
-      "Automated meeting room readiness and Google Workspace integration",
+      "Centralized fire, CCTV, and lift system health monitoring across all sites",
       "Real-time HVAC energy optimization and peak load management"
     ],
-    metric: "30% Energy Savings"
+    metric: "30% Energy Savings",
+    cta: "Schedule Commercial Demo"
   },
   residential: {
     title: "Residential Communities & Apartments",
@@ -1069,7 +1087,8 @@ const solutionsData = {
       "Zero resident water complaints with proactive STP health monitoring",
       "Digital maintenance ticket logging & resident transparency"
     ],
-    metric: "40% Water Savings"
+    metric: "40% Water Savings",
+    cta: "Schedule Residential Demo"
   },
   facility: {
     title: "Facility Management Service (FMS) Teams",
@@ -1079,7 +1098,19 @@ const solutionsData = {
       "Real-time mobile task dispatching & geo-fenced staff attendance",
       "Eliminate vendor dependencies with automated alert triggers"
     ],
-    metric: "60% Faster MTTR"
+    metric: "60% Faster MTTR",
+    cta: "Schedule FMS Demo"
+  },
+  meeting: {
+    title: "Meeting & Conference Room Readiness",
+    desc: "AI and IoT powered health checks keep every meeting room clean, working, and ready, with issues caught and routed to the right team before they disrupt a meeting.",
+    features: [
+      "Automatic room health checks covering AC, lighting, equipment, and cleanliness",
+      "One-tap QR issue reporting instantly routed to the right maintenance team",
+      "Seamless integration with Google Workspace and ITSM tools for synced room data"
+    ],
+    metric: "Always Meeting-Ready",
+    cta: "Schedule Meeting Space Demo"
   }
 };
 
@@ -1091,6 +1122,7 @@ function switchSolution(key, btn) {
   document.getElementById('solTitle').innerText = data.title;
   document.getElementById('solDesc').innerText = data.desc;
   document.getElementById('solMetric').innerText = data.metric;
+  document.getElementById('solCta').innerText = data.cta;
 
   const featContainer = document.getElementById('solFeatures');
   featContainer.innerHTML = data.features.map(f => `<div class="sol-feature-item"><span class="check-icon">✓</span> ${f}</div>`).join('');
@@ -1132,6 +1164,99 @@ function handleFormSubmit(e) {
   e.preventDefault();
   alert("Thank you! Your demo request has been received. Our TrackBot expert will contact you shortly.");
 }
+
+const featureModalData = {
+  water: {
+    icon: "💧",
+    title: "Automated Water Management",
+    desc: "Real-time monitoring and automation for every stage of your building's water lifecycle, from source to storage to quality.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Real-time status of critical amenities",
+        "Alerts and notifications to ensure resource availability",
+        "Visual indications"
+      ]},
+      { label: "Applications", type: "tags", items: ["Borewells", "Fresh Water System", "Energy Management System"] },
+      { label: "Sensors & Solutions", type: "tags", items: ["Water Level", "Motor Controller", "Water Quality Sensor"] }
+    ]
+  },
+  asset: {
+    icon: "⚡",
+    title: "Predictive Asset Health",
+    desc: "Proactive asset and system health monitoring that catches problems before they become breakdowns.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Minimize costly downtime and extend equipment lifespan"
+      ]},
+      { label: "Applications", type: "tags", items: ["Fresh Water System", "WTP", "STP", "Swimming Pool", "Diesel Generators", "Common Area Electricity"] },
+      { label: "Features", type: "list", items: [
+        "Get real-time operational status of critical assets (Pumps, Blowers, Generators, Conference Rooms, HVAC Systems, Transformers, CCTV, Common Area Lights, etc.)",
+        "QR-code-based tracking for instant access to asset details, repair history, and repair logs",
+        "Predict potential failures and schedule preventative maintenance"
+      ]}
+    ]
+  },
+  workforce: {
+    icon: "📲",
+    title: "Digital Workforce & Tasks",
+    desc: "Efficient staff and task management that replaces paper checklists with accountable, trackable digital workflows.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Boost team productivity and ensure task accountability"
+      ]},
+      { label: "Applications", type: "tags", items: ["Facility Managers", "Plumbers", "Electricians", "Pool Operators", "STP Operators", "Lift Operators", "Housekeeping Supervisors", "Gardeners", "Security Supervisors", "Fire Operators"] },
+      { label: "Features", type: "list", items: [
+        "Digitize checklists and Standard Operating Procedures (SOPs)",
+        "Schedule routine tasks or assign ad-hoc duties",
+        "Track staff attendance with a face recognition system and validate task completion with geo-location and real-time image uploads",
+        "Implement multi-level approvals for critical jobs"
+      ]}
+    ]
+  },
+  anyconnect: {
+    icon: "🔌",
+    title: "AnyConnect IoT Hardware",
+    desc: "Seamless integration with the sensors, meters, and devices you already own, regardless of manufacturer.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Leverage your existing infrastructure and avoid costly hardware replacements",
+        "Alerts and notifications to ensure resource availability"
+      ]},
+      { label: "Features", type: "list", items: [
+        "TrackBot's unique AnyConnect capability allows integration with a wide range of existing sensors, meters, and devices, regardless of the manufacturer",
+        "Smartify your current equipment cost-effectively"
+      ]}
+    ]
+  }
+};
+
+function openFeatureModal(key) {
+  const data = featureModalData[key];
+  if (!data) return;
+  document.getElementById('modalIcon').textContent = data.icon;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalDesc').textContent = data.desc;
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = data.sections.map(section => {
+    const inner = section.type === 'tags'
+      ? `<div class="modal-tags">${section.items.map(i => `<span class="modal-tag">${i}</span>`).join('')}</div>`
+      : `<ul class="modal-list">${section.items.map(i => `<li><span class="check-icon">✓</span>${i}</li>`).join('')}</ul>`;
+    return `<div><div class="modal-section-title">${section.label}</div>${inner}</div>`;
+  }).join('');
+
+  document.getElementById('featureModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFeatureModal() {
+  document.getElementById('featureModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFeatureModal();
+});
 </script>
 </body>
 </html>
