@@ -21,17 +21,55 @@
   --bg-page: #F8FAFC;
   --bg-white: #FFFFFF;
   --border: #E2E8F0;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --glass-border-subtle: rgba(226, 232, 240, 0.8);
 }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-page);
+  background: transparent;
   color: var(--text-dark);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ======== FULL PAGE AMBIENT BACKDROP VIDEO ======== */
+.ambient-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.96;
+}
+.ambient-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.22) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.ambient-video-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    radial-gradient(rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px);
+  background-size: 88px 88px, 88px 88px, 88px 88px;
+  background-position: center top;
+  pointer-events: none;
+  z-index: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-video { display: none; }
 }
 
 /* ======== NAVIGATION ======== */
@@ -39,15 +77,25 @@ nav {
   position: sticky;
   top: 0;
   z-index: 200;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 48px;
   height: 72px;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
 .nav-logo {
   display: flex;
@@ -88,7 +136,7 @@ nav {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(33,150,243,0.4);
 }
-.nav-toggle {
+.nav-hamburger {
   display: none;
   background: none;
   border: none;
@@ -96,13 +144,44 @@ nav {
   padding: 8px;
   color: var(--text-dark);
 }
-.nav-toggle svg { display: block; }
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 199;
+  padding: 40px 24px;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.nav-mobile-overlay.active {
+  display: flex;
+}
+.nav-mobile-overlay a {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 8px 16px;
+}
+.nav-mobile-overlay a.active {
+  color: var(--blue);
+}
 
-/* ======== PAGE HEADER ======== */
+/* ======== HERO ======== */
 .blog-hero {
-  background: radial-gradient(100% 100% at 50% 0%, #EBF5FF 0%, #F8FAFC 70%);
-  padding: 72px 48px 56px;
+  margin-top: -72px;
+  padding: 140px 48px 48px;
+  background: transparent;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .eyebrow {
   display: inline-block;
@@ -113,27 +192,37 @@ nav {
   padding: 6px 16px;
   border-radius: 100px;
   margin-bottom: 14px;
-  background: var(--blue-light);
+  background: rgba(235, 245, 255, 0.85);
   color: var(--blue);
+  border: 1px solid rgba(33, 150, 243, 0.2);
 }
 .blog-hero h1 {
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 16px;
   color: var(--text-dark);
 }
+.blog-hero h1 .highlight {
+  background: linear-gradient(135deg, #1E88E5 0%, #0284C7 50%, #0369A1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .blog-hero p {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--text-muted);
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
   line-height: 1.7;
 }
 
 /* ======== BLOG GRID ======== */
-.blog-sec { padding: 72px 48px 112px; }
+.blog-sec {
+  padding: 40px 48px 112px;
+  position: relative;
+  z-index: 1;
+}
 .blog-grid {
   max-width: 1140px;
   margin: 0 auto;
@@ -142,58 +231,127 @@ nav {
   gap: 28px;
 }
 .blog-card {
-  background: #FFFFFF;
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
   transition: all .25s ease;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
+  position: relative;
+}
+.blog-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 2;
 }
 .blog-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--blue);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 40px -8px rgba(33, 150, 243, 0.14), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(33, 150, 243, 0.35);
 }
+.blog-card:hover::before { opacity: 1; }
+
 .blog-img-wrap {
-  height: 150px;
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  height: 160px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.94) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 2rem;
   position: relative;
+  overflow: hidden;
+}
+.blog-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.blog-icon-pill {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: transform .25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+.blog-card:hover .blog-icon-pill {
+  transform: scale(1.1);
 }
 .blog-date {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: rgba(33, 150, 243, 0.2);
-  color: #60A5FA;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #E2E8F0;
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1;
 }
-.blog-body { padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1; }
-.blog-body h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 12px; line-height: 1.35; }
-.blog-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+
+.blog-body {
+  padding: 28px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.blog-body h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.blog-body p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  flex: 1;
+}
 .blog-link {
   color: var(--blue);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  transition: gap .2s ease;
 }
 .blog-card:hover .blog-link { gap: 10px; }
 
 /* ======== FOOTER ======== */
-footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+footer {
+  background: rgba(11, 17, 32, 0.98);
+  color: #94A3B8;
+  padding: 72px 48px 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
+}
 .ft-inner { max-width: 1140px; margin: 0 auto; }
 .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 64px; margin-bottom: 48px; }
 .ft-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 14px; }
@@ -204,57 +362,40 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 .ft-links a:hover { color: var(--blue); }
 .ft-office-box { font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin-bottom: 16px; }
 .ft-office-title { color: #E2E8F0; font-weight: 700; margin-bottom: 4px; }
-.ft-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #475569; }
+.ft-bottom { border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #475569; }
 
 /* ======== RESPONSIVE ======== */
 @media(max-width: 1024px) {
-  .blog-hero h1 { font-size: 2.2rem; }
-  .blog-grid { grid-template-columns: 1fr; max-width: 560px; }
+  .blog-hero h1 { font-size: 2.5rem; }
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
   nav { padding: 0 24px; }
   .blog-sec, .blog-hero, footer { padding-left: 24px; padding-right: 24px; }
   .ft-grid { grid-template-columns: 1fr; gap: 32px; }
 }
-@media(max-width: 860px) {
-  .nav-toggle { display: flex; align-items: center; justify-content: center; }
-  .nav-links {
-    position: fixed;
-    top: 72px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    background: #FFFFFF;
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 12px 24px 20px;
-    transform: translateY(-8px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  .nav-links.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 12px 0; width: 100%; }
-  .nav-cta { display: inline-flex; margin-top: 4px; }
-}
-@media(max-width: 640px) {
-  .blog-hero { padding: 56px 20px 44px; }
-  .blog-hero h1 { font-size: 1.75rem; }
+
+@media(max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: block; }
+  .blog-hero { padding: 116px 20px 36px; }
+  .blog-hero h1 { font-size: 2.1rem; }
   .blog-hero p { font-size: 0.95rem; }
-  .blog-sec { padding: 48px 20px 72px; }
-  .blog-grid { gap: 20px; }
-  .blog-body { padding: 22px 20px 24px; }
-  footer { padding: 56px 20px 28px; }
-  .ft-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .blog-sec { padding: 28px 20px 64px; }
+  .blog-grid { grid-template-columns: 1fr; max-width: 520px; }
+  footer { padding: 48px 20px 24px; }
+  .ft-bottom { flex-direction: column; gap: 12px; text-align: center; }
 }
 </style>
 </head>
 <body>
+
+<!-- FULL PAGE AMBIENT BACKDROP VIDEO -->
+<div class="ambient-video-bg" aria-hidden="true">
+  <video class="ambient-video" autoplay loop muted playsinline preload="auto">
+    <source src="assets/backdrop.mp4" type="video/mp4">
+  </video>
+  <div class="ambient-video-overlay"></div>
+  <div class="ambient-video-grid"></div>
+</div>
 
 <!-- NAVIGATION -->
 <nav>
@@ -266,23 +407,34 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     </svg>
     TrackBot™
   </a>
-  <ul class="nav-links" id="navLinks">
+  <ul class="nav-links">
     <li><a href="index.html#solutions">Solutions</a></li>
     <li><a href="index.html#features">Features</a></li>
     <li><a href="index.html#testimonials">Testimonials</a></li>
-    <li><a href="platform.html">Platform</a></li>
     <li><a href="blogs.html" class="active">Blogs</a></li>
     <li><a href="index.html#demo" class="nav-cta">Book a Demo</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="hamburgerIcon">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
   </button>
 </nav>
+
+<div class="nav-mobile-overlay" id="mobileNavOverlay">
+  <a href="index.html#solutions" onclick="closeMobileNav()">Solutions</a>
+  <a href="index.html#features" onclick="closeMobileNav()">Features</a>
+  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="blogs.html" class="active" onclick="closeMobileNav()">Blogs</a>
+  <a href="index.html#demo" class="nav-cta" onclick="closeMobileNav()">Book a Demo</a>
+</div>
 
 <!-- PAGE HEADER -->
 <section class="blog-hero">
   <span class="eyebrow">Latest Insights</span>
-  <h1>The TrackBot Blog</h1>
+  <h1>The TrackBot <span class="highlight">Blog</span></h1>
   <p>Perspectives on water quality, predictive maintenance, IoT automation, and smart facility management from the TrackBot &amp; LetUSense team.</p>
 </section>
 
@@ -293,7 +445,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <a href="blogs/silent-science-soft-water.html" class="blog-card">
       <div class="blog-img-wrap">
         <span class="blog-date">January 5, 2026</span>
-        💧
+        <div class="blog-icon-pill" style="background: rgba(33, 150, 243, 0.2); color: #60A5FA; border: 1px solid rgba(96, 165, 250, 0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+        </div>
       </div>
       <div class="blog-body">
         <h3>The Silent Science of Soft Water: Why Your Building's Water Quality Might Be at Risk</h3>
@@ -305,7 +459,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <a href="blogs/streamlining-conference-room-management.html" class="blog-card">
       <div class="blog-img-wrap">
         <span class="blog-date">June 19, 2025</span>
-        📽️
+        <div class="blog-icon-pill" style="background: rgba(139, 92, 246, 0.2); color: #A78BFA; border: 1px solid rgba(167, 139, 250, 0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
       </div>
       <div class="blog-body">
         <h3>Streamlining Conference Room Management: How TrackBot Elevates Google Workspace Operations</h3>
@@ -317,7 +473,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <a href="blogs/predictive-maintenance-game-changer.html" class="blog-card">
       <div class="blog-img-wrap">
         <span class="blog-date">Jan 22, 2025</span>
-        ⚡
+        <div class="blog-icon-pill" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24; border: 1px solid rgba(251, 191, 36, 0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
       </div>
       <div class="blog-body">
         <h3>TrackBot Predictive Maintenance: A Game Changer in Asset Management</h3>
@@ -329,7 +487,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <a href="blogs/precision-flow-meters-borewell-automation.html" class="blog-card">
       <div class="blog-img-wrap">
         <span class="blog-date">March 24, 2024</span>
-        🚰
+        <div class="blog-icon-pill" style="background: rgba(14, 165, 233, 0.2); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
       </div>
       <div class="blog-body">
         <h3>The Power of Precision: How Flow Meters Drive Borewell Automation with TrackBot™ AI Platform</h3>
@@ -341,7 +501,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <a href="blogs/monitor-stp-system-closely.html" class="blog-card">
       <div class="blog-img-wrap">
         <span class="blog-date">February 2024</span>
-        🏭
+        <div class="blog-icon-pill" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+        </div>
       </div>
       <div class="blog-body">
         <h3>Why do we need to monitor STP system closely and keep it Healthy?</h3>
@@ -378,7 +540,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           <li><a href="index.html#solutions">Commercial Solutions</a></li>
           <li><a href="index.html#solutions">Residential Solutions</a></li>
           <li><a href="index.html#features">Features Grid</a></li>
-          <li><a href="platform.html">Platform</a></li>
           <li><a href="blogs.html">Blogs</a></li>
           <li><a href="index.html#demo">Book a Demo</a></li>
         </ul>
@@ -405,18 +566,43 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 </footer>
 
 <script>
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen);
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
-});
+function toggleMobileNav() {
+  const overlay = document.getElementById('mobileNavOverlay');
+  const icon = document.getElementById('hamburgerIcon');
+  const isOpen = overlay.classList.toggle('active');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (isOpen) {
+    icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+  } else {
+    icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+  }
+}
+
+function closeMobileNav() {
+  const overlay = document.getElementById('mobileNavOverlay');
+  const icon = document.getElementById('hamburgerIcon');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+}
+
+function updateNavScroll() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', updateNavScroll, { passive: true });
+updateNavScroll();
+
+const ambientVid = document.querySelector('.ambient-video');
+if (ambientVid) {
+  ambientVid.play().catch(() => {});
+}
 </script>
+
 </body>
 </html>

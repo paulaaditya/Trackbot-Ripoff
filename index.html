@@ -40,7 +40,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-page);
+  background: transparent;
   color: var(--text-dark);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -51,17 +51,22 @@ nav {
   position: sticky;
   top: 0;
   z-index: 200;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border-subtle);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 48px;
   height: 72px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
 .nav-logo {
   display: flex;
@@ -104,60 +109,17 @@ nav {
 
 /* ======== HERO ======== */
 .hero {
-  background: radial-gradient(100% 100% at 50% 0%, #EBF5FF 0%, #F8FAFC 70%);
-  padding: 80px 48px 60px;
+  margin-top: -72px;
+  padding: 140px 48px 48px;
+  background: transparent;
   text-align: center;
   position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(15,23,42,0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15,23,42,0.07) 1px, transparent 1px),
-    radial-gradient(rgba(15,23,42,0.16) 1.5px, transparent 1.5px);
-  background-size: 88px 88px, 88px 88px, 88px 88px;
-  background-position: center, center, center;
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 25%, #000 35%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 25%, #000 35%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
 }
 .hero-inner {
   position: relative;
   z-index: 1;
   max-width: 920px;
   margin: 0 auto;
-}
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(33, 150, 243, 0.28);
-  padding: 6px 18px;
-  border-radius: 100px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--blue-dark);
-  margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(33,150,243,0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
-}
-.hero-badge .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--blue);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(33,150,243,0.7); }
-  70%{ transform: scale(1); box-shadow: 0 0 0 8px rgba(33,150,243,0); }
-  100%{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(33,150,243,0); }
 }
 
 .hero-title {
@@ -294,13 +256,13 @@ nav {
 /* Hero Dashboard Graphic */
 .hero-graphic {
   max-width: 1040px;
-  margin: 48px auto -80px;
+  margin: 56px auto 0;
   background: rgba(15, 23, 42, 0.94);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 25px 60px rgba(15,23,42,0.3), 0 0 40px rgba(33,150,243,0.12);
+  box-shadow: 0 25px 60px -10px rgba(15,23,42,0.35), 0 0 50px rgba(33,150,243,0.18);
   border: 1px solid rgba(255,255,255,0.12);
   color: #fff;
   position: relative;
@@ -357,31 +319,81 @@ nav {
 .val-blue { color: #60A5FA; }
 .val-orange { color: #FBBF24; }
 
-/* ======== STATS BANNER ======== */
+/* ======== STATS SECTION ======== */
 .stats-banner {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 120px 48px 48px;
+  background: transparent;
+  border: none;
+  padding: 48px 48px 72px;
+  position: relative;
+  z-index: 1;
 }
 .stats-grid {
-  max-width: 1100px;
+  max-width: 1140px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 20px;
+}
+.stat-box {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 22px;
+  padding: 28px 20px;
   text-align: center;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stat-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.stat-box:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 20px 40px -8px rgba(33, 150, 243, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(33, 150, 243, 0.35);
+}
+.stat-box:hover::before { opacity: 1; }
+.stat-box-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  transition: transform 0.25s ease;
+}
+.stat-box:hover .stat-box-icon {
+  transform: scale(1.08);
 }
 .stat-box h3 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: 800;
   color: var(--blue-navy);
   letter-spacing: -0.03em;
-  margin-bottom: 4px;
+  line-height: 1.1;
+  margin-bottom: 6px;
 }
-.stat-box p { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); }
+.stat-box p {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
 
 /* ======== SECTION TYPOGRAPHY ======== */
 .section-pad { padding: 96px 48px; }
@@ -416,9 +428,57 @@ nav {
 }
 .sec-p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
 
+/* ======== FULL PAGE AMBIENT BACKDROP VIDEO ======== */
+.ambient-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.96;
+}
+.ambient-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.22) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.ambient-video-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    radial-gradient(rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px);
+  background-size: 88px 88px, 88px 88px, 88px 88px;
+  background-position: center top;
+  pointer-events: none;
+  z-index: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-video { display: none; }
+}
+
+.solutions-switcher,
+.features-sec,
+.testi-sec {
+  background: transparent !important;
+  border-top: none !important;
+  position: relative;
+  z-index: 1;
+}
+
 /* ======== SOLUTIONS AS CARDS ======== */
 .solutions-switcher {
-  background: radial-gradient(80% 80% at 50% 10%, #F0F7FF 0%, #F8FAFC 100%);
   position: relative;
 }
 .tab-controls-wrap {
@@ -548,55 +608,128 @@ nav {
 
 .sol-module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
 .sol-module-card {
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  border-left: 4px solid var(--blue);
-  border-radius: 18px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
-  transition: transform .2s, box-shadow .2s;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 26px 24px;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 2px 8px -2px rgba(33, 150, 243, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.sol-module-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  pointer-events: none;
 }
 .sol-module-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.08);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(33, 150, 243, 0.3);
+  box-shadow: 0 18px 38px -6px rgba(33, 150, 243, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
-.sol-module-card h5 { font-size: 1.02rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark); }
-.sol-module-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-.sol-module-benefits { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.sol-module-benefits li { font-size: 0.84rem; color: var(--text-mid); display: flex; gap: 8px; align-items: flex-start; font-weight: 600; }
+.sol-module-card h5 { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark); line-height: 1.35; letter-spacing: -0.01em; }
+.sol-module-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+.sol-module-benefits { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.sol-module-benefits li { font-size: 0.84rem; color: var(--text-mid); display: flex; gap: 10px; align-items: flex-start; font-weight: 600; line-height: 1.45; }
 
-.sol-keyfeat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+.sol-module-image-card {
+  display: flex;
+  flex-direction: column;
+}
+.sol-module-img-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+.sol-module-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+.sol-module-card:hover .sol-module-img {
+  transform: scale(1.04);
+}
+.sol-module-img-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #60A5FA;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sol-keyfeat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
 .sol-keyfeat-item {
   display: flex;
-  gap: 14px;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 18px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
+}
+.sol-keyfeat-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(33, 150, 243, 0.25);
+  box-shadow: 0 8px 24px -4px rgba(33, 150, 243, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 .sol-keyfeat-num {
-  width: 30px; height: 30px; border-radius: 50%; background: var(--blue-light); color: var(--blue);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(33, 150, 243, 0.12);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.82rem;
+  flex-shrink: 0;
 }
 .sol-keyfeat-item h6 { font-weight: 800; font-size: 0.92rem; margin-bottom: 4px; color: var(--text-dark); }
 .sol-keyfeat-item p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.55; }
 
 .sol-industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
 .sol-industry-card {
-  border: 1px solid rgba(226, 232, 240, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 18px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
-  transition: transform .2s, box-shadow .2s;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
 }
 .sol-industry-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(33, 150, 243, 0.25);
+  box-shadow: 0 12px 28px rgba(33, 150, 243, 0.1);
 }
 .sol-industry-card .sol-industry-icon {
   width: 44px;
@@ -639,6 +772,81 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+/* ======== SLIDING CAPABILITIES VIEW ======== */
+.capabilities-slider-wrap {
+  position: relative;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 54px;
+}
+.capabilities-slider {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 16px 4px 28px;
+}
+.capabilities-slider::-webkit-scrollbar {
+  display: none;
+}
+.capabilities-slider .feature-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 320px;
+  scroll-snap-align: start;
+}
+.slider-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  color: var(--blue-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+.slider-nav-btn:hover {
+  background: #FFFFFF;
+  color: var(--blue);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 12px 28px -4px rgba(33, 150, 243, 0.25);
+}
+.slider-nav-btn.prev { left: 0; }
+.slider-nav-btn.next { right: 0; }
+.slider-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(148, 163, 184, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+  padding: 0;
+}
+.slider-dot.active {
+  width: 28px;
+  background: var(--blue);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.35);
 }
 .feature-card {
   background: var(--glass-bg-card);
@@ -1087,19 +1295,19 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   .nav-hamburger { display: block; }
 
   /* Hero */
-  .hero { padding: 56px 20px 40px; }
+  .hero { padding: 116px 20px 40px; }
   .hero-title { font-size: 2.2rem; }
   .hero-desc { font-size: 0.95rem; }
   .hero-cta { flex-direction: column; align-items: center; gap: 12px; }
   .btn-p, .btn-o { width: 100%; max-width: 320px; justify-content: center; }
-  .hero-graphic { margin: 32px auto -60px; padding: 16px; border-radius: 18px; }
+  .hero-graphic { margin: 32px auto 0; padding: 16px; border-radius: 18px; }
   .dash-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .dash-card { padding: 14px; }
   .dash-card-val { font-size: 1.3rem; }
 
   /* Stats */
-  .stats-banner { padding: 90px 20px 36px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stats-banner { padding: 36px 20px 48px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .stat-box h3 { font-size: 1.8rem; }
 
   /* Section typography */
@@ -1125,8 +1333,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   .sol-module-card h5 { font-size: 0.95rem; }
   .sol-module-card p { font-size: 0.84rem; }
 
-  /* Features */
-  .features-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  /* Capabilities Slider */
+  .capabilities-slider-wrap { padding: 0 44px; }
+  .capabilities-slider .feature-card { flex: 0 0 calc((100% - 24px) / 2); min-width: 280px; }
   .feature-card { padding: 24px 20px; border-radius: 20px; }
   .feature-card h3 { font-size: 1.05rem; }
 
@@ -1166,8 +1375,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   .nav-logo svg { width: 26px; height: 26px; }
   .nav-mobile-overlay { top: 60px; padding: 32px 16px; }
 
-  .hero { padding: 40px 16px 32px; }
-  .hero-badge { font-size: 0.72rem; padding: 5px 12px; }
+  .hero { margin-top: -60px; padding: 92px 16px 32px; }
   .hero-title { font-size: 1.75rem; margin-bottom: 16px; }
   .hero-desc { font-size: 0.88rem; margin-bottom: 24px; }
   .btn-p, .btn-o { max-width: 100%; padding: 13px 24px; font-size: 0.9rem; }
@@ -1176,12 +1384,15 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   .dash-card { padding: 12px; border-radius: 12px; }
   .dash-card-label { font-size: 0.68rem; }
   .dash-card-val { font-size: 1.15rem; }
-  .hero-graphic { border-radius: 16px; padding: 14px; }
+  .hero-graphic { margin: 24px auto 0; border-radius: 16px; padding: 14px; }
 
-  .stats-banner { padding: 80px 16px 28px; }
-  .stats-grid { gap: 16px; }
-  .stat-box h3 { font-size: 1.5rem; }
-  .stat-box p { font-size: 0.78rem; }
+  .stats-banner { padding: 24px 16px 36px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-box { padding: 18px 10px; border-radius: 16px; }
+  .stat-box-icon { width: 36px; height: 36px; border-radius: 10px; margin-bottom: 8px; }
+  .stat-box-icon svg { width: 18px; height: 18px; }
+  .stat-box h3 { font-size: 1.45rem; }
+  .stat-box p { font-size: 0.74rem; }
 
   .section-pad { padding: 48px 16px; }
   .sec-h2 { font-size: 1.5rem; }
@@ -1203,8 +1414,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
   .sol-keyfeat-item { padding: 14px; border-radius: 14px; }
   .sol-industry-card { padding: 18px 16px; border-radius: 14px; }
 
-  .features-grid { grid-template-columns: 1fr; gap: 14px; }
-  .feature-card { padding: 22px 18px; border-radius: 18px; }
+  .capabilities-slider-wrap { padding: 0 4px; }
+  .capabilities-slider .feature-card { flex: 0 0 86%; min-width: 250px; padding: 22px 18px; border-radius: 18px; }
+  .slider-nav-btn { display: none; }
   .feat-icon { width: 44px; height: 44px; border-radius: 14px; }
 
   .testi-card { padding: 20px; border-radius: 18px; }
@@ -1230,6 +1442,15 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 </head>
 <body>
 
+<!-- FULL PAGE AMBIENT BACKDROP VIDEO -->
+<div class="ambient-video-bg" aria-hidden="true">
+  <video class="ambient-video" autoplay loop muted playsinline preload="auto">
+    <source src="assets/backdrop.mp4" type="video/mp4">
+  </video>
+  <div class="ambient-video-overlay"></div>
+  <div class="ambient-video-grid"></div>
+</div>
+
 <!-- NAVIGATION -->
 <nav>
   <a href="index.html" class="nav-logo">
@@ -1244,7 +1465,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <li><a href="#solutions">Solutions</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
-    <li><a href="platform.html">Platform</a></li>
     <li><a href="blogs.html">Blogs</a></li>
     <li><a href="#demo" class="nav-cta">Book a Demo</a></li>
   </ul>
@@ -1268,9 +1488,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 <!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="dot"></span> AI &amp; IoT Powered Building Operations Platform
-    </div>
     <h1 class="hero-title">
       Intelligent Facilities &amp;<br>
       <span class="highlight">Automated Water Management</span>
@@ -1365,18 +1582,30 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 <section class="stats-banner">
   <div class="stats-grid">
     <div class="stat-box">
+      <div class="stat-box-icon" style="background: rgba(33, 150, 243, 0.12); color: #0284C7;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+      </div>
       <h3>50M+</h3>
       <p>Liters Water Saved Annually</p>
     </div>
     <div class="stat-box">
+      <div class="stat-box-icon" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+      </div>
       <h3>30%</h3>
       <p>Reduction in Energy &amp; Water Bills</p>
     </div>
     <div class="stat-box">
+      <div class="stat-box-icon" style="background: rgba(99, 102, 241, 0.12); color: #4F46E5;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+      </div>
       <h3>99.8%</h3>
       <p>Critical Asset Uptime</p>
     </div>
     <div class="stat-box">
+      <div class="stat-box-icon" style="background: rgba(245, 158, 11, 0.12); color: #D97706;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      </div>
       <h3>40%</h3>
       <p>Faster Maintenance Resolution</p>
     </div>
@@ -1478,76 +1707,75 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       </div>
 
       <div class="solution-intro">
-        <h4>Smart Facility Management, Made Intelligent</h4>
-        <p>Residential spaces are more than just buildings—they're homes, communities, and places where families grow and memories are made. At TrackBot, we understand that maintaining a residential property means ensuring every resident feels safe, heard, and cared for. That's why our intelligent systems are designed not just to manage utilities, but to support the well-being of the people who live there—quietly working in the background to keep life running smoothly.</p>
+        <h4>Enterprise-Grade Intelligent Property Automation</h4>
+        <p>Centralize multi-site operations, predict critical equipment failures, and deliver zero-friction occupant support with integrated AI and IoT automation.</p>
       </div>
 
-      <h4 class="solution-section-title">Enterprise-Grade Intelligent Property Automation</h4>
-      <p class="solution-section-sub">TrackBot enables commercial property operators to unify control, enhance responsiveness, and ensure operational continuity at scale. Our enterprise-ready automation suite uses AI and IoT to centralize management, predict issues, and provide seamless support across multiple buildings or sites.</p>
+      <h4 class="solution-section-title">Intelligent Automation Modules</h4>
+      <p class="solution-section-sub">Core capabilities designed to eliminate downtime and streamline operations across your properties.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
           <h5>Unified Multi-Property Command Center with AI Insights</h5>
-          <p>Gain complete visibility and control across your entire property network. TrackBot's centralized dashboard aggregates real-time data from all your corporate locations or commercial complexes. AI-driven insights help facility managers make informed decisions, spot anomalies early, and implement standardized protocols across properties—whether you're managing 5 buildings or 50.</p>
+          <p>Centralize real-time telemetry, anomaly alerts, and protocol management across your entire building network from one dashboard.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> Centralized command for all sites.</li>
-            <li><span class="check-icon">✓</span> Cross-building incident tracking &amp; escalation.</li>
-            <li><span class="check-icon">✓</span> AI-driven energy &amp; asset optimization.</li>
-            <li><span class="check-icon">✓</span> Standardized compliance &amp; audit reporting</li>
+            <li><span class="check-icon">✓</span> Multi-site portfolio visibility &amp; live telemetry</li>
+            <li><span class="check-icon">✓</span> Cross-building incident tracking &amp; automated escalation</li>
+            <li><span class="check-icon">✓</span> AI-driven energy &amp; asset optimization</li>
+            <li><span class="check-icon">✓</span> Standardized compliance &amp; digital audit reporting</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>AI-Driven Predictive Maintenance for Critical Infrastructure</h5>
-          <p>Proactively protect the systems that keep your buildings safe and operational. From fire safety systems and elevators to diesel generators and HVACs, TrackBot monitors performance in real time. It uses predictive models to detect stress, usage spikes, and wear indicators, scheduling preventive actions before issues disrupt operations.</p>
+          <p>Detect stress and wear indicators early to schedule preventive servicing across HVAC, lifts, and generators before outages happen.</p>
           <ul class="sol-module-benefits">
             <li><span class="check-icon">✓</span> Minimized downtime &amp; emergency repairs</li>
-            <li><span class="check-icon">✓</span> Smart maintenance aligned with operations</li>
-            <li><span class="check-icon">✓</span> Safety assurance for people and assets.</li>
-            <li><span class="check-icon">✓</span> Longer lifespan, better ROI</li>
+            <li><span class="check-icon">✓</span> Automated usage-based maintenance dispatch</li>
+            <li><span class="check-icon">✓</span> Proactive safety assurance for occupants &amp; assets</li>
+            <li><span class="check-icon">✓</span> Extended equipment lifespan &amp; higher ROI</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Tenant &amp; Guest Instant Support via WhatsApp</h5>
-          <p>Simplify issue reporting for everyone—no app required. With TrackBot, guests, tenants, or corporate employees can instantly report facility issues using just WhatsApp. Whether it's a faulty lift, an AC problem in a meeting room, or a restroom maintenance need, AI-powered backend systems log, route, and resolve tickets efficiently.</p>
+          <p>Enable occupants to report facility issues directly over WhatsApp—no apps, logins, or training required.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> No need for separate login or apps</li>
-            <li><span class="check-icon">✓</span> Real-time communication and ticket updates</li>
-            <li><span class="check-icon">✓</span> Supports media and location tags</li>
-            <li><span class="check-icon">✓</span> Boosts satisfaction, cuts helpdesk load.</li>
+            <li><span class="check-icon">✓</span> Zero-friction reporting with no app downloads</li>
+            <li><span class="check-icon">✓</span> Photo, video &amp; location-tagged issue logging</li>
+            <li><span class="check-icon">✓</span> Automated AI ticket triage &amp; team assignment</li>
+            <li><span class="check-icon">✓</span> Real-time WhatsApp status &amp; resolution alerts</li>
           </ul>
+        </div>
+        <div class="sol-module-card sol-module-image-card">
+          <div class="sol-module-img-container">
+            <img src="assets/automation_dashboard_preview.jpg" alt="TrackBot Intelligent Automation Dashboard" class="sol-module-img"/>
+            <div class="sol-module-img-badge">Live Telemetry Hub</div>
+          </div>
+          <h5>Real-Time Operational Intelligence</h5>
+          <p>Continuous telemetry stream monitoring campus energy, equipment health scores, and automated threshold responses.</p>
         </div>
       </div>
 
-      <h4 class="solution-section-title">Industry-Specific Focus</h4>
+      <h4 class="solution-section-title">Industry-Specific Applications</h4>
       <div class="sol-industry-grid">
         <div class="sol-industry-card">
           <div class="sol-industry-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
           </div>
           <h5>Tech Parks &amp; Malls</h5>
-          <p>Centralized Fire System &amp; CCTV health monitoring, Lift performance analytics, smart energy management, and WhatsApp-based tenant support.</p>
+          <p>Centralized Fire &amp; CCTV monitoring, lift analytics, and WhatsApp tenant support.</p>
         </div>
         <div class="sol-industry-card">
           <div class="sol-industry-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path><path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"></path><path d="M8 7h.01"></path><path d="M16 7h.01"></path><path d="M12 7h.01"></path><path d="M12 11h.01"></path><path d="M16 11h.01"></path><path d="M8 11h.01"></path><path d="M10 22v-4a2 2 0 0 1 4 0v4"></path></svg>
           </div>
           <h5>Hotels &amp; Hospitality</h5>
-          <p>Enhance guest experience with proactive maintenance (Lifts, DGs), ensure water quality, optimize energy, and offer instant WhatsApp support.</p>
+          <p>Proactive HVAC &amp; DG uptime, water quality monitoring, and instant guest issue logging.</p>
         </div>
         <div class="sol-industry-card">
           <div class="sol-industry-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M17 18h1"></path><path d="M12 18h1"></path><path d="M7 18h1"></path></svg>
           </div>
           <h5>Industrial Facilities</h5>
-          <p>Monitor heavy equipment, manage smart compliance for safety regulations, and ensure integrity of critical systems including Fire Safety and CCTV.</p>
-        </div>
-      </div>
-
-      <h4 class="solution-section-title">Key Features for Corporate &amp; Commercial</h4>
-      <div class="sol-keyfeat-grid">
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>Critical Systems Management (Fire, CCTV, Lifts)</h6><p>Ensure safety, compliance, and operational uptime with intelligent monitoring, predictive alerts, and health diagnostics for Fire Safety Systems, CCTV networks, and Lift operations.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>Public Space WhatsApp Helpdesk Solution</h6><p>Tenants, employees, or guests can report issues in common areas, meeting rooms, or hotel rooms via WhatsApp. AI helps categorize and route for quick action.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>Smart Workforce Optimization</h6><p>Track consumption, carbon footprint, and progress towards ESG targets with AI-powered optimization and comprehensive reporting.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Automated Compliance &amp; AI-Optimized PPM</h6><p>Ultimate tracking of safety regulations, licenses, certifications, and conduct digital safety audits with AI support.</p></div></div>
+          <p>Heavy machinery health tracking, environmental safety audits, and automated compliance.</p>
       </div>
     </div>
 
@@ -1613,65 +1841,53 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       </div>
 
       <div class="solution-intro">
-        <h4>Where People Live, Comfort Matters Most</h4>
-        <p>Residential spaces are more than just buildings—they're homes, communities, and places where families grow and memories are made. At TrackBot, we understand that maintaining a residential property means ensuring every resident feels safe, heard, and cared for. That's why our intelligent systems are designed not just to manage utilities, but to support the well-being of the people who live there—quietly working in the background to keep life running smoothly.</p>
+        <h4>Intelligent Living for Residential Communities</h4>
+        <p>Automate water systems, eliminate amenity downtime, and resolve resident complaints swiftly without manual overhead.</p>
       </div>
 
-      <h4 class="solution-section-title">How TrackBot's Intelligent Solutions Transform Property Management</h4>
-      <p class="solution-section-sub">TrackBot leverages AI, IoT, and automation to bring next-generation efficiency, transparency, and cost-effectiveness to residential and commercial property management. Here's a deeper look at how each solution contributes to smarter living and operational excellence:</p>
+      <h4 class="solution-section-title">Core Community Automation</h4>
+      <p class="solution-section-sub">Smart solutions that quietly keep utilities running smoothly and enhance resident satisfaction.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
           <h5>AI-Powered Borewell Optimization</h5>
-          <p>Groundwater is a precious resource—TrackBot helps you make the most of it. Our AI-powered borewell module continuously analyzes water table levels, motor load, and consumption patterns to dynamically optimize borewell operations. It prevents motor overuse, reduces wear and tear, and ensures maximum water extraction with minimum energy usage.</p>
+          <p>Dynamically adjusts pump runtimes based on water table levels and demand to prevent motor burnout and reduce energy costs.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> Up to 20–30% reduction in energy bills</li>
-            <li><span class="check-icon">✓</span> Longer life for borewell motors and pumps</li>
-            <li><span class="check-icon">✓</span> Data logs for informed water resource planning</li>
-            <li><span class="check-icon">✓</span> Early alerts for motor faults and dry runs</li>
-            <li><span class="check-icon">✓</span> Automatically adapts to changes in groundwater level</li>
+            <li><span class="check-icon">✓</span> 20–30% lower pumping energy costs</li>
+            <li><span class="check-icon">✓</span> Automatic dry-run and motor load protection</li>
+            <li><span class="check-icon">✓</span> Real-time water table telemetry &amp; yield logs</li>
+            <li><span class="check-icon">✓</span> Extended borewell motor lifespan</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Smart Water Management</h5>
-          <p>TrackBot enables end-to-end oversight of your water infrastructure. Using real-time sensors and AI analytics, it detects leaks, inefficiencies, and contamination risks in your water systems—from pipelines to softener plants. It alerts managers immediately, preventing damage, health hazards, and water wastage.</p>
+          <p>Continuous oversight of sumps, overhead tanks, and treatment plants with instant leak and contamination alerts.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> Auto leak detection with zone mapping</li>
-            <li><span class="check-icon">✓</span> Monitor hardness, TDS &amp; pH in treated water</li>
-            <li><span class="check-icon">✓</span> Water &amp; health reports – daily to monthly.</li>
-            <li><span class="check-icon">✓</span> Promotes sustainability and regulatory compliance</li>
+            <li><span class="check-icon">✓</span> Automated leak detection with pipe zone mapping</li>
+            <li><span class="check-icon">✓</span> Live TDS, pH &amp; water hardness tracking</li>
+            <li><span class="check-icon">✓</span> Real-time tank levels &amp; automated replenishment</li>
+            <li><span class="check-icon">✓</span> Daily consumption and purity reports</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Predictive Amenity Upkeep</h5>
-          <p>Go beyond reactive maintenance—TrackBot predicts problems before they arise. Our system gathers usage patterns and sensor data from critical infrastructure like STPs (Sewage Treatment Plants), elevators, diesel generators, and pumps. Machine learning algorithms then forecast breakdowns and schedule preventive maintenance automatically.</p>
+          <p>Machine learning models forecast equipment breakdowns across STPs, lifts, and backup generators before failures occur.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> No downtime for key amenities.</li>
-            <li><span class="check-icon">✓</span> Lower costs through early issue detection.</li>
-            <li><span class="check-icon">✓</span> Smart maintenance with minimal oversight.</li>
-            <li><span class="check-icon">✓</span> In-depth component health reports.</li>
-            <li><span class="check-icon">✓</span> Enhances trust and satisfaction among residents and facility staff</li>
+            <li><span class="check-icon">✓</span> Zero unplanned downtime for critical amenities</li>
+            <li><span class="check-icon">✓</span> Early wear detection &amp; automated service orders</li>
+            <li><span class="check-icon">✓</span> Comprehensive asset health scoring</li>
+            <li><span class="check-icon">✓</span> Lower maintenance and replacement costs</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Automated Resident Ticketing via WhatsApp</h5>
-          <p>Make issue reporting as simple as chatting with a friend. Residents can raise maintenance requests, complaints, or suggestions directly through WhatsApp. TrackBot's AI backend captures the issue, tags it with priority, assigns it to the right staff or vendor, and sends updates to residents in real time.</p>
+          <p>Residents report maintenance requests directly through WhatsApp with instant AI categorization and auto-dispatch.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> No separate app needed for residents.</li>
-            <li><span class="check-icon">✓</span> Image/video uploads for clearer issues.</li>
-            <li><span class="check-icon">✓</span> AI auto-routing for faster resolution.</li>
-            <li><span class="check-icon">✓</span> Full transparency with ticket tracking.</li>
-            <li><span class="check-icon">✓</span> Reduces manual handling and improves satisfaction scores</li>
+            <li><span class="check-icon">✓</span> Zero app downloads or logins needed</li>
+            <li><span class="check-icon">✓</span> Photo and video attachment support</li>
+            <li><span class="check-icon">✓</span> AI auto-prioritization &amp; vendor assignment</li>
+            <li><span class="check-icon">✓</span> Live WhatsApp ticket tracking for residents</li>
           </ul>
         </div>
-      </div>
-
-      <h4 class="solution-section-title">Key Features for Residential Properties</h4>
-      <div class="sol-keyfeat-grid">
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>AI-Enabled Borewell &amp; Sump Optimization</h6><p>Intelligently manages pump running/resting times based on historical data and real-time yield, significantly enhancing borewell life, maximizing water output, and saving energy.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>Intelligent Water Treatment &amp; Leak Detection</h6><p>Automated monitoring and control for STPs/WTPs (including softener efficiency), plus AI-based leak detection to prevent wastage and ensure water quality.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>AI Complaint Management via WhatsApp</h6><p>Residents use WhatsApp for hassle-free issue reporting. AI categorizes, prioritizes, and tracks tickets for faster resolution.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Predictive Maintenance for Critical Assets</h6><p>Smart monitoring of Lifts, Diesel Generators, and common area electrical systems with AI-driven alerts for proactive servicing.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">5</div><div><h6>Security &amp; CCTV Health Monitoring</h6><p>Maintain robust security with automated checks on CCTV systems and access control.</p></div></div>
       </div>
     </div>
 
@@ -1731,52 +1947,43 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       </div>
 
       <div class="solution-intro">
-        <h4>Smart Facility Management, Made Intelligent</h4>
-        <p>Residential spaces are more than just buildings—they're homes, communities, and places where families grow and memories are made. At TrackBot, we understand that maintaining a residential property means ensuring every resident feels safe, heard, and cared for. That's why our intelligent systems are designed not just to manage utilities, but to support the well-being of the people who live there—quietly working in the background to keep life running smoothly.</p>
+        <h4>Data-Driven Facility Operations</h4>
+        <p>Empower facility management teams to transition from reactive firefighting to predictive, automated operations across every site.</p>
       </div>
 
-      <h4 class="solution-section-title">How TrackBot's Intelligent Solutions Transform Facility Management Service (FMS)</h4>
-      <p class="solution-section-sub">TrackBot empowers facility management teams to shift from reactive processes to intelligent, data-driven operations. Our platform unifies AI, automation, and IoT to improve service quality, reduce costs, and future-proof assets.</p>
+      <h4 class="solution-section-title">FMS Operational Modules</h4>
+      <p class="solution-section-sub">Unified telemetry, automated work orders, and digital audit readiness for multi-site managers.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
           <h5>AI-Driven Operational Excellence</h5>
-          <p>Unlock next-level efficiency with predictive insights and seamless automation. TrackBot enables facility managers to move away from manual oversight and reactive problem-solving. By monitoring assets, energy usage, and systems in real time, it proactively addresses issues, schedules tasks, and optimizes performance across your property portfolio.</p>
+          <p>Centralize multi-property monitoring, automated task routing, and predictive alert triage in a single pane of glass.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> Predictive alerts for system failures</li>
-            <li><span class="check-icon">✓</span> Centralized control dashboard for all operations</li>
-            <li><span class="check-icon">✓</span> Real-time energy, water &amp; asset insights.</li>
-            <li><span class="check-icon">✓</span> Reduced overhead &amp; service delays.</li>
+            <li><span class="check-icon">✓</span> Multi-property operations command hub</li>
+            <li><span class="check-icon">✓</span> Real-time equipment diagnostics &amp; fault alerts</li>
+            <li><span class="check-icon">✓</span> Automated SLA tracking with faster resolution</li>
+            <li><span class="check-icon">✓</span> Drastically reduced operational overhead</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Intelligent Asset Performance</h5>
-          <p>Extend the life and reliability of your assets with AI-backed intelligence. TrackBot helps ensure that mission-critical assets—like water pumps, STPs, HVACs, and electrical systems—run efficiently and reliably. AI algorithms analyze performance trends to schedule maintenance, detect inefficiencies, and avoid breakdowns before they occur.</p>
+          <p>Keep pumps, STPs, HVACs, and electrical infrastructure running reliably with automated usage-based servicing.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> Smart alerts for borewell and leak issues.</li>
-            <li><span class="check-icon">✓</span> Auto-scheduled maintenance by usage.</li>
-            <li><span class="check-icon">✓</span> Asset lifecycle tracking for smarter CAPEX.</li>
-            <li><span class="check-icon">✓</span> Improved ROI on infrastructure investment</li>
+            <li><span class="check-icon">✓</span> Early wear detection &amp; auto-scheduled work orders</li>
+            <li><span class="check-icon">✓</span> Real-time diagnostics for critical plant equipment</li>
+            <li><span class="check-icon">✓</span> Extended asset lifecycles and lower CAPEX</li>
+            <li><span class="check-icon">✓</span> Higher return on infrastructure investments</li>
           </ul>
         </div>
         <div class="sol-module-card">
           <h5>Smart Workforce Automation</h5>
-          <p>Empower your team with tools that increase productivity and accountability. With TrackBot, you can digitize task assignments, monitor completion status, and even manage workforce schedules—all through a mobile-friendly platform. AI helps assign the right task to the right person at the right time, minimizing response times and errors.</p>
+          <p>Digitize job allocation, track attendance, and verify on-site task completion via mobile in real time.</p>
           <ul class="sol-module-benefits">
-            <li><span class="check-icon">✓</span> AI task &amp; shift planning.</li>
-            <li><span class="check-icon">✓</span> Mobile access for task reporting &amp; updates.</li>
-            <li><span class="check-icon">✓</span> Supervisor performance dashboards.</li>
-            <li><span class="check-icon">✓</span> Faster SLAs &amp; improved feedback.</li>
+            <li><span class="check-icon">✓</span> AI-assisted shift planning &amp; task routing</li>
+            <li><span class="check-icon">✓</span> Mobile task execution with photo verification</li>
+            <li><span class="check-icon">✓</span> Live supervisor dashboards &amp; technician metrics</li>
+            <li><span class="check-icon">✓</span> Faster ticket closures and accountability</li>
           </ul>
         </div>
-      </div>
-
-      <h4 class="solution-section-title">Core Features for Facility Management</h4>
-      <div class="sol-keyfeat-grid">
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>Unified Intelligent Monitoring Dashboard</h6><p>Centralized view of STPs, WTPs, Fire Systems, DGs, Pumps, Lifts with AI-driven health scores and predictive alerts.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>AI-Powered Water Management Solutions</h6><p>Includes borewell optimization, automated softener control, and leak detection across managed properties.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>Smart Workforce Optimization</h6><p>Digital attendance, AI-assisted task scheduling, geo-tagging, and performance reports.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Automated Compliance &amp; AI-Optimized PPM</h6><p>Digital audit logs, contract management, and AI-optimized scheduling of Preventive Maintenance.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">5</div><div><h6>Mobile App for Field Techs with AI Support</h6><p>Empower staff with on-the-go task updates, image capture for AI verification, and asset info.</p></div></div>
       </div>
     </div>
 
@@ -1831,23 +2038,22 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       </div>
 
       <div class="solution-intro">
-        <h4>AI in Conference Room Management</h4>
-        <p>Conference room management can improve operational efficiency by leveraging AI and IoT to integrate them in real time, plan regular health checks, and predict maintenance needs based on room conditions. TrackBot allows organizations to schedule and track routine checkups more efficiently, reduce waiting times, and improve user experience.</p>
+        <h4>Always-Ready Meeting Spaces</h4>
+        <p>Ensure meeting rooms, AV systems, and climate controls are fully functional and checked before every reservation.</p>
       </div>
 
-      <h4 class="solution-section-title">Smart Maintenance &amp; Support for Meeting Spaces</h4>
+      <h4 class="solution-section-title">Smart Meeting Space Management</h4>
       <div class="sol-keyfeat-grid">
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>Easy Issue Reporting</h6><p>Users can easily report any problems in meeting rooms using a simple interface—like scanning a QR code or tapping a button. Behind the scenes, AI understands the issue and automatically sends it to the right maintenance team, along with smart suggestions to speed up the fix. No confusion, no delays—just quick action.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>Faster Problem Resolution</h6><p>AI-powered complaint tracking helps reduce the turnaround time by ensuring the right issue reaches the right team without manual follow-ups. This means problems are addressed faster, so your meetings aren't disrupted and your workspace stays productive and stress-free.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>Automatic Room Health Checks</h6><p>Regular health checks are automatically scheduled for every meeting room. These checks cover things like air conditioning, lighting, equipment status, and cleanliness. Once identified, tasks are immediately assigned to the appropriate team—keeping the room ready for use without users needing to report anything.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Routine Task Tracking</h6><p>Every conference room has unique configurations. Our system keeps track of all routine maintenance tasks based on each room's needs—whether it's checking tech equipment, furniture, or air quality—so nothing gets missed, and the environment stays smooth and reliable for everyone.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">5</div><div><h6>Integration</h6><p>Our platform seamlessly integrates with existing IT Service Management (ITSM) tools and popular conferencing platforms like Google Workspace. This ensures that all meeting room data and maintenance tasks are synchronized, providing a holistic view of room performance and facilitating better resource allocation.</p></div></div>
+        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>Instant QR Issue Reporting</h6><p>Scan a room QR code to report AV or AC issues with instant AI triage and routing.</p></div></div>
+        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>Rapid Resolution Dispatch</h6><p>Directs urgent tickets to on-duty IT and facility technicians without manual follow-ups.</p></div></div>
+        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>Automated Room Health Checks</h6><p>Pre-scheduled checks for display screens, microphones, lighting, and air conditioning.</p></div></div>
+        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Routine Maintenance Tracking</h6><p>Custom maintenance checklists tailored to each room's specific hardware and acoustics.</p></div></div>
+        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">5</div><div><h6>Calendar &amp; ITSM Sync</h6><p>Seamlessly integrates with Google Workspace, Microsoft Teams, and IT helpdesk tools.</p></div></div>
       </div>
 
       <div class="sol-analytics-box">
-        <h4>Smart Analytics for Insights</h4>
-        <p>Analytics plays a key role in maintaining healthy conference rooms. The customized dashboard provides key insights into how each room is maintained by the team.</p>
-        <p>In addition, it enables the service owner to evaluate the performance of each team and see how efficiently their team is working across the globe, all in a single interface.</p>
+        <h4>Meeting Space Analytics &amp; Insights</h4>
+        <p>Track room uptime, resolution speeds, and utilization rates across all your offices from a single dashboard.</p>
       </div>
     </div>
 
@@ -1862,88 +2068,100 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <p class="sec-p">TrackBot replaces fragmented manual logs with intelligent automation and real-time visibility.</p>
   </div>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+  <div class="capabilities-slider-wrap">
+    <button class="slider-nav-btn prev" onclick="slideCapabilities(-1)" aria-label="Previous capability">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+
+    <div class="capabilities-slider" id="capabilitiesSlider">
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+        </div>
+        <h3>Automated Operations &amp; Daily Logs</h3>
+        <p>Real-time telemetry, instant threshold alerts, and automated digital logsheets for critical amenities and utilities.</p>
+        <button class="feat-link" onclick="openFeatureModal('water')">Know more →</button>
       </div>
-      <h3>Automated Operations &amp; Daily Logs</h3>
-      <p>Real-time status of critical amenities with alerts and notifications to ensure resource availability, plus visual indications for at-a-glance monitoring.</p>
-      <button class="feat-link" onclick="openFeatureModal('water')">Know more →</button>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+        <h3>Seamless AnyConnect IoT</h3>
+        <p>Connect directly with your existing third-party sensors, meters, and controllers without costly hardware overhauls.</p>
+        <button class="feat-link" onclick="openFeatureModal('anyconnect')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h3>Proactive Asset Health Monitoring</h3>
+        <p>Prevent unexpected equipment breakdowns with live health scores and QR-tagged tracking for pumps, HVAC, and generators.</p>
+        <button class="feat-link" onclick="openFeatureModal('asset')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <h3>Efficient Staff &amp; Task Management</h3>
+        <p>Streamline shift handovers with digitized SOPs, GPS-verified task execution, and automated manager sign-offs.</p>
+        <button class="feat-link" onclick="openFeatureModal('workforce')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+        </div>
+        <h3>Integrated Operations Dashboard</h3>
+        <p>Single-pane visibility into plant health, pending tasks, team productivity, and utility consumption in real time.</p>
+        <button class="feat-link" onclick="openFeatureModal('dashboard')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+        </div>
+        <h3>Streamlined Tickets &amp; Work Orders</h3>
+        <p>Accelerate incident resolution with intelligent auto-assignment, priority tagging, and SLA escalation workflows.</p>
+        <button class="feat-link" onclick="openFeatureModal('tickets')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </div>
+        <h3>Insightful Reporting &amp; Analytics</h3>
+        <p>Analyze consumption patterns, equipment lifecycle trends, and audit readiness with exportable reports.</p>
+        <button class="feat-link" onclick="openFeatureModal('reporting')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+        </div>
+        <h3>AI-Powered WhatsApp Helpdesk</h3>
+        <p>Zero-barrier issue reporting via WhatsApp with automated AI classification and instant resident status notifications.</p>
+        <button class="feat-link" onclick="openFeatureModal('helpdesk')">Know more →</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        </div>
+        <h3>Modular &amp; Scalable Architecture</h3>
+        <p>Deploy quickly with essential modules and effortlessly expand from a single building to multi-site portfolios.</p>
+        <button class="feat-link" onclick="openFeatureModal('scalable')">Know more →</button>
+      </div>
     </div>
 
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-      </div>
-      <h3>Seamless Integration: AnyConnect IoT</h3>
-      <p>Leverage your existing infrastructure and avoid costly hardware replacements by integrating with a wide range of existing sensors, meters, and devices, regardless of manufacturer.</p>
-      <button class="feat-link" onclick="openFeatureModal('anyconnect')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-      </div>
-      <h3>Proactive Asset &amp; System Health Monitoring</h3>
-      <p>Minimize costly downtime and extend equipment lifespan with real-time status and QR-code-based tracking for pumps, blowers, generators, HVAC, and more.</p>
-      <button class="feat-link" onclick="openFeatureModal('asset')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-      </div>
-      <h3>Efficient Staff &amp; Task Management</h3>
-      <p>Boost team productivity and ensure task accountability with digitized checklists, SOPs, geo-located task validation, and multi-level approvals.</p>
-      <button class="feat-link" onclick="openFeatureModal('workforce')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
-      </div>
-      <h3>The Integrated Dashboard for Centralized Control</h3>
-      <p>Make informed decisions faster with a holistic view of system health, pending tasks, staff activity, resource consumption, and resident-reported issues.</p>
-      <button class="feat-link" onclick="openFeatureModal('dashboard')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-      </div>
-      <h3>Streamlined Issue Resolution (Tickets &amp; To-Dos)</h3>
-      <p>Ensure operational issues and resident complaints are addressed promptly and efficiently with a complete workflow for tickets and operational tasks.</p>
-      <button class="feat-link" onclick="openFeatureModal('tickets')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-      </div>
-      <h3>Insightful Reporting &amp; Analytics</h3>
-      <p>Understand performance trends and identify areas for improvement with comprehensive reports on system performance, resource usage, and staff efficiency.</p>
-      <button class="feat-link" onclick="openFeatureModal('reporting')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
-      </div>
-      <h3>AI-Powered Helpdesk</h3>
-      <p>Improve resident satisfaction with convenient issue reporting via WhatsApp, where an AI chatbot captures details and automatically logs a ticket.</p>
-      <button class="feat-link" onclick="openFeatureModal('helpdesk')">Know more →</button>
-    </div>
-
-    <div class="feature-card">
-      <div class="feat-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-      </div>
-      <h3>Flexible &amp; Scalable Platform</h3>
-      <p>Adapt the platform precisely to your needs and grow seamlessly. Start with the modules you need and scale from single buildings to large, multi-site portfolios.</p>
-      <button class="feat-link" onclick="openFeatureModal('scalable')">Know more →</button>
-    </div>
+    <button class="slider-nav-btn next" onclick="slideCapabilities(1)" aria-label="Next capability">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
   </div>
+
+  <div class="slider-pagination" id="capabilitiesPagination"></div>
 </section>
 
 <!-- FEATURE DETAIL MODAL -->
@@ -2100,7 +2318,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           <li><a href="#solutions">Commercial Solutions</a></li>
           <li><a href="#solutions">Residential Solutions</a></li>
           <li><a href="#features">Features Grid</a></li>
-          <li><a href="platform.html">Platform</a></li>
           <li><a href="blogs.html">Blogs</a></li>
           <li><a href="#demo">Book a Demo</a></li>
         </ul>
@@ -2384,6 +2601,63 @@ function closeMobileNav() {
   overlay.classList.remove('open');
   document.body.style.overflow = '';
   icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+}
+
+function updateNavScroll() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', updateNavScroll, { passive: true });
+updateNavScroll();
+
+// Capabilities Slider Controller
+function slideCapabilities(direction) {
+  const slider = document.getElementById('capabilitiesSlider');
+  if (!slider) return;
+  const card = slider.querySelector('.feature-card');
+  const cardWidth = card ? card.offsetWidth + 24 : 360;
+  slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+}
+
+function updateCapabilitiesDots() {
+  const slider = document.getElementById('capabilitiesSlider');
+  const dotsContainer = document.getElementById('capabilitiesPagination');
+  if (!slider || !dotsContainer) return;
+  const cards = slider.querySelectorAll('.feature-card');
+  if (!cards.length) return;
+  const cardWidth = cards[0].offsetWidth + 24;
+  const scrollLeft = slider.scrollLeft;
+  const activeIndex = Math.round(scrollLeft / cardWidth);
+  const visibleCount = Math.round(slider.offsetWidth / cardWidth) || 1;
+  const totalPages = Math.max(1, cards.length - visibleCount + 1);
+
+  dotsContainer.innerHTML = '';
+  for (let i = 0; i < totalPages; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === activeIndex ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide to capability ' + (i + 1));
+    dot.onclick = () => {
+      slider.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+    };
+    dotsContainer.appendChild(dot);
+  }
+}
+
+const sliderEl = document.getElementById('capabilitiesSlider');
+if (sliderEl) {
+  sliderEl.addEventListener('scroll', updateCapabilitiesDots, { passive: true });
+  window.addEventListener('resize', updateCapabilitiesDots, { passive: true });
+  setTimeout(updateCapabilitiesDots, 100);
+}
+
+const ambientVid = document.querySelector('.ambient-video');
+if (ambientVid) {
+  ambientVid.play().catch(() => {});
 }
 </script>
 </body>
