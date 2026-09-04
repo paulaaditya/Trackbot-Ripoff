@@ -68,19 +68,25 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop
 .kbs{padding:80px 64px;text-align:center}
 .kbs-h2{font-size:1.9rem;font-weight:800;margin-bottom:40px}
 .kbs-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:1100px;margin:0 auto}
-.kbc{display:flex;align-items:center;gap:12px;background:var(--bg-white);border:1px solid var(--border);border-radius:14px;padding:16px 24px;font-size:.9rem;font-weight:500;box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s;min-width:195px;cursor:default}
-.kbc:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-2px)}
-.kbc-icon{width:36px;height:36px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.kbc{display:flex;align-items:center;gap:14px;background:var(--bg-white);border:1px solid var(--border);border-radius:16px;padding:16px 24px;font-size:.92rem;font-weight:600;color:var(--text-dark);box-shadow:var(--shadow);transition:all .2s ease;min-width:205px;cursor:default}
+.kbc:hover{box-shadow:0 8px 24px rgba(33,150,243,0.12);border-color:rgba(33,150,243,0.3);transform:translateY(-3px)}
+.kbc-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease}
+.kbc:hover .kbc-icon{transform:scale(1.08)}
+.kbc-icon svg{width:20px;height:20px}
 /* CORE FEATURES */
 .core{padding:80px 64px}
 .core-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 .core-left h2{font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:32px}
 .core-img{width:100%;max-width:360px;height:340px;object-fit:cover;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12);margin-top:32px}
 .core-right{display:flex;flex-direction:column;gap:16px}
-.cfi{background:var(--bg-white);border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:box-shadow .2s,transform .2s;cursor:default}
-.cfi:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateX(4px)}
-.cfi h4{font-size:.95rem;font-weight:700;margin-bottom:6px}
-.cfi p{font-size:.83rem;color:var(--text-muted);line-height:1.6}
+.cfi{background:var(--bg-white);border:1px solid var(--border);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start;transition:all .2s ease;cursor:default}
+.cfi:hover{box-shadow:0 8px 24px rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.3);transform:translateX(4px)}
+.cfi-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:transform .2s ease}
+.cfi:hover .cfi-icon{transform:scale(1.08)}
+.cfi-icon svg{width:22px;height:22px}
+.cfi-content{flex:1}
+.cfi h4{font-size:.98rem;font-weight:700;margin-bottom:6px;color:var(--text-dark)}
+.cfi p{font-size:.84rem;color:var(--text-muted);line-height:1.6;margin:0}
 /* SOLUTIONS */
 .solutions{padding:80px 64px}
 .sol-inner{max-width:1280px;margin:0 auto}
@@ -328,12 +334,42 @@ footer{background:#0f172a;color:#94a3b8;padding:60px 64px 30px}
 <section class="kbs">
   <h2 class="kbs-h2 reveal">Key Benefits for <span class="blue">Residential Communities</span></h2>
   <div class="kbs-grid">
-    <div class="kbc reveal"><div class="kbc-icon">&#9889;</div>Faster Issue Resoulution</div>
-    <div class="kbc reveal" style="transition-delay:.08s"><div class="kbc-icon">&#128201;</div>Lower Operational Costs</div>
-    <div class="kbc reveal" style="transition-delay:.16s"><div class="kbc-icon">&#128202;</div>Smarter Resource Usage</div>
-    <div class="kbc reveal" style="transition-delay:.24s"><div class="kbc-icon">&#128522;</div>Happier Residents</div>
-    <div class="kbc reveal" style="transition-delay:.32s"><div class="kbc-icon">&#128274;</div>Stronger Security</div>
-    <div class="kbc reveal" style="transition-delay:.40s"><div class="kbc-icon">&#127807;</div>Eco-Friendly Living</div>
+    <div class="kbc reveal">
+      <div class="kbc-icon" style="background:rgba(245,158,11,0.12);color:#D97706;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      </div>
+      Faster Issue Resolution
+    </div>
+    <div class="kbc reveal" style="transition-delay:.08s">
+      <div class="kbc-icon" style="background:rgba(16,185,129,0.12);color:#059669;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+      </div>
+      Lower Operational Costs
+    </div>
+    <div class="kbc reveal" style="transition-delay:.16s">
+      <div class="kbc-icon" style="background:rgba(33,150,243,0.12);color:#0284C7;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+      </div>
+      Smarter Resource Usage
+    </div>
+    <div class="kbc reveal" style="transition-delay:.24s">
+      <div class="kbc-icon" style="background:rgba(236,72,153,0.12);color:#DB2777;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+      </div>
+      Happier Residents
+    </div>
+    <div class="kbc reveal" style="transition-delay:.32s">
+      <div class="kbc-icon" style="background:rgba(99,102,241,0.12);color:#4F46E5;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
+      Stronger Security
+    </div>
+    <div class="kbc reveal" style="transition-delay:.40s">
+      <div class="kbc-icon" style="background:rgba(34,197,94,0.12);color:#16A34A;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+      </div>
+      Eco-Friendly Living
+    </div>
   </div>
 </section>
 
@@ -348,11 +384,51 @@ footer{background:#0f172a;color:#94a3b8;padding:60px 64px 30px}
       <img src="assets/facility_manager_photo.png" alt="Facility manager with laptop" class="core-img" id="img-mgr"/>
     </div>
     <div class="core-right reveal" style="transition-delay:.15s">
-      <div class="cfi"><h4>Unified Intelligent Monitoring Dashboard</h4><p>Centralized view of STPs, WTPs, Fire Systems, DGs, Pumps, Lifts with AI-driven health scores and predictive alerts.</p></div>
-      <div class="cfi"><h4>AI-Powered Water Management Solutions</h4><p>Includes borewell optimization, automated softener control, and leak detection across managed properties.</p></div>
-      <div class="cfi"><h4>Smart Workforce Optimization</h4><p>Digital attendance, AI-assisted task scheduling, geo-tagging, and performance reports.</p></div>
-      <div class="cfi"><h4>Automated Compliance &amp; AI-Optimized PPM</h4><p>Digital audit logs, contract management, and AI-optimized scheduling of Preventive Maintenance.</p></div>
-      <div class="cfi"><h4>Mobile App for Field Techs with AI Support</h4><p>Empower staff with on-the-go task updates, image capture for AI verification, and asset info.</p></div>
+      <div class="cfi">
+        <div class="cfi-icon" style="background:rgba(33,150,243,0.12);color:#0284C7;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+        </div>
+        <div class="cfi-content">
+          <h4>Unified Intelligent Monitoring Dashboard</h4>
+          <p>Centralized view of STPs, WTPs, Fire Systems, DGs, Pumps, Lifts with AI-driven health scores and predictive alerts.</p>
+        </div>
+      </div>
+      <div class="cfi">
+        <div class="cfi-icon" style="background:rgba(14,165,233,0.12);color:#0284C7;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 12v6"></path><path d="M9 15h6"></path></svg>
+        </div>
+        <div class="cfi-content">
+          <h4>AI-Powered Water Management Solutions</h4>
+          <p>Includes borewell optimization, automated softener control, and leak detection across managed properties.</p>
+        </div>
+      </div>
+      <div class="cfi">
+        <div class="cfi-icon" style="background:rgba(245,158,11,0.12);color:#D97706;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+        </div>
+        <div class="cfi-content">
+          <h4>Smart Workforce Optimization</h4>
+          <p>Digital attendance, AI-assisted task scheduling, geo-tagging, and performance reports.</p>
+        </div>
+      </div>
+      <div class="cfi">
+        <div class="cfi-icon" style="background:rgba(99,102,241,0.12);color:#4F46E5;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="m9 15 2 2 4-4"></path></svg>
+        </div>
+        <div class="cfi-content">
+          <h4>Automated Compliance &amp; AI-Optimized PPM</h4>
+          <p>Digital audit logs, contract management, and AI-optimized scheduling of Preventive Maintenance.</p>
+        </div>
+      </div>
+      <div class="cfi">
+        <div class="cfi-icon" style="background:rgba(16,185,129,0.12);color:#059669;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+        </div>
+        <div class="cfi-content">
+          <h4>Mobile App for Field Techs with AI Support</h4>
+          <p>Empower staff with on-the-go task updates, image capture for AI verification, and asset info.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

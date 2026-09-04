@@ -313,7 +313,26 @@ nav.scrolled {
   border-color: rgba(33,150,243,0.3);
   transform: translateY(-2px);
 }
-.dash-card-label { font-size: 0.75rem; color: #94A3B8; margin-bottom: 6px; font-weight: 600; }
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.dash-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.dash-card-icon svg {
+  width: 15px;
+  height: 15px;
+}
+.dash-card-label { font-size: 0.75rem; color: #94A3B8; margin-bottom: 0; font-weight: 600; }
 .dash-card-val { font-size: 1.6rem; font-weight: 800; }
 .val-green { color: #34D399; }
 .val-blue { color: #60A5FA; }
@@ -398,26 +417,6 @@ nav.scrolled {
 /* ======== SECTION TYPOGRAPHY ======== */
 .section-pad { padding: 96px 48px; }
 .section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
-.eyebrow {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 100px;
-  margin-bottom: 14px;
-}
-.eyebrow.blue {
-  background: rgba(235, 245, 255, 0.85);
-  color: var(--blue);
-  border: 1px solid rgba(33, 150, 243, 0.2);
-}
-.eyebrow.green {
-  background: rgba(230, 244, 234, 0.85);
-  color: #137333;
-  border: 1px solid rgba(19, 115, 51, 0.2);
-}
 .sec-h2 {
   font-size: 2.4rem;
   font-weight: 800;
@@ -635,6 +634,24 @@ nav.scrolled {
   border-color: rgba(33, 150, 243, 0.3);
   box-shadow: 0 18px 38px -6px rgba(33, 150, 243, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
+.sol-module-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+.sol-module-card:hover .sol-module-icon {
+  transform: scale(1.08);
+}
+.sol-module-icon svg {
+  width: 22px;
+  height: 22px;
+}
 .sol-module-card h5 { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark); line-height: 1.35; letter-spacing: -0.01em; }
 .sol-module-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
 .sol-module-benefits { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -710,6 +727,30 @@ nav.scrolled {
   font-weight: 800;
   font-size: 0.82rem;
   flex-shrink: 0;
+}
+.sol-keyfeat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sol-keyfeat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(33, 150, 243, 0.12);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.sol-keyfeat-item:hover .sol-keyfeat-icon {
+  transform: scale(1.08);
+}
+.sol-keyfeat-icon svg {
+  width: 17px;
+  height: 17px;
 }
 .sol-keyfeat-item h6 { font-weight: 800; font-size: 0.92rem; margin-bottom: 4px; color: var(--text-dark); }
 .sol-keyfeat-item p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.55; }
@@ -1080,6 +1121,24 @@ nav.scrolled {
 .testi-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--glass-shadow-hover);
+}
+.testi-card-quote-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(33, 150, 243, 0.08);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.testi-card-quote-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  opacity: 0.85;
 }
 .testi-quote { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
 .testi-author { display: flex; align-items: center; gap: 12px; }
@@ -1553,22 +1612,42 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       </div>
       <div class="dash-grid">
         <div class="dash-card">
-          <div class="dash-card-label">Freshwater Reserve</div>
+          <div class="dash-card-header">
+            <div class="dash-card-label">Freshwater Reserve</div>
+            <div class="dash-card-icon" style="background:rgba(56,189,248,0.15);color:#38BDF8;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+            </div>
+          </div>
           <div class="dash-card-val val-blue">94.2%</div>
           <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Auto-filled via Borewell #2</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-label">STP Efficiency</div>
+          <div class="dash-card-header">
+            <div class="dash-card-label">STP Efficiency</div>
+            <div class="dash-card-icon" style="background:rgba(52,211,153,0.15);color:#34D399;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            </div>
+          </div>
           <div class="dash-card-val val-green">98.1%</div>
           <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Zero resident complaints</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-label">HVAC &amp; DG Uptime</div>
+          <div class="dash-card-header">
+            <div class="dash-card-label">HVAC &amp; DG Uptime</div>
+            <div class="dash-card-icon" style="background:rgba(129,140,248,0.15);color:#818CF8;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+          </div>
           <div class="dash-card-val val-green">100%</div>
           <div style="font-size:0.72rem;color:#64748B;margin-top:4px">Predictive maintenance active</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-label">Monthly Cost Savings</div>
+          <div class="dash-card-header">
+            <div class="dash-card-label">Monthly Cost Savings</div>
+            <div class="dash-card-icon" style="background:rgba(251,191,36,0.15);color:#FBBF24;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 18V6"></path></svg>
+            </div>
+          </div>
           <div class="dash-card-val val-orange">₹2.4L</div>
           <div style="font-size:0.72rem;color:#64748B;margin-top:4px">30% reduction in water bills</div>
         </div>
@@ -1590,14 +1669,14 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     </div>
     <div class="stat-box">
       <div class="stat-box-icon" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
       </div>
       <h3>30%</h3>
       <p>Reduction in Energy &amp; Water Bills</p>
     </div>
     <div class="stat-box">
       <div class="stat-box-icon" style="background: rgba(99, 102, 241, 0.12); color: #4F46E5;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
       </div>
       <h3>99.8%</h3>
       <p>Critical Asset Uptime</p>
@@ -1615,7 +1694,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 <!-- SOLUTIONS AS FULL CARDS -->
 <section class="solutions-switcher section-pad" id="solutions">
   <div class="section-head">
-    <span class="eyebrow blue">Tailored Solutions</span>
     <h2 class="sec-h2">Purpose-Built for Your Property Type</h2>
     <p class="sec-p">Whether managing a high-rise residential complex, tech park, facility services team, or a meeting-heavy corporate campus, TrackBot adapts to your exact operational requirements.</p>
   </div>
@@ -1715,6 +1793,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <p class="solution-section-sub">Core capabilities designed to eliminate downtime and streamline operations across your properties.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(33, 150, 243, 0.12); color: #0284C7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
           <h5>Unified Multi-Property Command Center with AI Insights</h5>
           <p>Centralize real-time telemetry, anomaly alerts, and protocol management across your entire building network from one dashboard.</p>
           <ul class="sol-module-benefits">
@@ -1725,6 +1806,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
           <h5>AI-Driven Predictive Maintenance for Critical Infrastructure</h5>
           <p>Detect stress and wear indicators early to schedule preventive servicing across HVAC, lifts, and generators before outages happen.</p>
           <ul class="sol-module-benefits">
@@ -1735,6 +1819,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(37, 211, 102, 0.12); color: #16A34A;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          </div>
           <h5>Tenant &amp; Guest Instant Support via WhatsApp</h5>
           <p>Enable occupants to report facility issues directly over WhatsApp—no apps, logins, or training required.</p>
           <ul class="sol-module-benefits">
@@ -1757,22 +1844,22 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <h4 class="solution-section-title">Industry-Specific Applications</h4>
       <div class="sol-industry-grid">
         <div class="sol-industry-card">
-          <div class="sol-industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+          <div class="sol-industry-icon" style="background:rgba(33,150,243,0.12);color:#0284C7;border-color:rgba(33,150,243,0.25);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M16 14h.01"></path></svg>
           </div>
           <h5>Tech Parks &amp; Malls</h5>
           <p>Centralized Fire &amp; CCTV monitoring, lift analytics, and WhatsApp tenant support.</p>
         </div>
         <div class="sol-industry-card">
-          <div class="sol-industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path><path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"></path><path d="M8 7h.01"></path><path d="M16 7h.01"></path><path d="M12 7h.01"></path><path d="M12 11h.01"></path><path d="M16 11h.01"></path><path d="M8 11h.01"></path><path d="M10 22v-4a2 2 0 0 1 4 0v4"></path></svg>
+          <div class="sol-industry-icon" style="background:rgba(245,158,11,0.12);color:#D97706;border-color:rgba(245,158,11,0.25);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><path d="M9 9v.01"></path><path d="M9 12v.01"></path><path d="M9 15v.01"></path><path d="M9 18v.01"></path></svg>
           </div>
           <h5>Hotels &amp; Hospitality</h5>
           <p>Proactive HVAC &amp; DG uptime, water quality monitoring, and instant guest issue logging.</p>
         </div>
         <div class="sol-industry-card">
-          <div class="sol-industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M17 18h1"></path><path d="M12 18h1"></path><path d="M7 18h1"></path></svg>
+          <div class="sol-industry-icon" style="background:rgba(99,102,241,0.12);color:#4F46E5;border-color:rgba(99,102,241,0.25);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M17 18h1"></path><path d="M12 18h1"></path><path d="M7 18h1"></path></svg>
           </div>
           <h5>Industrial Facilities</h5>
           <p>Heavy machinery health tracking, environmental safety audits, and automated compliance.</p>
@@ -1850,6 +1937,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <p class="solution-section-sub">Smart solutions that quietly keep utilities running smoothly and enhance resident satisfaction.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(14, 165, 233, 0.12); color: #0284C7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 12v6"></path><path d="M9 15h6"></path></svg>
+          </div>
           <h5>AI-Powered Borewell Optimization</h5>
           <p>Dynamically adjusts pump runtimes based on water table levels and demand to prevent motor burnout and reduce energy costs.</p>
           <ul class="sol-module-benefits">
@@ -1860,6 +1950,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(33, 150, 243, 0.12); color: #0284C7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M2 17c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"></path><path d="M2 21c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"></path></svg>
+          </div>
           <h5>Smart Water Management</h5>
           <p>Continuous oversight of sumps, overhead tanks, and treatment plants with instant leak and contamination alerts.</p>
           <ul class="sol-module-benefits">
@@ -1870,6 +1963,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+          </div>
           <h5>Predictive Amenity Upkeep</h5>
           <p>Machine learning models forecast equipment breakdowns across STPs, lifts, and backup generators before failures occur.</p>
           <ul class="sol-module-benefits">
@@ -1880,6 +1976,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(37, 211, 102, 0.12); color: #16A34A;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          </div>
           <h5>Automated Resident Ticketing via WhatsApp</h5>
           <p>Residents report maintenance requests directly through WhatsApp with instant AI categorization and auto-dispatch.</p>
           <ul class="sol-module-benefits">
@@ -1956,6 +2055,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <p class="solution-section-sub">Unified telemetry, automated work orders, and digital audit readiness for multi-site managers.</p>
       <div class="sol-module-grid">
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(99, 102, 241, 0.12); color: #4F46E5;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path></svg>
+          </div>
           <h5>AI-Driven Operational Excellence</h5>
           <p>Centralize multi-property monitoring, automated task routing, and predictive alert triage in a single pane of glass.</p>
           <ul class="sol-module-benefits">
@@ -1966,6 +2068,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(33, 150, 243, 0.12); color: #0284C7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </div>
           <h5>Intelligent Asset Performance</h5>
           <p>Keep pumps, STPs, HVACs, and electrical infrastructure running reliably with automated usage-based servicing.</p>
           <ul class="sol-module-benefits">
@@ -1976,6 +2081,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
           </ul>
         </div>
         <div class="sol-module-card">
+          <div class="sol-module-icon" style="background: rgba(245, 158, 11, 0.12); color: #D97706;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
           <h5>Smart Workforce Automation</h5>
           <p>Digitize job allocation, track attendance, and verify on-site task completion via mobile in real time.</p>
           <ul class="sol-module-benefits">
@@ -2045,11 +2153,51 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <h4 class="solution-section-title">Smart Meeting Space Management</h4>
       <div class="sol-keyfeat-grid">
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">1</div><div><h6>Instant QR Issue Reporting</h6><p>Scan a room QR code to report AV or AC issues with instant AI triage and routing.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">2</div><div><h6>Rapid Resolution Dispatch</h6><p>Directs urgent tickets to on-duty IT and facility technicians without manual follow-ups.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">3</div><div><h6>Automated Room Health Checks</h6><p>Pre-scheduled checks for display screens, microphones, lighting, and air conditioning.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">4</div><div><h6>Routine Maintenance Tracking</h6><p>Custom maintenance checklists tailored to each room's specific hardware and acoustics.</p></div></div>
-        <div class="sol-keyfeat-item"><div class="sol-keyfeat-num">5</div><div><h6>Calendar &amp; ITSM Sync</h6><p>Seamlessly integrates with Google Workspace, Microsoft Teams, and IT helpdesk tools.</p></div></div>
+        <div class="sol-keyfeat-item">
+          <div class="sol-keyfeat-head">
+            <div class="sol-keyfeat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3z"></path><path d="M20 14v3h-3"></path><path d="M14 20h7"></path></svg>
+            </div>
+            <div class="sol-keyfeat-num">1</div>
+          </div>
+          <div><h6>Instant QR Issue Reporting</h6><p>Scan a room QR code to report AV or AC issues with instant AI triage and routing.</p></div>
+        </div>
+        <div class="sol-keyfeat-item">
+          <div class="sol-keyfeat-head">
+            <div class="sol-keyfeat-icon" style="background:rgba(239,68,68,0.12);color:#DC2626;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path><line x1="2" y1="8" x2="4" y2="8"></line><line x1="20" y1="8" x2="22" y2="8"></line></svg>
+            </div>
+            <div class="sol-keyfeat-num">2</div>
+          </div>
+          <div><h6>Rapid Resolution Dispatch</h6><p>Directs urgent tickets to on-duty IT and facility technicians without manual follow-ups.</p></div>
+        </div>
+        <div class="sol-keyfeat-item">
+          <div class="sol-keyfeat-head">
+            <div class="sol-keyfeat-icon" style="background:rgba(16,185,129,0.12);color:#059669;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><polyline points="7 10 10 13 17 7"></polyline></svg>
+            </div>
+            <div class="sol-keyfeat-num">3</div>
+          </div>
+          <div><h6>Automated Room Health Checks</h6><p>Pre-scheduled checks for display screens, microphones, lighting, and air conditioning.</p></div>
+        </div>
+        <div class="sol-keyfeat-item">
+          <div class="sol-keyfeat-head">
+            <div class="sol-keyfeat-icon" style="background:rgba(245,158,11,0.12);color:#D97706;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            </div>
+            <div class="sol-keyfeat-num">4</div>
+          </div>
+          <div><h6>Routine Maintenance Tracking</h6><p>Custom maintenance checklists tailored to each room's specific hardware and acoustics.</p></div>
+        </div>
+        <div class="sol-keyfeat-item">
+          <div class="sol-keyfeat-head">
+            <div class="sol-keyfeat-icon" style="background:rgba(99,102,241,0.12);color:#4F46E5;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="m9 16 2 2 4-4"></path></svg>
+            </div>
+            <div class="sol-keyfeat-num">5</div>
+          </div>
+          <div><h6>Calendar &amp; ITSM Sync</h6><p>Seamlessly integrates with Google Workspace, Microsoft Teams, and IT helpdesk tools.</p></div>
+        </div>
       </div>
 
       <div class="sol-analytics-box">
@@ -2064,7 +2212,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 <!-- CORE FEATURES GRID -->
 <section class="features-sec section-pad" id="features">
   <div class="section-head">
-    <span class="eyebrow green">Platform Capabilities</span>
     <h2 class="sec-h2">Complete Operations Control Under One Roof</h2>
     <p class="sec-p">TrackBot replaces fragmented manual logs with intelligent automation and real-time visibility.</p>
   </div>
@@ -2077,7 +2224,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     <div class="capabilities-slider" id="capabilitiesSlider">
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M8 14h8"></path><path d="M9 17h6"></path></svg>
         </div>
         <h3>Automated Operations &amp; Daily Logs</h3>
         <p>Real-time telemetry, instant threshold alerts, and automated digital logsheets for critical amenities and utilities.</p>
@@ -2086,7 +2233,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="5" r="2"></circle><circle cx="19" cy="19" r="2"></circle><circle cx="5" cy="19" r="2"></circle><line x1="7" y1="7" x2="10" y2="10"></line><line x1="17" y1="7" x2="14" y2="10"></line><line x1="7" y1="17" x2="10" y2="14"></line><line x1="17" y1="17" x2="14" y2="14"></line></svg>
         </div>
         <h3>Seamless AnyConnect IoT</h3>
         <p>Connect directly with your existing third-party sensors, meters, and controllers without costly hardware overhauls.</p>
@@ -2095,7 +2242,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m8 12 2.5 2.5L13 10l3 4"></path></svg>
         </div>
         <h3>Proactive Asset Health Monitoring</h3>
         <p>Prevent unexpected equipment breakdowns with live health scores and QR-tagged tracking for pumps, HVAC, and generators.</p>
@@ -2104,7 +2251,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
         </div>
         <h3>Efficient Staff &amp; Task Management</h3>
         <p>Streamline shift handovers with digitized SOPs, GPS-verified task execution, and automated manager sign-offs.</p>
@@ -2113,7 +2260,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
         </div>
         <h3>Integrated Operations Dashboard</h3>
         <p>Single-pane visibility into plant health, pending tasks, team productivity, and utility consumption in real time.</p>
@@ -2122,7 +2269,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="m9 14 2 2 4-4"></path></svg>
         </div>
         <h3>Streamlined Tickets &amp; Work Orders</h3>
         <p>Accelerate incident resolution with intelligent auto-assignment, priority tagging, and SLA escalation workflows.</p>
@@ -2131,7 +2278,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><path d="M3 20h18"></path></svg>
         </div>
         <h3>Insightful Reporting &amp; Analytics</h3>
         <p>Analyze consumption patterns, equipment lifecycle trends, and audit readiness with exportable reports.</p>
@@ -2140,7 +2287,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path><path d="M8 11h.01"></path><path d="M12 11h.01"></path><path d="M16 11h.01"></path></svg>
         </div>
         <h3>AI-Powered WhatsApp Helpdesk</h3>
         <p>Zero-barrier issue reporting via WhatsApp with automated AI classification and instant resident status notifications.</p>
@@ -2149,7 +2296,7 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
       <div class="feature-card">
         <div class="feat-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7l10-5z"></path><path d="m2 17 10 5 10-5"></path><path d="m2 12 10 5 10-5"></path></svg>
         </div>
         <h3>Modular &amp; Scalable Architecture</h3>
         <p>Deploy quickly with essential modules and effortlessly expand from a single building to multi-site portfolios.</p>
@@ -2183,7 +2330,6 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 <!-- SEGMENTED TESTIMONIALS -->
 <section class="testi-sec section-pad" id="testimonials">
   <div class="section-head">
-    <span class="eyebrow green">Client Praise</span>
     <h2 class="sec-h2">Trusted by Property Leaders</h2>
     <p class="sec-p">Hear directly from society presidents, association members, and facility managers.</p>
   </div>
@@ -2197,6 +2343,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
 
   <div class="testi-grid" id="testiGrid">
     <div class="testi-card">
+      <div class="testi-card-quote-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+      </div>
       <div class="testi-quote">"TrackBot eliminated water wastage and significantly reduced our monthly water bills. Managing freshwater in our society is now completely effortless."</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:#7C3AED">P</div>
@@ -2208,6 +2357,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     </div>
 
     <div class="testi-card">
+      <div class="testi-card-quote-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+      </div>
       <div class="testi-quote">"Our freshwater management and STP operations are seamlessly automated. Zero resident complaints regarding water quality since deployment!"</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:#0284C7">M</div>
@@ -2219,6 +2371,9 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
     </div>
 
     <div class="testi-card">
+      <div class="testi-card-quote-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+      </div>
       <div class="testi-quote">"Smart borewell automation and water quality oversight vastly improved service quality while cutting maintenance costs."</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:#16A34A">R</div>
@@ -2377,6 +2532,9 @@ function switchTesti(key, btn) {
   const grid = document.getElementById('testiGrid');
   grid.innerHTML = testiData[key].map(t => `
     <div class="testi-card">
+      <div class="testi-card-quote-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+      </div>
       <div class="testi-quote">"${t.quote}"</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:${t.color}">${t.avatar}</div>
@@ -2421,7 +2579,7 @@ function handleFormSubmit(e) {
 
 const featureModalData = {
   water: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M8 14h8"></path><path d="M9 17h6"></path></svg>`,
     title: "Automated Operations & Daily Logs",
     desc: "Real-time monitoring and automation for every stage of your building's water lifecycle, from source to storage to quality.",
     sections: [
@@ -2435,7 +2593,7 @@ const featureModalData = {
     ]
   },
   anyconnect: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="5" r="2"></circle><circle cx="19" cy="19" r="2"></circle><circle cx="5" cy="19" r="2"></circle><line x1="7" y1="7" x2="10" y2="10"></line><line x1="17" y1="7" x2="14" y2="10"></line><line x1="7" y1="17" x2="10" y2="14"></line><line x1="17" y1="17" x2="14" y2="14"></line></svg>`,
     title: "Seamless Integration: AnyConnect IoT",
     desc: "Seamless integration with the sensors, meters, and devices you already own, regardless of manufacturer.",
     sections: [
@@ -2450,7 +2608,7 @@ const featureModalData = {
     ]
   },
   asset: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m8 12 2.5 2.5L13 10l3 4"></path></svg>`,
     title: "Proactive Asset & System Health Monitoring",
     desc: "Proactive asset and system health monitoring that catches problems before they become breakdowns.",
     sections: [
@@ -2466,7 +2624,7 @@ const featureModalData = {
     ]
   },
   workforce: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>`,
     title: "Efficient Staff & Task Management",
     desc: "Efficient staff and task management that replaces paper checklists with accountable, trackable digital workflows.",
     sections: [
@@ -2483,7 +2641,7 @@ const featureModalData = {
     ]
   },
   dashboard: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>`,
     title: "The Integrated Dashboard for Centralized Control",
     desc: "A single, customizable interface to make informed decisions faster with a holistic view of your facility.",
     sections: [
@@ -2496,7 +2654,7 @@ const featureModalData = {
     ]
   },
   tickets: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="m9 14 2 2 4-4"></path></svg>`,
     title: "Streamlined Issue Resolution (Tickets & To-Dos)",
     desc: "Ensure operational issues and resident complaints are addressed promptly and efficiently.",
     sections: [
@@ -2510,7 +2668,7 @@ const featureModalData = {
     ]
   },
   reporting: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><path d="M3 20h18"></path></svg>`,
     title: "Insightful Reporting & Analytics",
     desc: "Understand performance trends and identify areas for improvement.",
     sections: [
@@ -2524,7 +2682,7 @@ const featureModalData = {
     ]
   },
   helpdesk: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path><path d="M8 11h.01"></path><path d="M12 11h.01"></path><path d="M16 11h.01"></path></svg>`,
     title: "AI-Powered Helpdesk",
     desc: "Improve resident satisfaction with convenient issue reporting via WhatsApp.",
     sections: [
@@ -2538,7 +2696,7 @@ const featureModalData = {
     ]
   },
   scalable: {
-    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`,
+    icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7l10-5z"></path><path d="m2 17 10 5 10-5"></path><path d="m2 12 10 5 10-5"></path></svg>`,
     title: "Flexible & Scalable Platform",
     desc: "Adapt the platform precisely to your needs and grow seamlessly.",
     sections: [
