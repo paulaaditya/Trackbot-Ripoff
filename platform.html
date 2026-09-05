@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Architecture &amp; Platform Capabilities | TrackBot™</title>
+<meta name="description" content="Explore TrackBot's flexible IoT architecture across Corporate, Residential, Facility Management, and Meeting Spaces, plus our 9 core operational platform modules."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-primary: #0284C7;
+  --blue-vibrant: #0EA5E9;
+  --blue-dark: #0369A1;
+  --blue-navy: #0F172A;
+  --blue-navy-soft: #1E293B;
+
+  --blue-ice: #E0F2FE;
+  --blue-ice-soft: #EDF7FF;
+  --blue-border: #BAE6FD;
+  --blue-border-focus: #38BDF8;
+  --blue-glow: rgba(2, 132, 199, 0.22);
+  --blue-card-bg: rgba(240, 249, 255, 0.85);
+
+  --text-dark: #0F172A;
+  --text-body: #334155;
+  --text-muted: #556987;
+  --text-light: #94A3B8;
+
+  --bg-page: #F0F7FF;
+  --bg-white: #FFFFFF;
+  --border-light: #CBD5E1;
+  --border-glass: rgba(186, 230, 253, 0.8);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-full: 9999px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(186, 230, 253, 0.75) 0px, transparent 55%),
+    radial-gradient(at 90% 15%, rgba(191, 219, 254, 0.7) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(224, 242, 254, 0.6) 0px, transparent 65%),
+    radial-gradient(at 80% 85%, rgba(186, 230, 253, 0.5) 0px, transparent 60%);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.bg-grid-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1.5px solid var(--blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  transition: all 0.3s ease;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--blue-navy);
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-body);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover, .nav-links a.active-link {
+  color: var(--blue-primary);
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-dark) 100%);
+  color: #fff !important;
+  padding: 11px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 700 !important;
+  font-size: 0.92rem;
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.35);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(2, 132, 199, 0.45);
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--blue-border);
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 72px; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 299;
+  flex-direction: column;
+  padding: 32px 24px;
+  gap: 20px;
+  border-bottom: 1.5px solid var(--blue-border);
+}
+
+.nav-mobile-overlay.open { display: flex; }
+
+.nav-mobile-overlay a {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-dark);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--blue-border);
+}
+
+/* CONTAINERS */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-pad {
+  padding: 80px 0;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 52px;
+}
+
+.pill-badge {
+  display: none !important;
+}
+
+.sec-h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: var(--blue-navy);
+}
+
+.sec-p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* PAGE HEADER */
+.page-hero {
+  padding: 70px 0 40px;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  color: var(--blue-navy);
+}
+
+.page-hero h1 .highlight {
+  background: linear-gradient(135deg, #0284C7 0%, #0284C7 40%, #0369A1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 780px;
+  margin: 0 auto 30px;
+}
+
+.subnav-pills {
+  display: inline-flex;
+  gap: 12px;
+  background: #FFFFFF;
+  padding: 6px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--blue-border);
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.08);
+}
+
+.subnav-pill {
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-body);
+  transition: all 0.2s ease;
+}
+
+.subnav-pill:hover, .subnav-pill.active {
+  background: var(--blue-primary);
+  color: #fff;
+}
+
+/* SOLUTIONS TABS */
+.solution-tabs-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.sol-tab-btn {
+  background: #FFFFFF;
+  border: 1.5px solid var(--blue-border);
+  color: var(--text-body);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.06);
+}
+
+.sol-tab-btn:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  transform: translateY(-2px);
+}
+
+.sol-tab-btn.active {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-dark) 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+}
+
+.sol-content-pane {
+  display: none;
+  animation: fadeIn 0.35s ease forwards;
+}
+
+.sol-content-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sol-hero-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--blue-ice-soft) 100%);
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-xl);
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 36px;
+  box-shadow: 0 8px 30px rgba(2, 132, 199, 0.08);
+}
+
+.sol-hero-text h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  color: var(--blue-navy);
+}
+
+.sol-hero-text h3 span {
+  color: var(--blue-primary);
+}
+
+.sol-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.btn-p {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-dark) 100%);
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-p:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(2, 132, 199, 0.45);
+}
+
+.sol-hero-img-wrap {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.15);
+  border: 1.5px solid var(--blue-border);
+}
+
+.sol-hero-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sol-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.sol-module-card {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 400px;
+}
+
+.sol-module-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px -8px rgba(2, 132, 199, 0.22);
+}
+
+.card-backdrop-banner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.card-backdrop-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sol-module-card:hover .card-backdrop-banner img,
+.cap-card:hover .card-backdrop-banner img {
+  transform: scale(1.08);
+}
+
+.card-backdrop-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.card-backdrop-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--blue-primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--blue-border);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
+  z-index: 2;
+}
+
+.sol-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.sol-module-card h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.sol-module-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.sol-mod-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: auto;
+}
+
+.sol-mod-list li {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-body);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.check-mark {
+  color: #0284C7;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.industry-bar {
+  background: #FFFFFF;
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.06);
+}
+
+.industry-bar-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--blue-primary);
+  margin-bottom: 14px;
+}
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.ind-card {
+  background: var(--blue-ice-soft);
+  border: 1px solid var(--blue-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.ind-card h5 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 4px;
+}
+
+.ind-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Meeting Steps */
+.meeting-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.m-step-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.06);
+  transition: all 0.25s ease;
+}
+
+.m-step-card:hover {
+  border-color: var(--blue-primary);
+  transform: translateY(-4px);
+}
+
+.m-step-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--blue-ice);
+  border: 1.5px solid var(--blue-border);
+  color: var(--blue-primary);
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.m-step-card h6 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.m-step-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* CAPABILITIES SECTION */
+.capabilities-sec {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-page) 100%);
+  border-top: 1.5px solid var(--blue-border);
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.cap-card {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 420px;
+}
+
+.cap-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px -8px rgba(2, 132, 199, 0.22);
+}
+
+.cap-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cap-content h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.cap-content p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.cap-btn {
+  background: none;
+  border: none;
+  color: var(--blue-primary);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  transition: gap 0.2s ease;
+}
+
+.cap-btn:hover {
+  gap: 10px;
+  color: var(--blue-dark);
+}
+
+/* FEATURE DETAIL MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-xl);
+  max-width: 620px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 36px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(2, 132, 199, 0.3);
+  animation: modalScale 0.25s ease forwards;
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--blue-ice-soft);
+  border: 1px solid var(--blue-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--blue-navy);
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: var(--blue-ice);
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 8px;
+}
+
+.modal-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.modal-section-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--blue-primary);
+  margin: 20px 0 10px;
+}
+
+.modal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-list li {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-tag {
+  background: var(--blue-ice);
+  color: var(--blue-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--blue-border);
+}
+
+/* CTA BANNER */
+.cta-banner-sec {
+  padding: 80px 0;
+  background: #FFFFFF;
+}
+
+.cta-box {
+  background: linear-gradient(135deg, var(--blue-navy) 0%, #0369A1 100%);
+  border-radius: var(--radius-xl);
+  padding: 60px 48px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(2, 132, 199, 0.25);
+}
+
+.cta-box h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.cta-box p {
+  font-size: 1.1rem;
+  color: #BAE6FD;
+  max-width: 650px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.cta-box-btns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-white {
+  background: #FFFFFF;
+  color: var(--blue-dark);
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  background: var(--blue-ice-soft);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding: 13px 30px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-outline-white:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+footer {
+  background: #FFFFFF;
+  border-top: 1.5px solid var(--blue-border);
+  padding: 70px 0 32px;
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.8fr 1fr;
+  gap: 48px;
+  margin-bottom: 50px;
+}
+
+.ft-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 14px;
+}
+
+.ft-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 320px;
+}
+
+.ft-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue-navy);
+  flex-wrap: wrap;
+}
+
+.ft-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 18px;
+}
+
+.ft-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ft-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.ft-links a:hover {
+  color: var(--blue-primary);
+}
+
+.ft-office-card {
+  background: var(--blue-ice-soft);
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  font-size: 0.84rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.ft-office-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 4px;
+}
+
+.ft-office-badge {
+  background: var(--blue-primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.ft-bottom {
+  border-top: 1.5px solid var(--blue-border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .sol-hero-card { grid-template-columns: 1fr; }
+  .sol-modules-grid { grid-template-columns: repeat(2, 1fr); }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+  .meeting-steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .ft-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: block; }
+  .page-hero h1 { font-size: 2.3rem; }
+  .sec-h2 { font-size: 2rem; }
+  .sol-modules-grid { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .industry-grid { grid-template-columns: 1fr; }
+  .meeting-steps-grid { grid-template-columns: 1fr; }
+  .ft-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid-overlay" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+      <rect x="4" y="18" width="6" height="14" rx="3" fill="#0284C7"/>
+      <rect x="14" y="10" width="6" height="22" rx="3" fill="#38BDF8"/>
+      <rect x="24" y="2" width="6" height="30" rx="3" fill="#0284C7"/>
+    </svg>
+    <span>TrackBot™</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html#how-it-works">How It Works</a></li>
+    <li><a href="platform.html" class="active-link">Architecture &amp; Platform</a></li>
+    <li><a href="index.html#calculator">ROI Calculator</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="blogs.html">Blogs</a></li>
+  </ul>
+
+  <a href="index.html#demo" class="nav-cta">
+    <span>Book a Demo</span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Open menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-mobile-overlay" id="mobileNavOverlay">
+  <a href="index.html#how-it-works" onclick="closeMobileNav()">How It Works</a>
+  <a href="platform.html" onclick="closeMobileNav()">Architecture &amp; Platform</a>
+  <a href="index.html#calculator" onclick="closeMobileNav()">ROI Calculator</a>
+  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="blogs.html" onclick="closeMobileNav()">Blogs</a>
+  <a href="index.html#demo" class="nav-cta" style="text-align:center;justify-content:center;margin-top:12px;" onclick="closeMobileNav()">Book a Demo</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="pill-badge">Flexible Architecture &amp; Platform</div>
+    <h1>Purpose-Built Architecture &amp; <span class="highlight">9 Core Capabilities</span></h1>
+    <p>Discover how TrackBot transforms operations across Commercial, Residential, Facilities, and Meeting Spaces with zero hardware replacements.</p>
+    <div class="subnav-pills">
+      <a href="#solutions-architecture" class="subnav-pill active">Property Solutions</a>
+      <a href="#platform-capabilities" class="subnav-pill">9 Platform Modules</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: FLEXIBLE ARCHITECTURE BY PROPERTY TYPE -->
+<section class="section-pad" id="solutions-architecture">
+  <div class="container">
+    <div class="section-head">
+      <div class="pill-badge">Multi-Property Adaptability</div>
+      <h2 class="sec-h2">Purpose-Built for Your Property Type</h2>
+      <p class="sec-p">
+        Whether managing a high-rise residential complex, tech park, facility services team, or corporate campus, TrackBot adapts to your exact operational workflows.
+      </p>
+    </div>
+
+    <!-- Solution Tabs -->
+    <div class="solution-tabs-nav">
+      <button class="sol-tab-btn active" onclick="switchSolutionTab('corporate', this)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/></svg>
+        Corporate &amp; Commercial
+      </button>
+
+      <button class="sol-tab-btn" onclick="switchSolutionTab('residential', this)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Residential Communities
+      </button>
+
+      <button class="sol-tab-btn" onclick="switchSolutionTab('facility', this)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Facility Management
+      </button>
+
+      <button class="sol-tab-btn" onclick="switchSolutionTab('meeting', this)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Meeting Spaces
+      </button>
+    </div>
+
+    <!-- 1. CORPORATE & COMMERCIAL PANE -->
+    <div class="sol-content-pane active" id="pane-corporate">
+      <div class="sol-hero-card">
+        <div class="sol-hero-text">
+          <h3><span>Future-Proof Your</span> Commercial Spaces with Intelligent Automation</h3>
+          <p class="sol-hero-desc">
+            Drive operational excellence, meet ESG goals, and ensure stringent safety and compliance with TrackBot's AI-powered solutions.
+          </p>
+          <a href="index.html#demo" class="btn-p">Book an Enterprise Demo</a>
+        </div>
+        <div class="sol-hero-img-wrap">
+          <img src="assets/automation_dashboard_preview.jpg" alt="Commercial Automation Dashboard Preview"/>
+        </div>
+      </div>
+
+      <div class="sol-modules-grid">
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/card_analytics_dashboard.jpg" alt="Unified Multi-Property Command Center"/>
+            <span class="card-backdrop-badge">Telemetry Hub</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Unified Multi-Property Command Center with AI Insights</h4>
+            <p>Centralize real-time telemetry, anomaly alerts, and protocol management across your entire building network from one dashboard.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Multi-site portfolio visibility &amp; live telemetry</li>
+              <li><span class="check-mark"></span> Cross-building incident tracking &amp; automated escalation</li>
+              <li><span class="check-mark"></span> AI-driven energy &amp; asset optimization</li>
+              <li><span class="check-mark"></span> Standardized compliance &amp; digital audit reporting</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/proactive_maintenance_illustration.png" alt="AI-Driven Predictive Maintenance"/>
+            <span class="card-backdrop-badge">Predictive AI</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>AI-Driven Predictive Maintenance for Critical Infrastructure</h4>
+            <p>Detect stress and wear indicators early to schedule preventive servicing across HVAC, lifts, and generators before outages happen.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Minimized downtime &amp; emergency repairs</li>
+              <li><span class="check-mark"></span> Automated usage-based maintenance dispatch</li>
+              <li><span class="check-mark"></span> Proactive safety assurance for occupants &amp; assets</li>
+              <li><span class="check-mark"></span> Extended equipment lifespan &amp; higher ROI</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/card_whatsapp_support.jpg" alt="Tenant & Guest WhatsApp Support"/>
+            <span class="card-backdrop-badge">WhatsApp Bot</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Tenant &amp; Guest Instant Support via WhatsApp</h4>
+            <p>Enable occupants to report facility issues directly over WhatsApp—no apps, logins, or training required.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Zero-friction reporting with no app downloads</li>
+              <li><span class="check-mark"></span> Photo, video &amp; location-tagged issue logging</li>
+              <li><span class="check-mark"></span> Automated AI ticket triage &amp; team assignment</li>
+              <li><span class="check-mark"></span> Real-time WhatsApp status &amp; resolution alerts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="industry-bar">
+        <div class="industry-bar-title">Industry-Specific Applications</div>
+        <div class="industry-grid">
+          <div class="ind-card">
+            <h5>Hotels &amp; Hospitality</h5>
+            <p>Proactive HVAC &amp; DG uptime, water quality monitoring, and instant guest issue logging.</p>
+          </div>
+          <div class="ind-card">
+            <h5>Industrial Facilities</h5>
+            <p>Heavy machinery health tracking, environmental safety audits, and automated compliance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. RESIDENTIAL COMMUNITIES PANE -->
+    <div class="sol-content-pane" id="pane-residential">
+      <div class="sol-hero-card">
+        <div class="sol-hero-text">
+          <h3><span>AI-Powered</span> Smart Living, Intelligently Managed Communities</h3>
+          <p class="sol-hero-desc">
+            Optimize resources like borewell water, ensure amenity uptime, and enhance resident satisfaction with AI-driven property management.
+          </p>
+          <a href="index.html#demo" class="btn-p">Book a Residential Demo</a>
+        </div>
+        <div class="sol-hero-img-wrap">
+          <img src="assets/proactive_maintenance_illustration.png" alt="Residential Water Management Preview"/>
+        </div>
+      </div>
+
+      <div class="sol-modules-grid">
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/card_water_telemetry.jpg" alt="AI-Powered Borewell Optimization"/>
+            <span class="card-backdrop-badge">Borewell IoT</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>AI-Powered Borewell Optimization</h4>
+            <p>Dynamically adjusts pump runtimes based on water table levels and demand to prevent motor burnout and reduce energy costs.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> 20–30% lower pumping energy costs</li>
+              <li><span class="check-mark"></span> Automatic dry-run and motor load protection</li>
+              <li><span class="check-mark"></span> Real-time water table telemetry &amp; yield logs</li>
+              <li><span class="check-mark"></span> Extended borewell motor lifespan</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/card_water_telemetry.jpg" alt="Smart Water Management"/>
+            <span class="card-backdrop-badge">Water Quality</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Smart Water Management</h4>
+            <p>Continuous oversight of sumps, overhead tanks, and treatment plants with instant leak and contamination alerts.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Automated leak detection with pipe zone mapping</li>
+              <li><span class="check-mark"></span> Live TDS, pH &amp; water hardness tracking</li>
+              <li><span class="check-mark"></span> Real-time tank levels &amp; automated replenishment</li>
+              <li><span class="check-mark"></span> Daily consumption and purity reports</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/maintenance_illustration.png" alt="Predictive Amenity Upkeep"/>
+            <span class="card-backdrop-badge">Amenity Health</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Predictive Amenity Upkeep</h4>
+            <p>Machine learning models forecast equipment breakdowns across STPs, lifts, and backup generators before failures occur.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Zero unplanned downtime for critical amenities</li>
+              <li><span class="check-mark"></span> Early wear detection &amp; automated service orders</li>
+              <li><span class="check-mark"></span> Comprehensive asset health scoring</li>
+              <li><span class="check-mark"></span> Lower maintenance and replacement costs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FACILITY MANAGEMENT PANE -->
+    <div class="sol-content-pane" id="pane-facility">
+      <div class="sol-hero-card">
+        <div class="sol-hero-text">
+          <h3><span>Intelligent Facility</span> Management for Peak Performance</h3>
+          <p class="sol-hero-desc">
+            Automate intelligently, predict issues, optimize resources, and deliver superior service across all properties.
+          </p>
+          <a href="index.html#demo" class="btn-p">Book an FMS Demo</a>
+        </div>
+        <div class="sol-hero-img-wrap">
+          <img src="assets/workforce_automation_person.png" alt="Facility Management Staff Automation"/>
+        </div>
+      </div>
+
+      <div class="sol-modules-grid">
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/automation_dashboard_preview.jpg" alt="Operational Excellence Hub"/>
+            <span class="card-backdrop-badge">SLA Automation</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>AI-Driven Operational Excellence</h4>
+            <p>Centralize multi-property monitoring, automated task routing, and predictive alert triage in a single pane of glass.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Multi-property operations command hub</li>
+              <li><span class="check-mark"></span> Real-time equipment diagnostics &amp; fault alerts</li>
+              <li><span class="check-mark"></span> Automated SLA tracking with faster resolution</li>
+              <li><span class="check-mark"></span> Drastically reduced operational overhead</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/asset_performance_person.png" alt="Intelligent Asset Performance"/>
+            <span class="card-backdrop-badge">Asset Lifespan</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Intelligent Asset Performance</h4>
+            <p>Keep pumps, STPs, HVACs, and electrical infrastructure running reliably with automated usage-based servicing.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> Early wear detection &amp; auto-scheduled work orders</li>
+              <li><span class="check-mark"></span> Real-time diagnostics for critical plant equipment</li>
+              <li><span class="check-mark"></span> Extended asset lifecycles and lower CAPEX</li>
+              <li><span class="check-mark"></span> Higher return on infrastructure investments</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sol-module-card">
+          <div class="card-backdrop-banner">
+            <img src="assets/workforce_automation_person.png" alt="Smart Workforce Automation"/>
+            <span class="card-backdrop-badge">Mobile Field SOP</span>
+          </div>
+          <div class="sol-card-body">
+            <h4>Smart Workforce Automation</h4>
+            <p>Digitize job allocation, track attendance, and verify on-site task completion via mobile in real time.</p>
+            <ul class="sol-mod-list">
+              <li><span class="check-mark"></span> AI-assisted shift planning &amp; task routing</li>
+              <li><span class="check-mark"></span> Mobile checklists with photo &amp; GPS verification</li>
+              <li><span class="check-mark"></span> Real-time technician attendance tracking</li>
+              <li><span class="check-mark"></span> 100% auditable logsheets &amp; shift handovers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. MEETING SPACES PANE -->
+    <div class="sol-content-pane" id="pane-meeting">
+      <div class="sol-hero-card">
+        <div class="sol-hero-text">
+          <h3><span>Seamless Meeting</span> Room &amp; Amenity Operations</h3>
+          <p class="sol-hero-desc">
+            Keep meeting spaces productive, connected, and issue-free with automated room checks, instant ticketing, and calendar sync.
+          </p>
+          <a href="index.html#demo" class="btn-p">Book a Meeting Spaces Demo</a>
+        </div>
+        <div class="sol-hero-img-wrap">
+          <img src="assets/asset_performance_person.png" alt="Smart Meeting Room Operations Preview"/>
+        </div>
+      </div>
+
+      <div class="meeting-steps-grid">
+        <div class="m-step-card">
+          <div class="m-step-num">1</div>
+          <h6>Instant QR Issue Reporting</h6>
+          <p>Scan a room QR code to report AV or AC issues with instant AI triage and routing.</p>
+        </div>
+        <div class="m-step-card">
+          <div class="m-step-num">2</div>
+          <h6>Rapid Resolution Dispatch</h6>
+          <p>Directs urgent tickets to on-duty IT and facility technicians without manual follow-ups.</p>
+        </div>
+        <div class="m-step-card">
+          <div class="m-step-num">3</div>
+          <h6>Automated Room Health Checks</h6>
+          <p>Pre-scheduled checks for display screens, microphones, lighting, and air conditioning.</p>
+        </div>
+        <div class="m-step-card">
+          <div class="m-step-num">4</div>
+          <h6>Routine Maintenance Tracking</h6>
+          <p>Custom maintenance checklists tailored to each room's specific hardware and acoustics.</p>
+        </div>
+        <div class="m-step-card">
+          <div class="m-step-num">5</div>
+          <h6>Calendar &amp; ITSM Sync</h6>
+          <p>Seamlessly integrates with Google Workspace, Microsoft Teams, and IT helpdesk tools.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 2: ALL-IN-ONE PLATFORM CAPABILITIES (9 MODULES) -->
+<section class="capabilities-sec section-pad" id="platform-capabilities">
+  <div class="container">
+    <div class="section-head">
+      <div class="pill-badge">All-In-One Platform</div>
+      <h2 class="sec-h2">Complete Operations Control Under One Roof</h2>
+      <p class="sec-p">TrackBot replaces fragmented manual logs with intelligent automation and real-time visibility across all 9 modules.</p>
+    </div>
+
+    <div class="cap-grid">
+      <!-- 1 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/card_water_telemetry.jpg" alt="Automated Operations & Daily Logs"/>
+          <span class="card-backdrop-badge">Water &amp; Logs</span>
+        </div>
+        <div class="cap-content">
+          <h3>Automated Operations &amp; Daily Logs</h3>
+          <p>Real-time telemetry, instant threshold alerts, and automated digital logsheets for critical amenities and utilities.</p>
+          <button class="cap-btn" onclick="openFeatureModal('water')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/card_iot_gateway.jpg" alt="Seamless AnyConnect IoT"/>
+          <span class="card-backdrop-badge">AnyConnect</span>
+        </div>
+        <div class="cap-content">
+          <h3>Seamless AnyConnect IoT</h3>
+          <p>Connect directly with your existing third-party sensors, meters, and controllers without costly hardware overhauls.</p>
+          <button class="cap-btn" onclick="openFeatureModal('anyconnect')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/proactive_maintenance_illustration.png" alt="Proactive Asset Health Monitoring"/>
+          <span class="card-backdrop-badge">Asset Health</span>
+        </div>
+        <div class="cap-content">
+          <h3>Proactive Asset Health Monitoring</h3>
+          <p>Prevent unexpected equipment breakdowns with live health scores and QR-tagged tracking for pumps, HVAC, and generators.</p>
+          <button class="cap-btn" onclick="openFeatureModal('asset')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/workforce_automation_person.png" alt="Efficient Staff & Task Management"/>
+          <span class="card-backdrop-badge">Workforce</span>
+        </div>
+        <div class="cap-content">
+          <h3>Efficient Staff &amp; Task Management</h3>
+          <p>Streamline shift handovers with digitized SOPs, GPS-verified task execution, and automated manager sign-offs.</p>
+          <button class="cap-btn" onclick="openFeatureModal('workforce')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/automation_dashboard_preview.jpg" alt="Integrated Operations Dashboard"/>
+          <span class="card-backdrop-badge">Command Center</span>
+        </div>
+        <div class="cap-content">
+          <h3>Integrated Operations Dashboard</h3>
+          <p>Single-pane visibility into plant health, pending tasks, team productivity, and utility consumption in real time.</p>
+          <button class="cap-btn" onclick="openFeatureModal('dashboard')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/card_whatsapp_support.jpg" alt="Streamlined Tickets & Work Orders"/>
+          <span class="card-backdrop-badge">Work Orders</span>
+        </div>
+        <div class="cap-content">
+          <h3>Streamlined Tickets &amp; Work Orders</h3>
+          <p>Accelerate incident resolution with intelligent auto-assignment, priority tagging, and SLA escalation workflows.</p>
+          <button class="cap-btn" onclick="openFeatureModal('tickets')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/card_analytics_dashboard.jpg" alt="Insightful Reporting & Analytics"/>
+          <span class="card-backdrop-badge">Analytics</span>
+        </div>
+        <div class="cap-content">
+          <h3>Insightful Reporting &amp; Analytics</h3>
+          <p>Analyze consumption patterns, equipment lifecycle trends, and audit readiness with exportable reports.</p>
+          <button class="cap-btn" onclick="openFeatureModal('reporting')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/card_whatsapp_support.jpg" alt="AI-Powered WhatsApp Helpdesk"/>
+          <span class="card-backdrop-badge">WhatsApp Helpdesk</span>
+        </div>
+        <div class="cap-content">
+          <h3>AI-Powered WhatsApp Helpdesk</h3>
+          <p>Zero-barrier issue reporting via WhatsApp with automated AI classification and instant resident status notifications.</p>
+          <button class="cap-btn" onclick="openFeatureModal('helpdesk')">Know more →</button>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="cap-card">
+        <div class="card-backdrop-banner">
+          <img src="assets/energy_optimization_illustration.png" alt="Modular & Scalable Architecture"/>
+          <span class="card-backdrop-badge">Scalable Core</span>
+        </div>
+        <div class="cap-content">
+          <h3>Modular &amp; Scalable Architecture</h3>
+          <p>Deploy quickly with essential modules and effortlessly expand from a single building to multi-site portfolios.</p>
+          <button class="cap-btn" onclick="openFeatureModal('scalable')">Know more →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-banner-sec">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Transform Your Facility Operations with TrackBot</h2>
+      <p>Schedule a customized 30-minute demonstration tailored specifically to your property type, current hardware setup, and operational pain points.</p>
+      <div class="cta-box-btns">
+        <a href="index.html#demo" class="btn-white">Book a Demo With Our Engineers</a>
+        <a href="index.html#how-it-works" class="btn-outline-white">Explore Interactive Product Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE DETAIL MODAL -->
+<div class="modal-overlay" id="featureModalOverlay" onclick="if(event.target===this) closeFeatureModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeFeatureModal()" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle">Automated Water Management</h3>
+      <p class="modal-desc" id="modalDesc">Description</p>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-brand">
+          <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+            <rect x="4" y="18" width="6" height="14" rx="3" fill="#0284C7"/>
+            <rect x="14" y="10" width="6" height="22" rx="3" fill="#38BDF8"/>
+            <rect x="24" y="2" width="6" height="30" rx="3" fill="#0284C7"/>
+          </svg>
+          TrackBot™
+        </div>
+        <p class="ft-desc">
+          Intelligent building management platform by LetUSense. Digitalize, monitor, and automate property operations at scale.
+        </p>
+        <div class="ft-contact-row">
+          <span> info@trackbot.in</span>
+          <span> +91 8296013357</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="ft-title">Navigation</div>
+        <ul class="ft-links">
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="platform.html">Architecture &amp; Platform</a></li>
+          <li><a href="index.html#calculator">ROI Calculator</a></li>
+          <li><a href="index.html#testimonials">Testimonials</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="index.html#demo">Book a Demo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="ft-title">Offices</div>
+        <div class="ft-office-card">
+          <div class="ft-office-head">
+            <span class="ft-office-badge">INDIA HQ</span>
+            Bengaluru
+          </div>
+          <div>Sarjapur Road, Bengaluru, Karnataka 560 035</div>
+        </div>
+        <div class="ft-office-card">
+          <div class="ft-office-head">
+            <span class="ft-office-badge">EUROPE</span>
+            Stockholm
+          </div>
+          <div>Armégatan 36, Stockholm, Sweden 17171</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <span>© 2026 TrackBot™ by LetUSense. All rights reserved.</span>
+      <span>Privacy Policy &nbsp;•&nbsp; Terms of Service &nbsp;•&nbsp; SOC2 Compliant IoT</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile Drawer
+function toggleMobileNav() {
+  document.getElementById('mobileNavOverlay').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+}
+
+// Solution Tabs
+function switchSolutionTab(key, btn) {
+  document.querySelectorAll('.sol-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sol-content-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById('pane-' + key);
+  if (target) target.classList.add('active');
+}
+
+// Feature Modal Data (Preserved verbatim)
+const featureModalData = {
+  water: {
+    title: "Automated Operations & Daily Logs",
+    desc: "Real-time monitoring and automation for every stage of your building's water lifecycle, from source to storage to quality.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Real-time status of critical amenities",
+        "Alerts and notifications to ensure resource availability",
+        "Visual indications"
+      ]},
+      { label: "Applications", type: "tags", items: ["Borewells", "Fresh Water System", "Energy Management System"] },
+      { label: "Sensors & Solutions", type: "tags", items: ["Water Level", "Motor Controller", "Water Quality Sensor"] }
+    ]
+  },
+  anyconnect: {
+    title: "Seamless Integration: AnyConnect IoT",
+    desc: "Seamless integration with the sensors, meters, and devices you already own, regardless of manufacturer.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Leverage your existing infrastructure and avoid costly hardware replacements",
+        "Alerts and notifications to ensure resource availability"
+      ]},
+      { label: "Features", type: "list", items: [
+        "TrackBot's unique AnyConnect capability allows integration with a wide range of existing sensors, meters, and devices, regardless of the manufacturer",
+        "Smartify your current equipment cost-effectively"
+      ]}
+    ]
+  },
+  asset: {
+    title: "Proactive Asset & System Health Monitoring",
+    desc: "Proactive asset and system health monitoring that catches problems before they become breakdowns.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Minimize costly downtime and extend equipment lifespan"
+      ]},
+      { label: "Applications", type: "tags", items: ["Fresh Water System", "WTP", "STP", "Swimming Pool", "Diesel Generators", "Common Area Electricity"] },
+      { label: "Features", type: "list", items: [
+        "Get real-time operational status of critical assets (Pumps, Blowers, Generators, Conference Rooms, HVAC Systems, Transformers, CCTV, Common Area Lights, etc.)",
+        "QR-code-based tracking for instant access to asset details, repair history, and repair logs",
+        "Predict potential failures and schedule preventative maintenance"
+      ]}
+    ]
+  },
+  workforce: {
+    title: "Efficient Staff & Task Management",
+    desc: "Efficient staff and task management that replaces paper checklists with accountable, trackable digital workflows.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Boost team productivity and ensure task accountability"
+      ]},
+      { label: "Applications", type: "tags", items: ["Facility Managers", "Plumbers", "Electricians", "Pool Operators", "STP Operators", "Lift Operators", "Housekeeping Supervisors", "Gardeners", "Security Supervisors", "Fire Operators"] },
+      { label: "Features", type: "list", items: [
+        "Digitize checklists and Standard Operating Procedures (SOPs)",
+        "Schedule routine tasks or assign ad-hoc duties",
+        "Track staff attendance with a face recognition system and validate task completion with geo-location and real-time image uploads",
+        "Implement multi-level approvals for critical jobs"
+      ]}
+    ]
+  },
+  dashboard: {
+    title: "The Integrated Dashboard for Centralized Control",
+    desc: "A single, customizable interface to make informed decisions faster with a holistic view of your facility.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Make informed decisions faster with a holistic view of your facility"
+      ]},
+      { label: "Features", type: "list", items: [
+        "Access a high-level overview of system health, pending tasks, staff activity, resource consumption, and resident-reported issues, all in one customizable interface, accessible via web and mobile app"
+      ]}
+    ]
+  },
+  tickets: {
+    title: "Streamlined Issue Resolution (Tickets & To-Dos)",
+    desc: "Ensure operational issues and resident complaints are addressed promptly and efficiently.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Ensure operational issues and resident complaints are addressed promptly and efficiently"
+      ]},
+      { label: "Features", type: "list", items: [
+        "Create the workflow or tickets and assign, approve, track, and manage maintenance tickets or operational tasks",
+        "Monitor resolution times and maintain a complete history of issues with the trends"
+      ]}
+    ]
+  },
+  reporting: {
+    title: "Insightful Reporting & Analytics",
+    desc: "Understand performance trends and identify areas for improvement.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Understand performance trends and identify areas for improvement"
+      ]},
+      { label: "Features", type: "list", items: [
+        "Generate comprehensive reports on system performance, resource usage, task completion rates, staff efficiency, and more",
+        "Leverage data for strategic planning and budgeting"
+      ]}
+    ]
+  },
+  helpdesk: {
+    title: "AI-Powered Helpdesk",
+    desc: "Improve resident satisfaction with convenient issue reporting via WhatsApp.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Improve resident satisfaction with convenient issue reporting"
+      ]},
+      { label: "Features", type: "list", items: [
+        "Allow residents/occupants to report facility issues easily via WhatsApp",
+        "The AI chatbot intelligently captures details and automatically logs a ticket within the TrackBot platform for the facility team to act on"
+      ]}
+    ]
+  },
+  scalable: {
+    title: "Flexible & Scalable Platform",
+    desc: "Adapt the platform precisely to your needs and grow seamlessly.",
+    sections: [
+      { label: "Benefits", type: "list", items: [
+        "Adapt the platform precisely to your needs and grow seamlessly"
+      ]},
+      { label: "Features", type: "list", items: [
+        "Start with the modules you need and easily add more as your requirements evolve",
+        "TrackBot is designed to scale from single buildings to large, multi-site portfolios"
+      ]}
+    ]
+  }
+};
+
+function openFeatureModal(key) {
+  const data = featureModalData[key];
+  if (!data) return;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalDesc').textContent = data.desc;
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = data.sections.map(section => {
+    const inner = section.type === 'tags'
+      ? `<div class="modal-tags">${section.items.map(i => `<span class="modal-tag">${i}</span>`).join('')}</div>`
+      : `<ul class="modal-list">${section.items.map(i => `<li><span class="check-mark"></span>${i}</li>`).join('')}</ul>`;
+    return `<div><div class="modal-section-title">${section.label}</div>${inner}</div>`;
+  }).join('');
+
+  document.getElementById('featureModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFeatureModal() {
+  document.getElementById('featureModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFeatureModal();
+});
+</script>
+</body>
+</html>

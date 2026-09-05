@@ -3,152 +3,444 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Power of Precision: Flow Meters &amp; Borewell Automation | TrackBot™ Blog</title>
-<meta name="description" content="Borewell automation with flow meters and TrackBot™ AI revolutionizes water management. By measuring extraction and tracking water tables, it prevents dry runs and optimizes pump operations."/>
+<title>Precision Flow Meters & Borewell Automation | TrackBot™ Blog</title>
+<meta name="description" content="Discover how digital flow meters and TrackBot IoT Motor Controllers revolutionize borewell automation, preventing aquifer depletion and motor damage."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --blue: #2196F3; --blue-dark: #0F6cbd; --blue-light: #EBF5FF;
-  --text-dark: #0F172A; --text-mid: #334155; --text-muted: #64748B;
-  --bg-page: #F8FAFC; --border: #E2E8F0;
+  --blue-primary: #0284C7;
+  --blue-vibrant: #0EA5E9;
+  --blue-dark: #0369A1;
+  --blue-navy: #0F172A;
+  --blue-ice: #E0F2FE;
+  --blue-ice-soft: #EDF7FF;
+  --blue-border: #BAE6FD;
+  --text-dark: #0F172A;
+  --text-mid: #334155;
+  --text-muted: #556987;
+  --bg-page: #F0F7FF;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
 }
+
 html { scroll-behavior: smooth; }
-body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-page); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-nav { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1.2rem; color: var(--text-dark); letter-spacing: -0.02em; }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a { text-decoration: none; font-size: 0.9rem; font-weight: 600; color: var(--text-mid); transition: color .2s; }
-.nav-links a:hover { color: var(--blue); }
-.nav-links a.active { color: var(--blue); }
-.nav-cta { background: var(--blue); color: #fff !important; padding: 10px 22px; border-radius: 100px; box-shadow: 0 4px 14px rgba(33,150,243,0.3); }
-.nav-cta:hover { background: var(--blue-dark); }
-.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: var(--text-dark); }
-.nav-toggle svg { display: block; }
 
-.article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
-.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); text-decoration: none; font-weight: 700; font-size: 0.88rem; margin-bottom: 32px; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(186, 230, 253, 0.7) 0px, transparent 55%),
+    radial-gradient(at 90% 15%, rgba(191, 219, 254, 0.6) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(224, 242, 254, 0.5) 0px, transparent 65%);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.bg-grid-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* NAVBAR */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1.5px solid var(--blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--blue-navy);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--blue-primary);
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-dark) 100%);
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-weight: 700 !important;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--blue-border);
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 72px; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 299;
+  flex-direction: column;
+  padding: 32px 24px;
+  gap: 20px;
+  border-bottom: 1.5px solid var(--blue-border);
+}
+.nav-mobile-overlay.open { display: flex; }
+.nav-mobile-overlay a {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-dark);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--blue-border);
+}
+
+/* ARTICLE CONTAINER */
+.article-wrap {
+  max-width: 860px;
+  margin: 48px auto 96px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.article-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-xl);
+  padding: 56px 64px;
+  box-shadow: 0 16px 40px rgba(2, 132, 199, 0.08);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue-primary);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+  transition: gap 0.2s ease;
+}
+
 .back-link:hover { gap: 10px; }
-.art-meta { font-size: 0.82rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
-.art-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 18px; color: var(--text-dark); }
-.art-byline { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-.art-body p { font-size: 1.02rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 22px; }
-.art-body h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 40px 0 16px; letter-spacing: -0.01em; }
-.art-body ul { margin: 0 0 22px 22px; }
-.art-body li { font-size: 1.02rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 10px; }
-.art-body li strong { color: var(--text-dark); }
-.art-share { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
 
-footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-top: 1px solid rgba(255,255,255,0.08); }
-.ft-inner { max-width: 1140px; margin: 0 auto; }
-.ft-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 64px; margin-bottom: 48px; }
-.ft-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 14px; }
-.ft-desc { font-size: 0.88rem; color: #64748B; line-height: 1.65; margin-bottom: 20px; }
-.ft-title { color: #fff; font-size: 0.88rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
-.ft-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.ft-links a { text-decoration: none; color: #94A3B8; font-size: 0.88rem; transition: color .2s; }
-.ft-links a:hover { color: var(--blue); }
-.ft-office-box { font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin-bottom: 16px; }
-.ft-office-title { color: #E2E8F0; font-weight: 700; margin-bottom: 4px; }
-.ft-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #475569; }
+.art-meta {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--blue-ice);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+  border: 1px solid var(--blue-border);
+}
+
+.art-title {
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  color: var(--blue-navy);
+}
+
+.art-byline {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1.5px solid var(--blue-border);
+}
+
+.art-body p {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 22px;
+}
+
+.art-body h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin: 36px 0 16px;
+  letter-spacing: -0.01em;
+}
+
+.art-body ul {
+  margin: 0 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.art-body li {
+  font-size: 1.02rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+.art-body li strong {
+  color: var(--blue-navy);
+}
+
+.art-share {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1.5px solid var(--blue-border);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* FOOTER */
+footer {
+  background: #FFFFFF;
+  border-top: 1.5px solid var(--blue-border);
+  padding: 64px 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.ft-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.8fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.ft-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 14px;
+}
+
+.ft-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 320px;
+}
+
+.ft-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 18px;
+}
+
+.ft-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ft-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.ft-links a:hover {
+  color: var(--blue-primary);
+}
+
+.ft-office-card {
+  background: var(--blue-ice-soft);
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  font-size: 0.84rem;
+  color: var(--text-mid);
+}
+
+.ft-office-title {
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 4px;
+}
+
+.ft-bottom {
+  border-top: 1.5px solid var(--blue-border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
 @media(max-width: 1024px) {
   nav { padding: 0 24px; }
-  .art-title { font-size: 1.7rem; }
-  .ft-grid { grid-template-columns: 1fr; gap: 32px; }
-  footer { padding-left: 24px; padding-right: 24px; }
+  .article-card { padding: 40px 32px; }
+  .ft-grid { grid-template-columns: 1fr 1fr; }
 }
-@media(max-width: 860px) {
-  .nav-toggle { display: flex; align-items: center; justify-content: center; }
-  .nav-links {
-    position: fixed; top: 72px; left: 0; right: 0;
-    flex-direction: column; align-items: flex-start; gap: 4px;
-    background: #FFFFFF; border-bottom: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 12px 24px 20px;
-    transform: translateY(-8px); opacity: 0; pointer-events: none;
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  .nav-links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-  .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 12px 0; width: 100%; }
-  .nav-cta { display: inline-flex; margin-top: 4px; }
-}
-@media(max-width: 640px) {
-  .article-wrap { padding: 40px 20px 72px; }
-  .art-title { font-size: 1.5rem; }
-  .art-body p, .art-body li { font-size: 0.96rem; }
-  .art-body h2 { font-size: 1.2rem; margin: 32px 0 14px; }
-  footer { padding: 56px 20px 28px; }
-  .ft-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
+
+@media(max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: block; }
+  .article-card { padding: 32px 20px; }
+  .art-title { font-size: 1.8rem; }
+  .ft-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
+<div class="bg-grid-overlay" aria-hidden="true"></div>
+
 <nav>
   <a href="../index.html" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-      <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
-      <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
-      <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+      <rect x="4" y="18" width="6" height="14" rx="3" fill="#0284C7"/>
+      <rect x="14" y="10" width="6" height="22" rx="3" fill="#38BDF8"/>
+      <rect x="24" y="2" width="6" height="30" rx="3" fill="#0284C7"/>
     </svg>
-    TrackBot™
+    <span>TrackBot™</span>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="../index.html#solutions">Solutions</a></li>
-    <li><a href="../index.html#features">Features</a></li>
-    <li><a href="../blogs.html" class="active">Blogs</a></li>
+  <ul class="nav-links">
+    <li><a href="../index.html#how-it-works">How It Works</a></li>
+    <li><a href="../platform.html">Architecture &amp; Platform</a></li>
+    <li><a href="../index.html#calculator">ROI Calculator</a></li>
     <li><a href="../index.html#testimonials">Testimonials</a></li>
-    <li><a href="../index.html#demo" class="nav-cta">Book a Demo</a></li>
+    <li><a href="../blogs.html" class="active">Blogs</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  <a href="../index.html#demo" class="nav-cta">Book a Demo</a>
+  <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
 </nav>
 
+<div class="nav-mobile-overlay" id="mobileNavOverlay">
+  <a href="../index.html#how-it-works" onclick="closeMobileNav()">How It Works</a>
+  <a href="../platform.html" onclick="closeMobileNav()">Architecture &amp; Platform</a>
+  <a href="../index.html#calculator" onclick="closeMobileNav()">ROI Calculator</a>
+  <a href="../index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="../blogs.html" onclick="closeMobileNav()">Blogs</a>
+  <a href="../index.html#demo" class="nav-cta" style="text-align:center;justify-content:center;margin-top:12px;" onclick="closeMobileNav()">Book a Demo</a>
+</div>
+
 <div class="article-wrap">
-  <a href="../blogs.html" class="back-link">← Back to Blogs</a>
-  <div class="art-meta">March 24, 2024</div>
-  <h1 class="art-title">The Power of Precision: How Flow Meters Drive Borewell Automation with TrackBot™ AI Platform</h1>
-  <div class="art-byline">By TrackBot™</div>
+  <div class="article-card">
+    <a href="../blogs.html" class="back-link">← Back to All Articles</a>
+    <div class="art-meta">March 24, 2024 • Water Automation</div>
+    <h1 class="art-title">The Power of Precision: How Flow Meters Drive Borewell Automation with TrackBot™ AI Platform</h1>
+    <div class="art-byline">By TrackBot™ IoT Engineering</div>
 
-  <div class="art-body">
-    <p>Borewells, lifelines in many regions, require efficient management to ensure sustainable water usage and optimal pump operation. Here's where flow meters, TrackBot™ IoT Motor Controllers and TrackBot™ AI come together to revolutionize borewell automation. Borewell water is the rainwater that seeps deep into the ground and gets trapped between the rock layers. The borewell system operates on the principle of accessing groundwater from underground aquifers.</p>
-    <p>According to TrackBot™ research, most borewells are getting dried due to inappropriate operation. Staff turns on the borewell and keep it running for hours without checking the water yield. This results in stressing of the aquifer and not getting enough water. Borewells that are automated with timer-based systems also have a similar disadvantage since the timers are not getting adjusted.</p>
+    <div class="art-body">
+      <p>Borewells, lifelines in many regions, require efficient management to ensure sustainable water usage and optimal pump operation. Here's where flow meters, TrackBot™ IoT Motor Controllers and TrackBot™ AI come together to revolutionize borewell automation. Borewell water is the rainwater that seeps deep into the ground and gets trapped between the rock layers. The borewell system operates on the principle of accessing groundwater from underground aquifers.</p>
+      <p>According to TrackBot™ research, most borewells are getting dried due to inappropriate operation. Staff turns on the borewell and keep it running for hours without checking the water yield. This results in stressing of the aquifer and not getting enough water. Borewells that are automated with timer-based systems also have a similar disadvantage since the timers are not getting adjusted.</p>
 
-    <h2>The Importance of Digital Flow Meters and TrackBot™ IoT Motor Controllers</h2>
-    <ul>
-      <li><strong>Accurate Water Measurement:</strong> Digital Flow meters precisely quantify the water extracted from the borewell.</li>
-      <li><strong>Monitoring Water Yield:</strong> Track water table depletion and plan pumping cycles to prevent over-extraction.</li>
-      <li><strong>Supply Management:</strong> Deliver the right amount of water to crops, avoiding wastage and ensuring healthy growth.</li>
-      <li><strong>Pump Protection:</strong> Flow meters provide real-time insights into pump performance.</li>
-      <li><strong>Dry Run Prevention:</strong> Detect a drop in flow, indicating the pump is running dry, and automatically shut it down to prevent damage and allow refilling of aquifers.</li>
-      <li><strong>Optimizing Pump Operation:</strong> Monitor flow rate and adjust pump settings to maximize efficiency and minimize energy consumption.</li>
-      <li><strong>Protect Pump:</strong> Monitor anomalies like power fluctuation, phase reversal, current overload, etc. and control the pump motor operations to protect the pump.</li>
-      <li><strong>Predictive Maintenance:</strong> Identify potential issues based on flow fluctuations, allowing for preventive maintenance and reduced downtime.</li>
-    </ul>
+      <h2>The Importance of Digital Flow Meters and TrackBot™ IoT Motor Controllers</h2>
+      <ul>
+        <li><strong>Accurate Water Measurement:</strong> Digital Flow meters precisely quantify the water extracted from the borewell.</li>
+        <li><strong>Monitoring Water Yield:</strong> Track water table depletion and plan pumping cycles to prevent over-extraction.</li>
+        <li><strong>Supply Management:</strong> Deliver the right amount of water to crops or tanks, avoiding wastage and ensuring healthy flow.</li>
+        <li><strong>Pump Protection:</strong> Flow meters provide real-time insights into pump performance and operating temperatures.</li>
+        <li><strong>Dry Run Prevention:</strong> Detect a drop in flow, indicating the pump is running dry, and automatically shut it down to prevent damage and allow refilling of aquifers.</li>
+        <li><strong>Optimizing Pump Operation:</strong> Monitor flow rate and adjust pump settings to maximize efficiency and minimize energy consumption.</li>
+        <li><strong>Protect Pump:</strong> Monitor anomalies like power fluctuation, phase reversal, current overload, etc. and control the pump motor operations to protect the pump.</li>
+        <li><strong>Predictive Maintenance:</strong> Identify potential issues based on flow fluctuations, allowing for preventive maintenance and reduced downtime.</li>
+      </ul>
 
-    <h2>TrackBot™ AI: A Robotic Supercharging Borewell Operation</h2>
-    <p>TrackBot™ AI, an AI-powered platform, takes borewell automation to the next level by leveraging flow meter data.</p>
-    <ul>
-      <li><strong>Real-Time Data Analysis:</strong> TrackBot continuously analyses flow data from the digital flow meters, variations in power supply (voltage fluctuation, phase reversal, etc.), providing actionable insights.</li>
-      <li><strong>Water Yield Trends:</strong> Identify peak yield periods and adjust pumping schedules for optimized water pumping, making it more weather agnostic.</li>
-      <li><strong>Predictive Analytics:</strong> Anticipate potential water scarcity based on historical data and suggest proactive measures.</li>
-      <li><strong>Remote Monitoring &amp; Control:</strong> Track borewell health and remotely control pump operations from anywhere.</li>
-      <li><strong>Automated Decision Making:</strong> TrackBot can be programmed to take autonomous actions.</li>
-      <li><strong>Auto-Shut Off During Dry Runs:</strong> Protects the pump from damage by automatically shutting it down when flow ceases.</li>
-      <li><strong>Dynamic Pump Scheduling:</strong> Adjusts pump operation based on real-time demand and water availability.</li>
-      <li><strong>Alert Generation:</strong> Sends notifications for potential issues like irregular flow or pump malfunctions, variations in power sources, etc.</li>
-      <li><strong>Maintenance Mode:</strong> Option to keep the device in maintenance mode / repair mode so that the scheduling can be turned off.</li>
-    </ul>
+      <h2>TrackBot™ AI: A Robotic Supercharging Borewell Operation</h2>
+      <p>TrackBot™ AI, an AI-powered platform, takes borewell automation to the next level by leveraging flow meter data.</p>
+      <ul>
+        <li><strong>Real-Time Data Analysis:</strong> TrackBot continuously analyses flow data from the digital flow meters, variations in power supply (voltage fluctuation, phase reversal, etc.), providing actionable insights.</li>
+        <li><strong>Water Yield Trends:</strong> Identify peak yield periods and adjust pumping schedules for optimized water pumping, making it more weather agnostic.</li>
+        <li><strong>Predictive Analytics:</strong> Anticipate potential water scarcity based on historical data and suggest proactive measures.</li>
+        <li><strong>Remote Monitoring &amp; Control:</strong> Track borewell health and remotely control pump operations from anywhere.</li>
+        <li><strong>Automated Decision Making:</strong> TrackBot can be programmed to take autonomous actions.</li>
+        <li><strong>Auto-Shut Off During Dry Runs:</strong> Protects the pump from damage by automatically shutting it down when flow ceases.</li>
+        <li><strong>Dynamic Pump Scheduling:</strong> Adjusts pump operation based on real-time demand and water availability.</li>
+        <li><strong>Alert Generation:</strong> Sends notifications for potential issues like irregular flow or pump malfunctions, variations in power sources, etc.</li>
+        <li><strong>Maintenance Mode:</strong> Option to keep the device in maintenance mode / repair mode so that the scheduling can be turned off.</li>
+      </ul>
 
-    <h2>Conclusion</h2>
-    <p>Flow meters and advanced IoT based motor controllers are essential tools for borewell automation, providing precise water measurement and pump protection. When integrated with TrackBot™ AI, they become a powerful force for optimizing water usage, maximizing productivity, and ensuring the sustainability of this vital resource. By leveraging the combined power of flow meters and AI, Apartments, TechParks, Commercial Buildings, and Farmers can manage their water resources effectively and contribute to a more water-secure future.</p>
+      <h2>Conclusion</h2>
+      <p>Flow meters and advanced IoT based motor controllers are essential tools for borewell automation, providing precise water measurement and pump protection. When integrated with TrackBot™ AI, they become a powerful force for optimizing water usage, maximizing productivity, and ensuring the sustainability of this vital resource. By leveraging the combined power of flow meters and AI, Apartments, TechParks, Commercial Buildings, and Farmers can manage their water resources effectively and contribute to a more water-secure future.</p>
+    </div>
+
+    <div class="art-share">
+      <span>Share this insight with your facility engineering team</span>
+    </div>
   </div>
-
-  <div class="art-share">Share this article</div>
 </div>
 
 <footer>
@@ -157,57 +449,52 @@ footer { background: #0A0F1D; color: #94A3B8; padding: 72px 48px 32px; border-to
       <div>
         <div class="ft-brand">
           <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-            <rect x="4" y="20" width="6" height="12" rx="2" fill="#2196F3"/>
-            <rect x="13" y="12" width="6" height="20" rx="2" fill="#F59E0B"/>
-            <rect x="22" y="4" width="6" height="28" rx="2" fill="#2196F3"/>
+            <rect x="4" y="18" width="6" height="14" rx="3" fill="#0284C7"/>
+            <rect x="14" y="10" width="6" height="22" rx="3" fill="#38BDF8"/>
+            <rect x="24" y="2" width="6" height="30" rx="3" fill="#0284C7"/>
           </svg>
           TrackBot™
         </div>
         <p class="ft-desc">Intelligent building management platform by LetUSense. Digitalize, monitor, and automate property operations at scale.</p>
-        <div style="color:#64748B;font-size:0.85rem">✉️ info@trackbot.in &nbsp;|&nbsp; 📞 +91 8296013357</div>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--blue-navy);">✉️ info@trackbot.in &nbsp;|&nbsp; 📞 +91 8296013357</div>
       </div>
       <div>
         <div class="ft-title">Quick Links</div>
         <ul class="ft-links">
-          <li><a href="../index.html#solutions">Commercial Solutions</a></li>
-          <li><a href="../index.html#solutions">Residential Solutions</a></li>
-          <li><a href="../index.html#features">Features Grid</a></li>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../platform.html">Architecture &amp; Platform</a></li>
+          <li><a href="../index.html#calculator">ROI Calculator</a></li>
+          <li><a href="../index.html#testimonials">Testimonials</a></li>
           <li><a href="../blogs.html">Blogs</a></li>
           <li><a href="../index.html#demo">Book a Demo</a></li>
         </ul>
       </div>
       <div>
         <div class="ft-title">Global Offices</div>
-        <div class="ft-office-box">
+        <div class="ft-office-card">
           <div class="ft-office-title">🇮🇳 Bengaluru, India</div>
           <div>Sarjapur Road, Bengaluru, Karnataka 560 035</div>
         </div>
-        <div class="ft-office-box">
+        <div class="ft-office-card">
           <div class="ft-office-title">🇸🇪 Stockholm, Sweden</div>
-          <div>Armrgatan 36, Stockholm, Sweden 17171</div>
+          <div>Armégatan 36, Stockholm, Sweden 17171</div>
         </div>
       </div>
     </div>
     <div class="ft-bottom">
       <span>© 2026 TrackBot™ by LetUSense. All rights reserved.</span>
-      <span>Privacy Policy | Terms of Service</span>
+      <span>Privacy Policy • Terms of Service</span>
     </div>
   </div>
 </footer>
 
 <script>
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen);
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
-});
+function toggleMobileNav() {
+  document.getElementById('mobileNavOverlay').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+}
 </script>
 </body>
 </html>
